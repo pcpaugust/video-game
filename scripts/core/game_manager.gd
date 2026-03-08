@@ -2,6 +2,7 @@ extends Node2D
 
 const MenuData = preload("res://scripts/data/menu_data.gd")
 const GameConfig = preload("res://scripts/config/game_config.gd")
+const CustomerItemScene: PackedScene = preload("res://scenes/ui/customer_item.tscn")
 
 class Customer:
 	var name: String
@@ -36,7 +37,7 @@ var missed_customers: int = 0
 @onready var mode_label: Label = $CanvasLayer/Root/MainVBox/Bottom/TypingPanel/ModeLabel
 @onready var input_label: Label = $CanvasLayer/Root/MainVBox/Bottom/TypingPanel/InputLabel
 @onready var dish_slots_label: Label = $CanvasLayer/Root/MainVBox/Middle/CookArea/DishSlotsLabel
-@onready var customers_label: Label = $CanvasLayer/Root/MainVBox/Middle/CustomerArea/CustomersLabel
+@onready var customers_container: VBoxContainer = $CanvasLayer/Root/MainVBox/Middle/CustomerArea/CustomerList
 @onready var hint_label: Label = $CanvasLayer/Root/MainVBox/Bottom/TypingPanel/HintLabel
 
 
@@ -337,34 +338,36 @@ func _build_dish_slots_text() -> String:
 	return "\n".join(lines)
 
 
-func _build_customers_text() -> String:
-	if customers.is_empty():
-		return "ลูกค้า: ไม่มี (ถ้าจบด่านจะไปด่านถัดไปอัตโนมัติ)"
+func _update_customers_ui() -> void:
+	if customers_container == null:
+		return
 
-	var lines: Array[String] = []
-	for c in customers:
-		var type_label: String = ""
-		if c.is_special:
-			type_label = "[พิเศษ] "
-		elif c.is_child:
-			type_label = "[เด็ก] "
+	# Ensure there are as many CustomerItem nodes as customers.
+	var current_count: int = customers_container.get_child_count()
 
-		var patience_ratio: float = c.patience / max(c.max_patience, 0.01)
-		var patience_bar_len := 10
-		var filled := int(round(patience_ratio * patience_bar_len))
-		var bar := ""
-		for i in range(patience_bar_len):
-			bar += "#" if i < filled else "-"
+	# Remove extra nodes if there are too many.
+	for i in range(current_count - 1, customers.size() - 1, -1):
+		var child: Node = customers_container.get_child(i)
+		child.queue_free()
 
-		lines.append(
-			"%s%s | รอ: [%s] | เมนู: %s" % [
-				type_label,
-				c.name,
-				bar,
-				", ".join(c.order_keys),
-			]
+	# Add or update nodes for each customer.
+	for i in range(customers.size()):
+		var item: CustomerItem = null
+		if i < customers_container.get_child_count():
+			item = customers_container.get_child(i) as CustomerItem
+		else:
+			item = CustomerItemScene.instantiate() as CustomerItem
+			customers_container.add_child(item)
+
+		var c: Customer = customers[i]
+		item.update_from_data(
+			c.name,
+			c.is_special,
+			c.is_child,
+			c.patience,
+			c.max_patience,
+			c.order_keys
 		)
-	return "\n".join(lines)
 
 
 func _update_ui() -> void:
@@ -380,7 +383,7 @@ func _update_ui() -> void:
 	mode_label.text = _build_mode_text()
 	input_label.text = "กำลังพิมพ์: %s" % typing_buffer
 	dish_slots_label.text = _build_dish_slots_text()
-	customers_label.text = _build_customers_text()
+	_update_customers_ui()
 
 	hint_label.text = (
 		"วิธีเล่น:\n"
