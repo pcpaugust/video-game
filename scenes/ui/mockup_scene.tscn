@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://cef0p2qx4ajb1"]
+
+[ext_resource type="Texture2D" uid="uid://frdbrrpdj7h" path="res://assets/image.jpg" id="1"]
+[ext_resource type="Script" uid="uid://b7xmtv746aanc" path="res://scripts/core/game_manager.gd" id="2"]
+
+[node name="Game" type="Node2D" unique_id=430532297]
+script = ExtResource("2")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=300217111]
+position = Vector2(-828, 981)
+texture = ExtResource("1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2125292622]
+
+[node name="Root" type="Control" parent="CanvasLayer" unique_id=153894578]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainVBox" type="VBoxContainer" parent="CanvasLayer/Root" unique_id=1077595034]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
+
+[node name="TopBar" type="HBoxContainer" parent="CanvasLayer/Root/MainVBox" unique_id=1183806358]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/Root/MainVBox/TopBar" unique_id=237533815]
+layout_mode = 2
+text = "LEVEL 1"
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer/Root/MainVBox/TopBar" unique_id=1104406995]
+layout_mode = 2
+text = "02:30"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Root/MainVBox/TopBar" unique_id=2120453936]
+layout_mode = 2
+text = "SCORE 0000"
+horizontal_alignment = 2
+
+[node name="Middle" type="HBoxContainer" parent="CanvasLayer/Root/MainVBox" unique_id=256205380]
+custom_minimum_size = Vector2(0, 320)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CookArea" type="Panel" parent="CanvasLayer/Root/MainVBox/Middle" unique_id=1573407411]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CookTitle" type="Label" parent="CanvasLayer/Root/MainVBox/Middle/CookArea" unique_id=1298880240]
+layout_mode = 0
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 32.0
+text = "COOKING SLOTS"
+
+[node name="DishSlotsLabel" type="Label" parent="CanvasLayer/Root/MainVBox/Middle/CookArea" unique_id=1611548624]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = -8.0
+offset_bottom = -8.0
+autowrap_mode = 2
+
+[node name="CounterArea" type="Panel" parent="CanvasLayer/Root/MainVBox/Middle" unique_id=312215694]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CounterTitle" type="Label" parent="CanvasLayer/Root/MainVBox/Middle/CounterArea" unique_id=418716665]
+layout_mode = 0
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 32.0
+text = "NOODLE COUNTER"
+
+[node name="CustomerArea" type="Panel" parent="CanvasLayer/Root/MainVBox/Middle" unique_id=1166590061]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CustomerTitle" type="Label" parent="CanvasLayer/Root/MainVBox/Middle/CustomerArea" unique_id=846269681]
+layout_mode = 0
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 32.0
+text = "CUSTOMER QUEUE"
+
+[node name="CustomersLabel" type="Label" parent="CanvasLayer/Root/MainVBox/Middle/CustomerArea" unique_id=532608363]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = -8.0
+offset_bottom = -8.0
+autowrap_mode = 2
+
+[node name="Bottom" type="VBoxContainer" parent="CanvasLayer/Root/MainVBox" unique_id=1357279067]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="TypingPanel" type="Panel" parent="CanvasLayer/Root/MainVBox/Bottom" unique_id=281010955]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+
+[node name="ModeLabel" type="Label" parent="CanvasLayer/Root/MainVBox/Bottom/TypingPanel" unique_id=2037592826]
+layout_mode = 0
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = -8.0
+offset_bottom = 24.0
+text = "MODE"
+
+[node name="InputLabel" type="Label" parent="CanvasLayer/Root/MainVBox/Bottom/TypingPanel" unique_id=253151104]
+layout_mode = 0
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 28.0
+offset_right = -8.0
+offset_bottom = 52.0
+text = "TYPE INGREDIENTS HERE..."
+
+[node name="HintLabel" type="Label" parent="CanvasLayer/Root/MainVBox/Bottom/TypingPanel" unique_id=651850271]
+layout_mode = 0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = -8.0
+offset_bottom = -8.0
+text = "Press ENTER to cook, type CLEAR to discard, TAB to switch to serve mode."
+autowrap_mode = 2

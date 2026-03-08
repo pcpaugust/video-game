@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="New Game Project"
-run/main_scene="uid://elst0xn32iil"
+config/name="Typing Noodle Shop"
+run/main_scene="res://scenes/ui/mockup_scene.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

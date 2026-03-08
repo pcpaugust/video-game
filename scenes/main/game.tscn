@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/game_manager.gd" id="1"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+
+[node name="RootVBox" type="VBoxContainer" parent="CanvasLayer/UI"]
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+
+[node name="ModeLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+
+[node name="InputLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+
+[node name="DishSlotsLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+custom_minimum_size = Vector2(0, 80)
+
+[node name="CustomersLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+custom_minimum_size = Vector2(0, 140)
+autowrap_mode = 2
+
+[node name="HintLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+autowrap_mode = 2
+
