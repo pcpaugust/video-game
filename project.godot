@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Typing Noodle Shop"
-run/main_scene="res://scenes/ui/mockup_scene.tscn"
+run/main_scene="uid://ddhyqsovjqijk"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1024
+window/size/viewport_height=600
 
 [physics]
 

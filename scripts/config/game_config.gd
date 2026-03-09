@@ -28,4 +28,3 @@ const BASE_SCORE_PER_DISH: int = 10
 const FULL_ORDER_BONUS: int = 20
 const SPECIAL_SCORE_MULTIPLIER: float = 1.5
 const CHILD_SCORE_MULTIPLIER: float = 0.8
-

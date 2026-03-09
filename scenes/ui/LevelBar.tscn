@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://dmddamjyml4vo"]
+
+[ext_resource type="Texture2D" uid="uid://frdbrrpdj7h" path="res://assets/image.jpg" id="1_uhmrm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y2cud"]
+bg_color = Color(0.4392157, 0.41568628, 0.41568628, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhmrm"]
+bg_color = Color(0.2627451, 0.7607843, 0.3372549, 1)
+
+[node name="LevelBar" type="VBoxContainer" unique_id=35058829]
+custom_minimum_size = Vector2(1000, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -152.0
+offset_bottom = -558.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="." unique_id=416485761]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4392157, 0.41568628, 0.41568628, 1)
+theme_override_font_sizes/font_size = 32
+text = "Level 12"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1657782932]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer" unique_id=518620359]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_styles/background = SubResource("StyleBoxFlat_y2cud")
+theme_override_styles/fill = SubResource("StyleBoxFlat_uhmrm")
+step = 1.0
+value = 20.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=860345527]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer" unique_id=1221628418]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=2000640109]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("1_uhmrm")
+expand_mode = 2
+
+[node name="Control2" type="Control" parent="MarginContainer/HBoxContainer" unique_id=1239358510]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=262068817]
+layout_mode = 2
+texture = ExtResource("1_uhmrm")
+expand_mode = 2
+
+[node name="Control3" type="Control" parent="MarginContainer/HBoxContainer" unique_id=47781744]
+layout_mode = 2
+size_flags_horizontal = 3

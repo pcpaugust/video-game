@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://ddhyqsovjqijk"]
+
+[ext_resource type="PackedScene" uid="uid://dmddamjyml4vo" path="res://scenes/ui/LevelBar.tscn" id="1_kwnqp"]
+[ext_resource type="PackedScene" uid="uid://r8jlkk4nsfeo" path="res://scenes/ui/OrderQueue.tscn" id="2_cy70s"]
+[ext_resource type="PackedScene" uid="uid://dshga2ulvahoa" path="res://scenes/ui/TypingSpace.tscn" id="3_xdmyo"]
+[ext_resource type="PackedScene" uid="uid://cdkr12srcscr8" path="res://scenes/ui/IngredientTable.tscn" id="4_4vgtb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijlok"]
+bg_color = Color(0.972549, 0.9137255, 0.6431373, 1)
+
+[node name="Cooking" type="Node2D" unique_id=2003241289]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1671593526]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1041534527]
+custom_minimum_size = Vector2(1024, 600)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ijlok")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer" unique_id=1147982892]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer" unique_id=706598204]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LevelBar" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=35058829 instance=ExtResource("1_kwnqp")]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+
+[node name="OrderQueue" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=837512951 instance=ExtResource("2_cy70s")]
+layout_mode = 2
+
+[node name="TypingSpace" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1951861316 instance=ExtResource("3_xdmyo")]
+layout_mode = 2
+
+[node name="IngredientTable" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=83946894 instance=ExtResource("4_4vgtb")]
+layout_mode = 2

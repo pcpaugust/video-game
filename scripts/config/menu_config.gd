@@ -60,4 +60,3 @@ const CHILD_CUSTOMER_NAMES: Array[String] = [
 	"น้องฟีฟี",
 	"น้องค็อกเทล",
 ]
-

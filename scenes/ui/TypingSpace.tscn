@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dshga2ulvahoa"]
+
+[ext_resource type="PackedScene" uid="uid://crwtg83h4v3i7" path="res://scenes/ui/TypedIngredient.tscn" id="1_grd28"]
+[ext_resource type="PackedScene" uid="uid://du0fx0nypysg3" path="res://scenes/ui/TypingIngredient.tscn" id="2_b38j1"]
+
+[node name="TypingSpace" type="CenterContainer" unique_id=1951861316]
+offset_right = 620.0
+offset_bottom = 164.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2048963512]
+layout_mode = 2
+
+[node name="TypedIngredient" parent="HBoxContainer" unique_id=55046984 instance=ExtResource("1_grd28")]
+layout_mode = 2
+
+[node name="TypedIngredient2" parent="HBoxContainer" unique_id=1136999192 instance=ExtResource("1_grd28")]
+layout_mode = 2
+
+[node name="TypingIngredient" parent="HBoxContainer" unique_id=1549248573 instance=ExtResource("2_b38j1")]
+layout_mode = 2

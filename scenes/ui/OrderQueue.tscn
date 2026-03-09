@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://r8jlkk4nsfeo"]
+
+[ext_resource type="PackedScene" uid="uid://6caqoai6174a" path="res://scenes/ui/OrderCard.tscn" id="1_cnvk8"]
+
+[node name="OrderContainer" type="ScrollContainer" unique_id=1928141581]
+custom_minimum_size = Vector2(800, 0)
+offset_bottom = 97.0
+size_flags_horizontal = 3
+theme_override_constants/scrollbar_h_separation = 8
+vertical_scroll_mode = 0
+
+[node name="OrderQueue" type="HBoxContainer" parent="." unique_id=837512951]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="OrderCard" parent="OrderQueue" unique_id=401019977 instance=ExtResource("1_cnvk8")]
+layout_mode = 2
+
+[node name="OrderCard2" parent="OrderQueue" unique_id=1750389145 instance=ExtResource("1_cnvk8")]
+layout_mode = 2
+
+[node name="OrderCard3" parent="OrderQueue" unique_id=1521966827 instance=ExtResource("1_cnvk8")]
+layout_mode = 2
+
+[node name="OrderCard4" parent="OrderQueue" unique_id=1427781770 instance=ExtResource("1_cnvk8")]
+layout_mode = 2
+
+[node name="OrderCard5" parent="OrderQueue" unique_id=1653358897 instance=ExtResource("1_cnvk8")]
+layout_mode = 2
+
+[node name="OrderCard6" parent="OrderQueue" unique_id=173793947 instance=ExtResource("1_cnvk8")]
+layout_mode = 2
+
+[node name="OrderCard7" parent="OrderQueue" unique_id=969670782 instance=ExtResource("1_cnvk8")]
+layout_mode = 2
