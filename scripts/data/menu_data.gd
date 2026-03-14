@@ -124,4 +124,3 @@ static func _build_single_dish_key(unlocked_ingredients: Array[String]) -> Strin
 			)
 
 	return canonical_dish_key(ingredients)
-

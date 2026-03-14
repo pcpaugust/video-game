@@ -1,20 +1,24 @@
 [gd_scene format=3 uid="uid://dshga2ulvahoa"]
 
-[ext_resource type="PackedScene" uid="uid://crwtg83h4v3i7" path="res://scenes/ui/TypedIngredient.tscn" id="1_grd28"]
-[ext_resource type="PackedScene" uid="uid://du0fx0nypysg3" path="res://scenes/ui/TypingIngredient.tscn" id="2_b38j1"]
+[ext_resource type="Script" uid="uid://2fpyyk0ildvv" path="res://scripts/ui/typing_space.gd" id="1_ro5k3"]
 
-[node name="TypingSpace" type="CenterContainer" unique_id=1951861316]
+[node name="TypingSpace" type="VBoxContainer" unique_id=1517659998]
+custom_minimum_size = Vector2(0, 150)
 offset_right = 620.0
 offset_bottom = 164.0
+script = ExtResource("1_ro5k3")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2048963512]
+[node name="ModeLabel" type="Label" parent="." unique_id=781658405]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="TextField" type="Label" parent="." unique_id=1290528722]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1223317892]
 layout_mode = 2
 
-[node name="TypedIngredient" parent="HBoxContainer" unique_id=55046984 instance=ExtResource("1_grd28")]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=2048963512]
 layout_mode = 2
-
-[node name="TypedIngredient2" parent="HBoxContainer" unique_id=1136999192 instance=ExtResource("1_grd28")]
-layout_mode = 2
-
-[node name="TypingIngredient" parent="HBoxContainer" unique_id=1549248573 instance=ExtResource("2_b38j1")]
-layout_mode = 2
+theme_override_constants/separation = 12

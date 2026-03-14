@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://6caqoai6174a"]
 
-[ext_resource type="Script" uid="uid://citsorkhq0kmu" path="res://scripts/ui/customer_item.gd" id="1"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekgec"]
 bg_color = Color(1, 0.95686275, 0.84705883, 1)
 border_width_left = 2
@@ -14,6 +12,50 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="GDScript" id="GDScript_ekgec"]
+script/source = "extends PanelContainer
+
+@onready var name_label = $MarginContainer/VBoxContainer/TopRow/VBoxContainer/NameLabel # ปรับชื่อตามภาพ
+@onready var patience_bar = $MarginContainer/VBoxContainer/TopRow/VBoxContainer/PatienceBar
+@onready var order_list = $MarginContainer/VBoxContainer/OrderList # โหนด Container ที่เราเพิ่มใหม่
+
+func setup(customer_data: Object):
+	name_label.text = customer_data.name
+	update_patience(customer_data.patience, customer_data.max_patience)
+	
+	# แสดงรายการที่สั่ง
+	_display_order_items(customer_data.order_keys)
+
+func _display_order_items(keys: Array):
+	# 1. เคลียร์รายการเก่าก่อน (กันเหนียว)
+	for child in order_list.get_children():
+		child.queue_free()
+	
+	# 2. สร้างรายการใหม่ตามที่สั่ง
+	for key in keys:
+		# แบบง่าย: ใช้ Label
+		var label = Label.new()
+		label.text = \"- \" + key
+		label.add_theme_font_size_override(\"font_size\", 14) # ปรับขนาดตามความเหมาะสม
+		label.add_theme_color_override(\"font_color\", Color.BLACK)
+		order_list.add_child(label)
+		
+		# แบบ Advance (ถ้ามีไอคอน):
+		# var icon = TextureRect.new()
+		# icon.texture = load(\"res://assets/icons/\" + key + \".png\")
+		# icon.custom_minimum_size = Vector2(24, 24)
+		# icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		# order_list.add_child(icon)
+
+func update_patience(current: float, max_val: float):
+	if not patience_bar: return
+	patience_bar.max_value = max_val
+	patience_bar.value = current
+	
+	var ratio = current / max_val
+	patience_bar.modulate = Color.RED if ratio < 0.3 else Color.WHITE
+"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_38jg4"]
 bg_color = Color(0.4392157, 0.41568628, 0.41568628, 1)
 
@@ -24,7 +66,7 @@ bg_color = Color(0.8745098, 0.3372549, 0.2509804, 1)
 offset_right = 164.0
 offset_bottom = 97.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ekgec")
-script = ExtResource("1")
+script = SubResource("GDScript_ekgec")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1044983186]
 layout_mode = 2
@@ -56,7 +98,7 @@ theme_override_colors/font_color = Color(0.4392157, 0.41568628, 0.41568628, 1)
 text = "ชื่อลูกค้า"
 
 [node name="PatienceBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopRow/VBoxContainer" unique_id=446205977]
-custom_minimum_size = Vector2(0, 8)
+custom_minimum_size = Vector2(200, 8)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_38jg4")
 theme_override_styles/fill = SubResource("StyleBoxFlat_707tj")
@@ -64,82 +106,5 @@ step = 1.0
 value = 40.0
 show_percentage = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=229547880]
+[node name="OrderList" type="GridContainer" parent="MarginContainer/VBoxContainer" unique_id=1785372204]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 3
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1850434172]
-layout_mode = 2
-size_flags_vertical = 4
-alignment = 1
-
-[node name="TopRow2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1163111504]
-layout_mode = 2
-
-[node name="OrderLabel2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/TopRow2" unique_id=1543786621]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.4392157, 0.41568628, 0.41568628, 1)
-theme_override_font_sizes/font_size = 12
-text = "เมนู..."
-autowrap_mode = 2
-
-[node name="OrderLabel3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/TopRow2" unique_id=249859031]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.4392157, 0.41568628, 0.41568628, 1)
-theme_override_font_sizes/font_size = 12
-text = "เมนู..."
-autowrap_mode = 2
-
-[node name="TopRow3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1153909152]
-layout_mode = 2
-
-[node name="OrderLabel2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/TopRow3" unique_id=1754407789]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.4392157, 0.41568628, 0.41568628, 1)
-theme_override_font_sizes/font_size = 12
-text = "เมนู..."
-autowrap_mode = 2
-
-[node name="OrderLabel3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/TopRow3" unique_id=647551119]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.4392157, 0.41568628, 0.41568628, 1)
-theme_override_font_sizes/font_size = 12
-text = "เมนู..."
-autowrap_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1042272300]
-layout_mode = 2
-size_flags_vertical = 4
-alignment = 1
-
-[node name="TopRow2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1461484264]
-layout_mode = 2
-
-[node name="OrderLabel2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TopRow2" unique_id=1482110739]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.4392157, 0.41568628, 0.41568628, 1)
-theme_override_font_sizes/font_size = 12
-text = "เมนู..."
-autowrap_mode = 2
-
-[node name="OrderLabel3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TopRow2" unique_id=1134379508]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.4392157, 0.41568628, 0.41568628, 1)
-theme_override_font_sizes/font_size = 12
-text = "เมนู..."
-autowrap_mode = 2

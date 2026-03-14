@@ -1,19 +1,18 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://b5ntfsd4f4y83"]
 
-[ext_resource type="Script" path="res://scripts/core/game_manager.gd" id="1"]
+[ext_resource type="Script" uid="uid://b7xmtv746aanc" path="res://scripts/core/game_manager.gd" id="1"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" unique_id=977471451]
 script = ExtResource("1")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2065509115]
 
-[node name="UI" type="Control" parent="CanvasLayer"]
+[node name="UI" type="Control" parent="CanvasLayer" unique_id=1433623703]
 layout_mode = 3
+anchors_preset = 0
 
-[node name="RootVBox" type="VBoxContainer" parent="CanvasLayer/UI"]
-anchors_preset = 15
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="RootVBox" type="VBoxContainer" parent="CanvasLayer/UI" unique_id=548622246]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
@@ -21,21 +20,27 @@ offset_top = 20.0
 offset_right = -20.0
 offset_bottom = -20.0
 
-[node name="LevelLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+[node name="LevelLabel" type="Label" parent="CanvasLayer/UI/RootVBox" unique_id=1493555310]
+layout_mode = 2
 
-[node name="ScoreLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/UI/RootVBox" unique_id=1211274221]
+layout_mode = 2
 
-[node name="ModeLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+[node name="ModeLabel" type="Label" parent="CanvasLayer/UI/RootVBox" unique_id=1240458216]
+layout_mode = 2
 
-[node name="InputLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+[node name="InputLabel" type="Label" parent="CanvasLayer/UI/RootVBox" unique_id=1396658291]
+layout_mode = 2
 
-[node name="DishSlotsLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+[node name="DishSlotsLabel" type="Label" parent="CanvasLayer/UI/RootVBox" unique_id=1174484475]
 custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
 
-[node name="CustomersLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+[node name="CustomersLabel" type="Label" parent="CanvasLayer/UI/RootVBox" unique_id=898905332]
 custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
 autowrap_mode = 2
 
-[node name="HintLabel" type="Label" parent="CanvasLayer/UI/RootVBox"]
+[node name="HintLabel" type="Label" parent="CanvasLayer/UI/RootVBox" unique_id=1005047337]
+layout_mode = 2
 autowrap_mode = 2
-

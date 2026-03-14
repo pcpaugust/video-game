@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ddhyqsovjqijk"]
 
+[ext_resource type="Script" uid="uid://dulnr7leoucps" path="res://scripts/core/cooking.gd" id="1_cy70s"]
 [ext_resource type="PackedScene" uid="uid://dmddamjyml4vo" path="res://scenes/ui/LevelBar.tscn" id="1_kwnqp"]
 [ext_resource type="PackedScene" uid="uid://r8jlkk4nsfeo" path="res://scenes/ui/OrderQueue.tscn" id="2_cy70s"]
 [ext_resource type="PackedScene" uid="uid://dshga2ulvahoa" path="res://scenes/ui/TypingSpace.tscn" id="3_xdmyo"]
@@ -9,6 +10,7 @@
 bg_color = Color(0.972549, 0.9137255, 0.6431373, 1)
 
 [node name="Cooking" type="Node2D" unique_id=2003241289]
+script = ExtResource("1_cy70s")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1671593526]
 
@@ -37,7 +39,7 @@ theme_override_constants/separation = 16
 custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 
-[node name="OrderQueue" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=837512951 instance=ExtResource("2_cy70s")]
+[node name="OrderContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2144028027 instance=ExtResource("2_cy70s")]
 layout_mode = 2
 
 [node name="TypingSpace" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1951861316 instance=ExtResource("3_xdmyo")]

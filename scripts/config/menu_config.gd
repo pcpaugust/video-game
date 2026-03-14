@@ -35,7 +35,7 @@ const VEGETABLE_TYPES: Array[String] = [
 const DRINK_TYPES: Array[String] = [
 	"โอเลี้ยง",
 	"กระเจี๊ยบ",
-	"เก๊กฮวยฅ",
+	"เก๊กฮวย",
 ]
 
 

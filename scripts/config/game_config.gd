@@ -21,7 +21,7 @@ const TIME_BONUS_PER_DISH: float = 3.0
 const MAX_DISH_SLOTS: int = 3
 
 # Fail conditions
-const MAX_MISSED_CUSTOMERS: int = 10
+const MAX_MISSED_CUSTOMERS: int = 2
 
 # Scoring
 const BASE_SCORE_PER_DISH: int = 10

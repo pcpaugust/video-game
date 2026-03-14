@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dmddamjyml4vo"]
 
+[ext_resource type="Script" uid="uid://boisyl2wq1vrp" path="res://scripts/ui/level_bar.gd" id="1_bcj4y"]
 [ext_resource type="Texture2D" uid="uid://frdbrrpdj7h" path="res://assets/image.jpg" id="1_uhmrm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y2cud"]
@@ -13,17 +14,28 @@ custom_minimum_size = Vector2(1000, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -152.0
-offset_bottom = -558.0
+offset_right = -24.0
+offset_bottom = -521.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
+script = ExtResource("1_bcj4y")
 
-[node name="Label" type="Label" parent="." unique_id=416485761]
+[node name="Container" type="HBoxContainer" parent="." unique_id=234882612]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Level" type="Label" parent="Container" unique_id=416485761]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4392157, 0.41568628, 0.41568628, 1)
 theme_override_font_sizes/font_size = 32
-text = "Level 12"
+text = "Level 1"
+
+[node name="Score" type="Label" parent="Container" unique_id=1297372023]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4392157, 0.41568628, 0.41568628, 1)
+theme_override_font_sizes/font_size = 32
+text = "Score 10"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1657782932]
 layout_mode = 2
@@ -36,7 +48,6 @@ theme_override_styles/background = SubResource("StyleBoxFlat_y2cud")
 theme_override_styles/fill = SubResource("StyleBoxFlat_uhmrm")
 step = 1.0
 value = 20.0
-show_percentage = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=860345527]
 layout_mode = 2
