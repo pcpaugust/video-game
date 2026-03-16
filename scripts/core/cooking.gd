@@ -31,8 +31,8 @@ var selected_slot: int = 0
 
 @onready var level_bar = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/LevelBar
 @onready var order_queue = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/OrderContainer
-@onready var typing_space = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/TypingSpace
-
+@onready var typing_space = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/CookingSpace/TypingSpace
+@onready var dish_container = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/CookingSpace/DishContainer
 func _ready() -> void:
 	randomize()
 	start_level(level, target_score)
@@ -53,12 +53,16 @@ func start_level(new_level: int, target: int) -> void:
 func _spawn_initial_customers() -> void:
 	var unlocked = MenuData.get_unlocked_ingredients_for_level(level)
 	var count = clamp(GameConfig.BASE_CUSTOMER_COUNT + level, 3, 7)
+	var used_name = []
 
-	for i in range(count):
+	while customers.size() < count:
 		var c = Customer.new()
 		c.is_child = randf() < GameConfig.CHILD_CUSTOMER_CHANCE
 		c.is_special = randf() < GameConfig.SPECIAL_CUSTOMER_CHANCE
 		c.name = MenuData.random_customer_name(c.is_special, c.is_child)
+		
+		if (used_name.has(c.name)): continue
+		
 		c.order_keys = MenuData.build_random_order_keys(unlocked, level)
 
 		# คำนวณเวลาพื้นฐานตาม Level
@@ -73,6 +77,7 @@ func _spawn_initial_customers() -> void:
 		c.max_patience = max(base_time, GameConfig.MIN_PATIENCE_TIME)
 		c.patience = c.max_patience
 		customers.append(c)
+		used_name.append(c.name)
 
 func _process(delta: float) -> void:
 	_update_customers_logic(delta)
@@ -151,7 +156,9 @@ func _attempt_cook() -> void:
 	if dish_slots.size() < GameConfig.MAX_DISH_SLOTS:
 		var key = MenuData.canonical_dish_key(valid_ingredients)
 		dish_slots.append({"key": key, "ingredients": valid_ingredients})
-		print("Cooked: ", key)
+		_update_dish(dish_slots)
+		print("Cooked: ", key, " ", valid_ingredients)
+	else: print("Dish Slot is Full!")
 
 # Logic การเสิร์ฟจาก game_manager
 func _attempt_serve() -> void:
@@ -176,8 +183,10 @@ func _attempt_serve() -> void:
 			served_keys.append(key)
 			remaining_required.remove_at(req_idx)
 			dish_slots.remove_at(i)
+			_update_dish(dish_slots)
 
 	if served_keys.size() > 0:
+		customer.order_keys = remaining_required
 		# 1. คำนวณคะแนนพื้นฐาน
 		var current_serve_score = served_keys.size() * GameConfig.BASE_SCORE_PER_DISH
 		
@@ -234,6 +243,9 @@ func _update_score() -> void:
 		start_level(new_level, target_score+40)
 		
 	level_bar.update_progress(score)
+
+func _update_dish(dish: Array) -> void:
+	dish_container.update_list(dish)
 
 func _update_ui_full() -> void:
 	order_queue.refresh_all_cards(customers)

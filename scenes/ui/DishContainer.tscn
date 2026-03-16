@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bn2itsdp6foer"]
+
+[ext_resource type="Script" uid="uid://bmn1s0i2mxy5s" path="res://scripts/ui/dish_container.gd" id="1_7fkh8"]
+
+[node name="DishContainer" type="PanelContainer" unique_id=1222613478]
+custom_minimum_size = Vector2(0, 180)
+offset_right = 208.0
+offset_bottom = 168.0
+size_flags_vertical = 3
+script = ExtResource("1_7fkh8")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1268281063]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=417333253]
+custom_minimum_size = Vector2(200, 160)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=723520676]
+layout_mode = 2
+text = "รายการอาหาร"
+
+[node name="List" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1334126301]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 2

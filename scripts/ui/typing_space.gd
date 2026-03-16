@@ -1,9 +1,9 @@
-extends VBoxContainer # หรือ Control ตามประเภท Root ของคุณ
+extends MarginContainer
 
 # ดึง Node ลูกออกมาเตรียมไว้
-@onready var mode = $ModeLabel
-@onready var input_label = $TextField
-@onready var icon_container = $CenterContainer/HBoxContainer
+@onready var mode = $TypingSpace/ModeLabel
+@onready var input_label = $TypingSpace/TextField
+@onready var icon_container = $TypingSpace/HBoxContainer
 
 const TypingIngredientScene = preload("res://scenes/ui/TypingIngredient.tscn")
 const MenuData = preload("res://scripts/data/menu_data.gd")

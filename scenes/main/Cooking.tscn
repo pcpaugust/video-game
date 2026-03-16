@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://r8jlkk4nsfeo" path="res://scenes/ui/OrderQueue.tscn" id="2_cy70s"]
 [ext_resource type="PackedScene" uid="uid://dshga2ulvahoa" path="res://scenes/ui/TypingSpace.tscn" id="3_xdmyo"]
 [ext_resource type="PackedScene" uid="uid://cdkr12srcscr8" path="res://scenes/ui/IngredientTable.tscn" id="4_4vgtb"]
+[ext_resource type="PackedScene" uid="uid://bn2itsdp6foer" path="res://scenes/ui/DishContainer.tscn" id="4_xdmyo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijlok"]
 bg_color = Color(0.972549, 0.9137255, 0.6431373, 1)
@@ -16,10 +17,15 @@ script = ExtResource("1_cy70s")
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1041534527]
 custom_minimum_size = Vector2(1024, 600)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 8.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -300.0
+offset_right = 512.0
+offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ijlok")
@@ -42,7 +48,13 @@ layout_mode = 2
 [node name="OrderContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2144028027 instance=ExtResource("2_cy70s")]
 layout_mode = 2
 
-[node name="TypingSpace" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1951861316 instance=ExtResource("3_xdmyo")]
+[node name="CookingSpace" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1194688964]
+layout_mode = 2
+
+[node name="DishContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/CookingSpace" unique_id=1222613478 instance=ExtResource("4_xdmyo")]
+layout_mode = 2
+
+[node name="TypingSpace" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/CookingSpace" unique_id=1951861316 instance=ExtResource("3_xdmyo")]
 layout_mode = 2
 
 [node name="IngredientTable" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=83946894 instance=ExtResource("4_4vgtb")]

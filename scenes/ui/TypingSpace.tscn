@@ -2,23 +2,26 @@
 
 [ext_resource type="Script" uid="uid://2fpyyk0ildvv" path="res://scripts/ui/typing_space.gd" id="1_ro5k3"]
 
-[node name="TypingSpace" type="VBoxContainer" unique_id=1517659998]
-custom_minimum_size = Vector2(0, 150)
+[node name="MarginContainer" type="MarginContainer" unique_id=1078964189]
+offset_top = 58.0
 offset_right = 620.0
-offset_bottom = 164.0
+offset_bottom = 58.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
 script = ExtResource("1_ro5k3")
 
-[node name="ModeLabel" type="Label" parent="." unique_id=781658405]
+[node name="TypingSpace" type="VBoxContainer" parent="." unique_id=1517659998]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="ModeLabel" type="Label" parent="TypingSpace" unique_id=781658405]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 
-[node name="TextField" type="Label" parent="." unique_id=1290528722]
+[node name="TextField" type="Label" parent="TypingSpace" unique_id=1290528722]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1223317892]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=2048963512]
+[node name="HBoxContainer" type="HBoxContainer" parent="TypingSpace" unique_id=2048963512]
 layout_mode = 2
 theme_override_constants/separation = 12

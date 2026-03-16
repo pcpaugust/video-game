@@ -1,11 +1,17 @@
 extends PanelContainer
 
 @onready var name_label = $MarginContainer/VBoxContainer/TopRow/VBoxContainer/NameLabel # ปรับชื่อตามภาพ
+@onready var type_label = $MarginContainer/VBoxContainer/TopRow/TypeLabel
 @onready var patience_bar = $MarginContainer/VBoxContainer/TopRow/VBoxContainer/PatienceBar
 @onready var order_list = $MarginContainer/VBoxContainer/OrderList # โหนด Container ที่เราเพิ่มใหม่
 
 func setup(customer_data: Object):
 	name_label.text = customer_data.name
+	if (customer_data.is_child):
+		type_label.text = "CH"
+	elif (customer_data.is_special):
+		type_label.text = "SP"
+	else: type_label.text = "N"
 	update_patience(customer_data.patience, customer_data.max_patience)
 	
 	# แสดงรายการที่สั่ง
