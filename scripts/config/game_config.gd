@@ -5,8 +5,8 @@ class_name GameConfig
 const BASE_CUSTOMER_COUNT: int = 2
 const MAX_CUSTOMERS: int = 4
 
-const SPECIAL_CUSTOMER_CHANCE: float = 0.2
-const CHILD_CUSTOMER_CHANCE: float = 0.2
+const SPECIAL_CUSTOMER_CHANCE: float = 0.1
+const CHILD_CUSTOMER_CHANCE: float = 0.1
 
 # Patience / time settings
 const BASE_PATIENCE_TIME: float = 100.0
