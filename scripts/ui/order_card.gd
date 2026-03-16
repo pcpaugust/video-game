@@ -5,6 +5,18 @@ extends PanelContainer
 @onready var patience_bar = $MarginContainer/VBoxContainer/TopRow/VBoxContainer/PatienceBar
 @onready var order_list = $MarginContainer/VBoxContainer/OrderList # โหนด Container ที่เราเพิ่มใหม่
 
+const MENU_ASSETS: Array[String] = [
+	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Menu/foods/1pancake.png",
+	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Menu/foods/2omelet.png",
+	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Menu/foods/3sandwhich.png",
+	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Menu/foods/4curryrice.png",
+	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Menu/drinks/1orange.png",
+	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Menu/drinks/2coffee.png",
+	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Menu/drinks/3chocolate.png",
+	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Menu/sweets/1strawberry-chocolate.png",
+	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Menu/sweets/4vanilla-chocolate.png",
+]
+
 func setup(customer_data: Object):
 	name_label.text = customer_data.name
 	if (customer_data.is_child):
@@ -24,12 +36,24 @@ func _display_order_items(keys: Array):
 	
 	# 2. สร้างรายการใหม่ตามที่สั่ง
 	for key in keys:
-		# แบบง่าย: ใช้ Label
+		var row = HBoxContainer.new()
+		row.add_theme_constant_override("separation", 6)
+		order_list.add_child(row)
+
+		var path = _pick_asset_path(key, MENU_ASSETS)
+		if path != "" and ResourceLoader.exists(path):
+			var icon = TextureRect.new()
+			icon.texture = load(path)
+			icon.custom_minimum_size = Vector2(24, 24)
+			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			icon.tooltip_text = key
+			row.add_child(icon)
+
 		var label = Label.new()
-		label.text = "- " + key
+		label.text = key
 		label.add_theme_font_size_override("font_size", 14) # ปรับขนาดตามความเหมาะสม
 		label.add_theme_color_override("font_color", Color.BLACK)
-		order_list.add_child(label)
+		row.add_child(label)
 		
 		# แบบ Advance (ถ้ามีไอคอน):
 		# var icon = TextureRect.new()
@@ -45,3 +69,11 @@ func update_patience(current: float, max_val: float):
 	
 	var ratio = current / max_val
 	patience_bar.modulate = Color.RED if ratio < 0.3 else Color.WHITE
+
+func _pick_asset_path(key: String, assets: Array[String]) -> String:
+	if assets.is_empty():
+		return ""
+	var acc := 0
+	for i in key.length():
+		acc += key.unicode_at(i)
+	return assets[acc % assets.size()]

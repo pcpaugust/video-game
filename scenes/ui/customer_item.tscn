@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://2jc76giccj5p"]
+
+[ext_resource type="Script" path="res://scripts/ui/customer_item.gd" id="1_c2bwp"]
+
+[node name="CustomerItem" type="PanelContainer" unique_id=284843403]
+script = ExtResource("1_c2bwp")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=782944764]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1523791396]
+layout_mode = 2
+
+[node name="TopRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=49507557]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TypeLabel" type="Label" parent="MarginContainer/VBoxContainer/TopRow" unique_id=20487817]
+layout_mode = 2
+text = "[พิเศษ]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopRow" unique_id=650333354]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/TopRow/VBoxContainer" unique_id=946166257]
+layout_mode = 2
+text = "Customer Name"
+
+[node name="PatienceBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopRow/VBoxContainer" unique_id=988808325]
+layout_mode = 2
+value = 50.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=669192532]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1281860729]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TopRow2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=952973558]
+layout_mode = 2
+
+[node name="OrderIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TopRow2" unique_id=1422308357]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+expand_mode = 1
+
+[node name="OrderLabel2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TopRow2" unique_id=1396282924]
+layout_mode = 2
+text = "order1, order2"
+autowrap_mode = 2
