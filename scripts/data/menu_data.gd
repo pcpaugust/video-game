@@ -21,7 +21,7 @@ static func canonical_dish_key(ingredients: Array[String]) -> String:
 		if ing in all_ingredients() and not filtered.has(ing):
 			filtered.append(ing)
 	filtered.sort()
-	return " | ".join(filtered)
+	return " ".join(filtered)
 
 
 static func is_drink(ingredients: Array[String]) -> bool:

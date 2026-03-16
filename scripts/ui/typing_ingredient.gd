@@ -1,19 +1,16 @@
 # video-game/scenes/ui/typing_ingredient.gd
 extends VBoxContainer
 
-@onready var texture_rect = $CenterContainer/TextureRect
-@onready var label = $MarginContainer/Text
+const MenuConfig = preload("res://scripts/config/menu_config.gd")
 
-const INGREDIENT_ASSETS: Array[String] = [
-	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Ingredient/food/1carrot.png",
-	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Ingredient/food/2meat.png",
-	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Ingredient/food/3cabbage.png",
-	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Ingredient/food/4egg.png",
-	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Ingredient/food/5rice.png",
-	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Ingredient/food/8bread.png",
-	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Ingredient/sweets/1vanilla.png",
-	"res://assets/PtPt - Cute Pixel Cooking Game Starter Pack/Ingredient/sweets/2strawberry.png",
-]
+@onready var icon_panel: PanelContainer = $CenterContainer/IconCircle
+@onready var label: Label = $MarginContainer/Text
+
+var style_grey: StyleBoxFlat
+var style_yellow: StyleBoxFlat
+var style_orange: StyleBoxFlat
+var style_green: StyleBoxFlat
+var style_blue: StyleBoxFlat
 
 func set_ingredient(ing_name: String):
 	# ตรวจสอบว่า Node พร้อมใช้งานหรือยัง ถ้ายังให้รอ (await) จนกว่าจะ ready
@@ -25,18 +22,41 @@ func set_ingredient(ing_name: String):
 		label.text = ing_name
 		label.queue_redraw()
 
-	# ส่วนการโหลดรูปภาพ (mock mapping: pick a deterministic asset)
-	var path = _pick_asset_path(ing_name, INGREDIENT_ASSETS)
-	if path != "" and ResourceLoader.exists(path):
-		texture_rect.texture = load(path)
-	else:
-		# หากไม่พบรูปภาพให้ใช้รูปเริ่มต้น (icon.svg)
-		texture_rect.texture = preload("res://icon.svg")
+	_apply_icon_color(ing_name)
 
-func _pick_asset_path(key: String, assets: Array[String]) -> String:
-	if assets.is_empty():
-		return ""
-	var acc: int = 0
-	for i in key.length():
-		acc += key.unicode_at(i)
-	return assets[acc % assets.size()]
+func _apply_icon_color(ing_name: String) -> void:
+	_ensure_styles()
+	if not icon_panel:
+		return
+
+	var style: StyleBoxFlat = style_yellow
+	if ing_name in MenuConfig.BROTH_TYPES:
+		style = style_grey
+	elif ing_name in MenuConfig.NOODLE_TYPES:
+		style = style_yellow
+	elif ing_name in MenuConfig.MEAT_TYPES:
+		style = style_orange
+	elif ing_name in MenuConfig.VEGETABLE_TYPES:
+		style = style_green
+	elif ing_name in MenuConfig.DRINK_TYPES:
+		style = style_blue
+
+	icon_panel.add_theme_stylebox_override("panel", style)
+
+func _ensure_styles() -> void:
+	if style_grey != null:
+		return
+	style_grey = _make_circle_style(Color(0.439216, 0.415686, 0.415686, 1))
+	style_yellow = _make_circle_style(Color(0.972549, 0.913725, 0.643137, 1))
+	style_orange = _make_circle_style(Color(0.976471, 0.556863, 0.235294, 1))
+	style_green = _make_circle_style(Color(0.262745, 0.760784, 0.337255, 1))
+	style_blue = _make_circle_style(Color(0.294118, 0.376471, 0.941176, 1))
+
+func _make_circle_style(color: Color) -> StyleBoxFlat:
+	var style: StyleBoxFlat = StyleBoxFlat.new()
+	style.bg_color = color
+	style.corner_radius_top_left = 999
+	style.corner_radius_top_right = 999
+	style.corner_radius_bottom_right = 999
+	style.corner_radius_bottom_left = 999
+	return style

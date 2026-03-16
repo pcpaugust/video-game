@@ -6,8 +6,8 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -820.0
-offset_bottom = -404.0
+offset_right = -817.0
+offset_bottom = -500.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -22,7 +22,7 @@ texture = ExtResource("1_grd28")
 expand_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1176633193]
-custom_minimum_size = Vector2(60, 0)
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 2
@@ -31,10 +31,10 @@ theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=253266365]
-custom_minimum_size = Vector2(200, 60)
+custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "[center]เส้นเล็ก[/center]"
 fit_content = true
