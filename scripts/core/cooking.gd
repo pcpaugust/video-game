@@ -31,8 +31,8 @@ var selected_slot: int = 0
 
 @onready var level_bar = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/LevelBar
 @onready var order_queue = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/OrderContainer
-@onready var typing_space = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/CookingSpace/TypingSpace
-@onready var dish_container = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/CookingSpace/DishContainer
+@onready var typing_space = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow/TypingSpace
+@onready var dish_container = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/DishContainer
 func _ready() -> void:
 	randomize()
 	start_level(level, target_score)

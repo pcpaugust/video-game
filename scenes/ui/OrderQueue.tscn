@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://r8jlkk4nsfeo"]
 
-[ext_resource type="PackedScene" uid="uid://6caqoai6174a" path="res://scenes/ui/OrderCard.tscn" id="1_cnvk8"]
 [ext_resource type="Script" uid="uid://bqsjev56a4qov" path="res://scripts/ui/order_queue.gd" id="1_dgkx7"]
 
 [node name="OrderContainer" type="ScrollContainer" unique_id=2144028027]
@@ -14,15 +13,3 @@ script = ExtResource("1_dgkx7")
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 16
-
-[node name="OrderCard" parent="OrderQueue" unique_id=401019977 instance=ExtResource("1_cnvk8")]
-layout_mode = 2
-
-[node name="OrderCard2" parent="OrderQueue" unique_id=343230490 instance=ExtResource("1_cnvk8")]
-layout_mode = 2
-
-[node name="OrderCard3" parent="OrderQueue" unique_id=197658636 instance=ExtResource("1_cnvk8")]
-layout_mode = 2
-
-[node name="OrderCard4" parent="OrderQueue" unique_id=1871860865 instance=ExtResource("1_cnvk8")]
-layout_mode = 2

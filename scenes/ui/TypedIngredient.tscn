@@ -16,10 +16,10 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer" unique_id=2099751981]
-custom_minimum_size = Vector2(96, 96)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("1_grd28")
-expand_mode = 1
+expand_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1176633193]
 custom_minimum_size = Vector2(60, 0)

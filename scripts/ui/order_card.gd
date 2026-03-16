@@ -73,7 +73,7 @@ func update_patience(current: float, max_val: float):
 func _pick_asset_path(key: String, assets: Array[String]) -> String:
 	if assets.is_empty():
 		return ""
-	var acc := 0
+	var acc: int = 0
 	for i in key.length():
 		acc += key.unicode_at(i)
 	return assets[acc % assets.size()]

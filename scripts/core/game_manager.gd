@@ -34,11 +34,11 @@ var missed_customers: int = 0
 
 @onready var level_label: Label = $CanvasLayer/Root/MainVBox/TopBar/LevelLabel
 @onready var score_label: Label = $CanvasLayer/Root/MainVBox/TopBar/ScoreLabel
-@onready var mode_label: Label = $CanvasLayer/Root/MainVBox/Bottom/TypingPanel/ModeLabel
-@onready var input_label: Label = $CanvasLayer/Root/MainVBox/Bottom/TypingPanel/InputLabel
-@onready var dish_slots_label: Label = $CanvasLayer/Root/MainVBox/Middle/CookArea/DishSlotsLabel
-@onready var customers_container: VBoxContainer = $CanvasLayer/Root/MainVBox/Middle/CustomerArea/CustomerList
-@onready var hint_label: Label = $CanvasLayer/Root/MainVBox/Bottom/TypingPanel/HintLabel
+@onready var mode_label: Label = $CanvasLayer/Root/MainVBox/Middle/CookArea/TypingPanel/ActionRow/TypingItem/TypingBlock/TypingText/ModeLabel
+@onready var input_label: Label = $CanvasLayer/Root/MainVBox/Middle/CookArea/TypingPanel/ActionRow/TypingItem/TypingBlock/TypingText/InputLabel
+@onready var dish_slots_label: Label = $CanvasLayer/Root/MainVBox/Middle/CookArea/TypingPanel/DishSlotsLabel
+@onready var customers_container: BoxContainer = $CanvasLayer/Root/MainVBox/Middle/CustomerArea/CustomerList
+@onready var hint_label: Label = $CanvasLayer/Root/MainVBox/Middle/CookArea/TypingPanel/HintLabel
 
 
 func _ready() -> void:
@@ -112,7 +112,7 @@ func _update_customers(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
-		var ev := event as InputEventKey
+		var ev: InputEventKey = event as InputEventKey
 
 		match ev.keycode:
 			KEY_TAB:
@@ -138,7 +138,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		# For other keys, append unicode text into buffer.
 		if ev.unicode != 0:
-			var ch := char(ev.unicode)
+			var ch: String = char(ev.unicode)
 			typing_buffer += ch
 			_update_ui()
 
@@ -196,13 +196,13 @@ func _handle_enter() -> void:
 
 
 func _attempt_cook_current_buffer() -> void:
-	var raw := typing_buffer.strip_edges()
+	var raw: String = typing_buffer.strip_edges()
 	if raw == "":
 		return
 
 	var tokens: Array[String] = []
 	for part in raw.split(" ", false):
-		var token := String(part).strip_edges()
+		var token: String = String(part).strip_edges()
 		if token == "":
 			continue
 		tokens.append(token)
@@ -226,7 +226,7 @@ func _attempt_cook_current_buffer() -> void:
 		_update_ui()
 		return
 
-	var key := MenuData.canonical_dish_key(valid_ingredients)
+	var key: String = MenuData.canonical_dish_key(valid_ingredients)
 
 	if dish_slots.size() < GameConfig.MAX_DISH_SLOTS:
 		dish_slots.append({
@@ -241,7 +241,7 @@ func _attempt_cook_current_buffer() -> void:
 
 
 func _attempt_serve_current_buffer() -> void:
-	var customer_name := typing_buffer.strip_edges()
+	var customer_name: String = typing_buffer.strip_edges()
 	if customer_name == "":
 		return
 
@@ -267,7 +267,7 @@ func _attempt_serve_current_buffer() -> void:
 		var dish = dish_slots[slot_idx]
 		var key: String = dish["key"]
 
-		var required_index := remaining_required.find(key)
+		var required_index: int = remaining_required.find(key)
 		if required_index != -1:
 			served_keys.append(key)
 			remaining_required.remove_at(required_index)
@@ -329,7 +329,7 @@ func _build_dish_slots_text() -> String:
 	for i in range(dish_slots.size()):
 		var dish = dish_slots[i]
 		var ing: Array[String] = dish["ingredients"]
-		var prefix := ""
+		var prefix: String = ""
 		if current_mode == Mode.CLEAR_SLOT and i == selected_slot:
 			prefix = "> "
 		else:

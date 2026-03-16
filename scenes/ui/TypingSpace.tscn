@@ -2,26 +2,50 @@
 
 [ext_resource type="Script" uid="uid://2fpyyk0ildvv" path="res://scripts/ui/typing_space.gd" id="1_ro5k3"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_block"]
+bg_color = Color(1, 0.933333, 0.764706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.439216, 0.415686, 0.415686, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="MarginContainer" type="MarginContainer" unique_id=1078964189]
-offset_top = 58.0
-offset_right = 620.0
-offset_bottom = 58.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 script = ExtResource("1_ro5k3")
 
-[node name="TypingSpace" type="VBoxContainer" parent="." unique_id=1517659998]
-custom_minimum_size = Vector2(0, 150)
-layout_mode = 2
-
-[node name="ModeLabel" type="Label" parent="TypingSpace" unique_id=781658405]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-
-[node name="TextField" type="Label" parent="TypingSpace" unique_id=1290528722]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TypingSpace" unique_id=2048963512]
+[node name="TypingSpace" type="VBoxContainer" parent="." unique_id=199487381]
 layout_mode = 2
 theme_override_constants/separation = 12
+alignment = 1
+
+[node name="TypingBlock" type="PanelContainer" parent="TypingSpace" unique_id=1111602193]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_block")
+
+[node name="BlockContent" type="VBoxContainer" parent="TypingSpace/TypingBlock" unique_id=82676836]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ModeLabel" type="Label" parent="TypingSpace/TypingBlock/BlockContent" unique_id=1921083847]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
+text = "????"
+
+[node name="TextField" type="Label" parent="TypingSpace/TypingBlock/BlockContent" unique_id=319323677]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TypingSpace" unique_id=1145732806]
+layout_mode = 2
+theme_override_constants/separation = 8

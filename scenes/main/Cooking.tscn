@@ -6,9 +6,48 @@
 [ext_resource type="PackedScene" uid="uid://dshga2ulvahoa" path="res://scenes/ui/TypingSpace.tscn" id="3_xdmyo"]
 [ext_resource type="PackedScene" uid="uid://cdkr12srcscr8" path="res://scenes/ui/IngredientTable.tscn" id="4_4vgtb"]
 [ext_resource type="PackedScene" uid="uid://bn2itsdp6foer" path="res://scenes/ui/DishContainer.tscn" id="4_xdmyo"]
+[ext_resource type="Texture2D" path="res://assets/figma/bg.png" id="5_bg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijlok"]
 bg_color = Color(0.972549, 0.9137255, 0.6431373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_circle_grey"]
+bg_color = Color(0.439216, 0.415686, 0.415686, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_typing_block"]
+bg_color = Color(1, 0.933333, 0.764706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.439216, 0.415686, 0.415686, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_circle_yellow"]
+bg_color = Color(0.972549, 0.913725, 0.643137, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_small_block"]
+bg_color = Color(1, 0.933333, 0.764706, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.439216, 0.415686, 0.415686, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="Cooking" type="Node2D" unique_id=2003241289]
 script = ExtResource("1_cy70s")
@@ -30,12 +69,22 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ijlok")
 
+[node name="Background" type="TextureRect" parent="CanvasLayer/PanelContainer" unique_id=2108137782]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("5_bg")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 1, 1, 0.1)
+
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer" unique_id=1147982892]
 layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer" unique_id=706598204]
 layout_mode = 2
@@ -47,15 +96,84 @@ layout_mode = 2
 
 [node name="OrderContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2144028027 instance=ExtResource("2_cy70s")]
 layout_mode = 2
+custom_minimum_size = Vector2(0, 110)
 
-[node name="CookingSpace" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1194688964]
+[node name="DishSlotsRow" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1734069991]
 layout_mode = 2
+theme_override_constants/separation = 24
 
-[node name="DishContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/CookingSpace" unique_id=1222613478 instance=ExtResource("4_xdmyo")]
+[node name="DishSlot1" type="PanelContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/DishSlotsRow"]
+custom_minimum_size = Vector2(88, 88)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_grey")
 
-[node name="TypingSpace" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/CookingSpace" unique_id=1951861316 instance=ExtResource("3_xdmyo")]
+[node name="DishSlot2" type="PanelContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/DishSlotsRow"]
+custom_minimum_size = Vector2(88, 88)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_grey")
+
+[node name="DishSlot3" type="PanelContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/DishSlotsRow"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_grey")
+
+[node name="ActionRow" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1194688964]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+theme_override_constants/separation = 16
+
+[node name="IdleItem1" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="IdleIcon1" type="PanelContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow/IdleItem1"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_yellow")
+
+[node name="IdleBlock1" type="PanelContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow/IdleItem1"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_small_block")
+
+[node name="IdleLabel1" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow/IdleItem1/IdleBlock1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
+text = "เย็นตาโฟ"
+
+[node name="IdleItem2" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="IdleIcon2" type="PanelContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow/IdleItem2"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_yellow")
+
+[node name="IdleBlock2" type="PanelContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow/IdleItem2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_small_block")
+
+[node name="IdleLabel2" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow/IdleItem2/IdleBlock2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
+text = "เย็นตาโฟ"
+
+[node name="TypingSpace" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow" unique_id=1951861316 instance=ExtResource("3_xdmyo")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_minimum_size = Vector2(220, 140)
+
+[node name="DishContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1222613478 instance=ExtResource("4_xdmyo")]
+layout_mode = 2
+visible = false
 
 [node name="IngredientTable" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=83946894 instance=ExtResource("4_4vgtb")]
 layout_mode = 2
+visible = true
