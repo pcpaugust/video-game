@@ -3,7 +3,7 @@ extends Control
 # อ้างอิง Node ลูกภายใน LevelBar.tscn (อิงตามรูปที่ 3)
 @onready var level_label = $Container/Level
 @onready var score_label = $Container/Score
-@onready var progress_bar = $MarginContainer/ProgressBar
+@onready var progress_bar = $BarWrap/ProgressBar
 
 func set_level(level_number: int, target: int) -> void:
 	# อัปเดตข้อความ เช่น "Level 1" หรือ "ด่าน: 1"
