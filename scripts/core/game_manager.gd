@@ -313,17 +313,17 @@ func _attempt_serve_current_buffer() -> void:
 func _build_mode_text() -> String:
 	match current_mode:
 		Mode.PREP:
-			return "โหมด: ปรุง (พิมพ์วัตถุดิบ เว้นวรรค แล้วกด Enter)"
+			return "โหมดปรุง: พิมพ์วัตถุดิบ (คั่นด้วยช่องว่าง) แล้วกด Enter"
 		Mode.CLEAR_SLOT:
-			return "โหมด: เคลียร์ชาม (กด Tab เลือกช่อง แล้ว Enter ทิ้ง)"
+			return "โหมดทิ้ง: กด Tab เลือกชาม แล้ว Enter เพื่อทิ้ง"
 		Mode.SERVE:
-			return "โหมด: เสิร์ฟ (พิมพ์ชื่อลูกค้า แล้วกด Enter)"
+			return "โหมดเสิร์ฟ: พิมพ์ชื่อลูกค้า แล้วกด Enter"
 	return ""
 
 
 func _build_dish_slots_text() -> String:
 	if dish_slots.is_empty():
-		return "ชามที่พัก: (ว่าง)"
+		return "ชามพัก: (ว่าง)"
 
 	var lines: Array[String] = []
 	for i in range(dish_slots.size()):
@@ -374,21 +374,21 @@ func _update_ui() -> void:
 	if not is_inside_tree():
 		return
 
-	level_label.text = "ด่าน: %d" % level
-	score_label.text = "คะแนน: %d (ลูกค้าที่หนี: %d/%d)" % [
+	level_label.text = "เลเวล %d" % level
+	score_label.text = "คะแนน: %d | หนีไป %d/%d" % [
 		score,
 		missed_customers,
 		GameConfig.MAX_MISSED_CUSTOMERS,
 	]
 	mode_label.text = _build_mode_text()
-	input_label.text = "กำลังพิมพ์: %s" % typing_buffer
+	input_label.text = "พิมพ์อยู่: %s" % typing_buffer
 	dish_slots_label.text = _build_dish_slots_text()
 	_update_customers_ui()
 
 	hint_label.text = (
 		"วิธีเล่น:\n"
-		+ "- พิมพ์ชื่อวัตถุดิบคั่นด้วยช่องว่าง แล้วกด Enter เพื่อปรุงชาม\n"
-		+ "- พิมพ์ \"clear\" แล้ว Enter -> กด Tab เลือกชาม -> Enter เพื่อทิ้ง\n"
-		+ "- กด Tab เพื่อสลับไปโหมดเสิร์ฟ / กลับโหมดปรุง\n"
-		+ "- ในโหมดเสิร์ฟ พิมพ์ชื่อลูกค้าแล้ว Enter เพื่อลองเสิร์ฟ"
+		+ "- โหมดปรุง: พิมพ์วัตถุดิบคั่นด้วยช่องว่าง แล้วกด Enter\n"
+		+ "- โหมดทิ้ง: พิมพ์ \"clear\" แล้ว Enter → กด Tab เลือกชาม → Enter\n"
+		+ "- กด Tab เพื่อสลับโหมดปรุง/เสิร์ฟ\n"
+		+ "- โหมดเสิร์ฟ: พิมพ์ชื่อลูกค้า แล้วกด Enter"
 	)

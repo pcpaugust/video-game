@@ -133,4 +133,4 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 autowrap_mode = 2
-text = "เส้นใหญ่, น้ำ"
+text = "รายการที่สั่ง"

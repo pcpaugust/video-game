@@ -22,7 +22,7 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=723520676]
 layout_mode = 2
-text = "รายการอาหาร"
+text = "รายการที่ทำแล้ว"
 
 [node name="List" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1334126301]
 custom_minimum_size = Vector2(200, 120)

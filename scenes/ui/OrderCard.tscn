@@ -53,7 +53,7 @@ size_flags_horizontal = 3
 [node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/TopRow/VBoxContainer" unique_id=438723968]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4392157, 0.41568628, 0.41568628, 1)
-text = "ชื่อลูกค้า"
+text = "ลูกค้า"
 
 [node name="PatienceBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopRow/VBoxContainer" unique_id=446205977]
 custom_minimum_size = Vector2(200, 8)

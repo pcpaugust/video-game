@@ -231,9 +231,9 @@ func _sync_typing_visuals() -> void:
 func _update_mode_ui() -> void:
 	var text = ""
 	match current_mode:
-		Mode.PREP: text = "โหมด: ปรุง (พิมพ์วัตถุดิบ กด Enter)"
-		Mode.SERVE: text = "โหมด: เสิร์ฟ (พิมพ์ชื่อลูกค้า กด Enter)"
-		Mode.CLEAR_SLOT: text = "โหมด: ทิ้งอาหาร (Tab เลือกชาม กด Enter)"
+		Mode.PREP: text = "โหมดปรุง: พิมพ์วัตถุดิบแล้วกด Enter"
+		Mode.SERVE: text = "โหมดเสิร์ฟ: พิมพ์ชื่อลูกค้าแล้วกด Enter"
+		Mode.CLEAR_SLOT: text = "โหมดทิ้ง: กด Tab เลือกชาม แล้ว Enter"
 	typing_space.update_mode(text)
 
 func _update_score() -> void:
