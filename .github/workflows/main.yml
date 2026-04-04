@@ -23,15 +23,13 @@ jobs:
           
           relative_export_path: build/web
   
-      - name: Download and Install Butler
-        run: |
-          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
-          unzip butler.zip
-          chmod +x butler
-          ./butler -V
-
-      - name: Push to Itch.io
+      - name: Install and Push with Butler
+        uses: abrignoni/action-butler@master
+        with:
+          executable-path: .
+          itch-user: ${{ secrets.ITCH_USER }}
+          itch-game: ${{ secrets.ITCH_GAME }}
+          package: build/web
+          channel: web
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_CREDENTIALS }}
-        run: |
-          ./butler push build/web ${{ secrets.ITCH_USER }}/${{ secrets.ITCH_GAME }}:web
