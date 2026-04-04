@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cdkr12srcscr8" path="res://scenes/ui/IngredientTable.tscn" id="4_4vgtb"]
 [ext_resource type="PackedScene" uid="uid://bn2itsdp6foer" path="res://scenes/ui/DishContainer.tscn" id="4_xdmyo"]
 [ext_resource type="Texture2D" uid="uid://cgy3p5jojrnir" path="res://assets/figma/bg.png" id="5_bg"]
+[ext_resource type="FontFile" path="res://assets/fonts/NotoSansThai-Regular.ttf" id="6_thai_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijlok"]
 bg_color = Color(0.972549, 0.9137255, 0.6431373, 1)
@@ -21,6 +22,7 @@ custom_minimum_size = Vector2(1024, 720)
 offset_right = 1024.0
 offset_bottom = 720.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ijlok")
+theme_override_fonts/font = ExtResource("6_thai_font")
 
 [node name="Background" type="TextureRect" parent="CanvasLayer/PanelContainer" unique_id=2108137782]
 modulate = Color(1, 1, 1, 0.1)
