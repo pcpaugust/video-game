@@ -27,11 +27,13 @@ jobs:
         run: |
           curl -L -o butler.zip https://github.com/itchio/butler/releases/latest/download/butler-linux-amd64.zip
           unzip butler.zip
-          chmod +x butler
-          ./butler -V
+          # The binary is inside the linux-amd64 folder
+          chmod +x linux-amd64/butler
+          ./linux-amd64/butler -V
 
       - name: Push to Itch.io
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_CREDENTIALS }}
         run: |
-          ./butler push build/web ${{ secrets.ITCH_USER }}/${{ secrets.ITCH_GAME }}:web
+          # Use the path to the extracted binary
+          ./linux-amd64/butler push build/web ${{ secrets.ITCH_USER }}/${{ secrets.ITCH_GAME }}:web
