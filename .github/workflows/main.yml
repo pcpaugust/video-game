@@ -20,11 +20,10 @@ jobs:
           relative_project_path: ./
   
       - name: Butler Push to Itch.io
-        uses: josephbmanley/butler-publish-action@master
+        uses: ayabbos/butler-publish-action@v1.0.3
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: web
           ITCH_GAME: ${{ secrets.ITCH_GAME }}
           ITCH_USER: ${{ secrets.ITCH_USER }}
-          # Path where firebelley/godot-export places the files by default
           PACKAGE: build/web
