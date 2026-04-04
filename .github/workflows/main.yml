@@ -19,11 +19,15 @@ jobs:
           export_preset_name: Web
           relative_project_path: ./
   
-      - name: Butler Push to Itch.io
-        uses: ayabbos/butler-publish-action@v1.0.3
+      - name: Download and Install Butler
+        run: |
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          ./butler -V
+
+      - name: Push to Itch.io
         env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-          CHANNEL: web
-          ITCH_GAME: ${{ secrets.ITCH_GAME }}
-          ITCH_USER: ${{ secrets.ITCH_USER }}
-          PACKAGE: build/web
+          BUTLER_API_KEY: ${{ secrets.BUTLER_CREDENTIALS }}
+        run: |
+          ./butler push build/web ${{ secrets.ITCH_USER }}/${{ secrets.ITCH_GAME }}:web
