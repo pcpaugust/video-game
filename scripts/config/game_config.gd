@@ -15,7 +15,7 @@ const CHILD_PATIENCE_BONUS: float = 4.0
 const SPECIAL_PATIENCE_PENALTY: float = 4.0
 const MIN_PATIENCE_TIME: float = 8.0
 
-const TIME_BONUS_PER_DISH: float = 3.0
+const TIME_BONUS_PER_DISH: float = 5.0
 
 # Dish / slot settings
 const MAX_DISH_SLOTS: int = 3
