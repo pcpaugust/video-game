@@ -47,7 +47,7 @@ func _ensure_styles() -> void:
 	if style_grey != null:
 		return
 	style_grey = _make_circle_style(Color(0.439216, 0.415686, 0.415686, 1))
-	style_yellow = _make_circle_style(Color(0.972549, 0.913725, 0.643137, 1))
+	style_yellow = _make_circle_style(Color(0.973, 0.914, 0.227, 1.0))
 	style_orange = _make_circle_style(Color(0.976471, 0.556863, 0.235294, 1))
 	style_green = _make_circle_style(Color(0.262745, 0.760784, 0.337255, 1))
 	style_blue = _make_circle_style(Color(0.294118, 0.376471, 0.941176, 1))

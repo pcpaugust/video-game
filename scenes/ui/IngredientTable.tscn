@@ -1,5 +1,12 @@
 [gd_scene format=3 uid="uid://cdkr12srcscr8"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_circle_grey"]
+bg_color = Color(0.439216, 0.415686, 0.415686, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_group"]
 bg_color = Color(1, 0.933333, 0.764706, 1)
 border_width_left = 1
@@ -13,21 +20,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_circle_yellow"]
-bg_color = Color(0.972549, 0.913725, 0.643137, 1)
-corner_radius_top_left = 999
-corner_radius_top_right = 999
-corner_radius_bottom_right = 999
-corner_radius_bottom_left = 999
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_circle_grey"]
-bg_color = Color(0.439216, 0.415686, 0.415686, 1)
-corner_radius_top_left = 999
-corner_radius_top_right = 999
-corner_radius_bottom_right = 999
-corner_radius_bottom_left = 999
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_circle_blue"]
-bg_color = Color(0.294118, 0.376471, 0.941176, 1)
+bg_color = Color(0.972549, 0.9137255, 0.22745098, 1)
 corner_radius_top_left = 999
 corner_radius_top_right = 999
 corner_radius_bottom_right = 999
@@ -47,457 +40,468 @@ corner_radius_top_right = 999
 corner_radius_bottom_right = 999
 corner_radius_bottom_left = 999
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_circle_blue"]
+bg_color = Color(0.294118, 0.376471, 0.941176, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
 [node name="IngredientTable" type="Control" unique_id=83946894]
 custom_minimum_size = Vector2(0, 200)
+layout_mode = 3
+anchors_preset = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Groups" type="HBoxContainer" parent="."]
+[node name="Groups" type="HBoxContainer" parent="." unique_id=1730722800]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 24
 
-[node name="Soup" type="VBoxContainer" parent="Groups"]
-layout_mode = 2
+[node name="Soup" type="VBoxContainer" parent="Groups" unique_id=868719430]
 custom_minimum_size = Vector2(160, 180)
-theme_override_constants/separation = 8
-
-[node name="SoupRow1" type="HBoxContainer" parent="Groups/Soup"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="SoupItem1" type="VBoxContainer" parent="Groups/Soup/SoupRow1"]
+[node name="SoupRow1" type="HBoxContainer" parent="Groups/Soup" unique_id=1776154845]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SoupItem1" type="VBoxContainer" parent="Groups/Soup/SoupRow1" unique_id=420975055]
 layout_mode = 2
 
-[node name="SoupIcon1" type="PanelContainer" parent="Groups/Soup/SoupRow1/SoupItem1"]
+[node name="SoupIcon1" type="PanelContainer" parent="Groups/Soup/SoupRow1/SoupItem1" unique_id=147168877]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_grey")
 
-[node name="SoupLabel1" type="PanelContainer" parent="Groups/Soup/SoupRow1/SoupItem1"]
+[node name="SoupLabel1" type="PanelContainer" parent="Groups/Soup/SoupRow1/SoupItem1" unique_id=1770350651]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="SoupLabel1Text" type="Label" parent="Groups/Soup/SoupRow1/SoupItem1/SoupLabel1"]
+[node name="SoupLabel1Text" type="Label" parent="Groups/Soup/SoupRow1/SoupItem1/SoupLabel1" unique_id=744091812]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "น้ำข้น"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="SoupItem2" type="VBoxContainer" parent="Groups/Soup/SoupRow1"]
+[node name="SoupItem2" type="VBoxContainer" parent="Groups/Soup/SoupRow1" unique_id=991526787]
 layout_mode = 2
 
-[node name="SoupIcon2" type="PanelContainer" parent="Groups/Soup/SoupRow1/SoupItem2"]
+[node name="SoupIcon2" type="PanelContainer" parent="Groups/Soup/SoupRow1/SoupItem2" unique_id=82323343]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_grey")
 
-[node name="SoupLabel2" type="PanelContainer" parent="Groups/Soup/SoupRow1/SoupItem2"]
+[node name="SoupLabel2" type="PanelContainer" parent="Groups/Soup/SoupRow1/SoupItem2" unique_id=323313911]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="SoupLabel2Text" type="Label" parent="Groups/Soup/SoupRow1/SoupItem2/SoupLabel2"]
+[node name="SoupLabel2Text" type="Label" parent="Groups/Soup/SoupRow1/SoupItem2/SoupLabel2" unique_id=1415499999]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "น้ำใส"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="SoupRow2" type="HBoxContainer" parent="Groups/Soup"]
+[node name="SoupRow2" type="HBoxContainer" parent="Groups/Soup" unique_id=1402384243]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="SoupItem3" type="VBoxContainer" parent="Groups/Soup/SoupRow2"]
+[node name="SoupItem3" type="VBoxContainer" parent="Groups/Soup/SoupRow2" unique_id=236688525]
 layout_mode = 2
 
-[node name="SoupIcon3" type="PanelContainer" parent="Groups/Soup/SoupRow2/SoupItem3"]
+[node name="SoupIcon3" type="PanelContainer" parent="Groups/Soup/SoupRow2/SoupItem3" unique_id=284086423]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_grey")
 
-[node name="SoupLabel3" type="PanelContainer" parent="Groups/Soup/SoupRow2/SoupItem3"]
+[node name="SoupLabel3" type="PanelContainer" parent="Groups/Soup/SoupRow2/SoupItem3" unique_id=1095022673]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="SoupLabel3Text" type="Label" parent="Groups/Soup/SoupRow2/SoupItem3/SoupLabel3"]
+[node name="SoupLabel3Text" type="Label" parent="Groups/Soup/SoupRow2/SoupItem3/SoupLabel3" unique_id=978083557]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "ต้มยำ"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="SoupItem4" type="VBoxContainer" parent="Groups/Soup/SoupRow2"]
+[node name="SoupItem4" type="VBoxContainer" parent="Groups/Soup/SoupRow2" unique_id=360397668]
 layout_mode = 2
 
-[node name="SoupIcon4" type="PanelContainer" parent="Groups/Soup/SoupRow2/SoupItem4"]
+[node name="SoupIcon4" type="PanelContainer" parent="Groups/Soup/SoupRow2/SoupItem4" unique_id=605971475]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_grey")
 
-[node name="SoupLabel4" type="PanelContainer" parent="Groups/Soup/SoupRow2/SoupItem4"]
+[node name="SoupLabel4" type="PanelContainer" parent="Groups/Soup/SoupRow2/SoupItem4" unique_id=1427242918]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="SoupLabel4Text" type="Label" parent="Groups/Soup/SoupRow2/SoupItem4/SoupLabel4"]
+[node name="SoupLabel4Text" type="Label" parent="Groups/Soup/SoupRow2/SoupItem4/SoupLabel4" unique_id=986988506]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "เย็นตาโฟ"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="Noodles" type="VBoxContainer" parent="Groups"]
-layout_mode = 2
+[node name="Noodles" type="VBoxContainer" parent="Groups" unique_id=2137536170]
 custom_minimum_size = Vector2(200, 180)
-theme_override_constants/separation = 8
-
-[node name="NoodlesRow1" type="HBoxContainer" parent="Groups/Noodles"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="NoodlesItem1" type="VBoxContainer" parent="Groups/Noodles/NoodlesRow1"]
+[node name="NoodlesRow1" type="HBoxContainer" parent="Groups/Noodles" unique_id=828847748]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NoodlesItem1" type="VBoxContainer" parent="Groups/Noodles/NoodlesRow1" unique_id=212780758]
 layout_mode = 2
 
-[node name="NoodlesIcon1" type="PanelContainer" parent="Groups/Noodles/NoodlesRow1/NoodlesItem1"]
+[node name="NoodlesIcon1" type="PanelContainer" parent="Groups/Noodles/NoodlesRow1/NoodlesItem1" unique_id=251460193]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_yellow")
 
-[node name="NoodlesLabel1" type="PanelContainer" parent="Groups/Noodles/NoodlesRow1/NoodlesItem1"]
+[node name="NoodlesLabel1" type="PanelContainer" parent="Groups/Noodles/NoodlesRow1/NoodlesItem1" unique_id=1679867649]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="NoodlesLabel1Text" type="Label" parent="Groups/Noodles/NoodlesRow1/NoodlesItem1/NoodlesLabel1"]
+[node name="NoodlesLabel1Text" type="Label" parent="Groups/Noodles/NoodlesRow1/NoodlesItem1/NoodlesLabel1" unique_id=1594431247]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "เส้นเล็ก"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="NoodlesItem2" type="VBoxContainer" parent="Groups/Noodles/NoodlesRow1"]
+[node name="NoodlesItem2" type="VBoxContainer" parent="Groups/Noodles/NoodlesRow1" unique_id=260626441]
 layout_mode = 2
 
-[node name="NoodlesIcon2" type="PanelContainer" parent="Groups/Noodles/NoodlesRow1/NoodlesItem2"]
+[node name="NoodlesIcon2" type="PanelContainer" parent="Groups/Noodles/NoodlesRow1/NoodlesItem2" unique_id=1985750238]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_yellow")
 
-[node name="NoodlesLabel2" type="PanelContainer" parent="Groups/Noodles/NoodlesRow1/NoodlesItem2"]
+[node name="NoodlesLabel2" type="PanelContainer" parent="Groups/Noodles/NoodlesRow1/NoodlesItem2" unique_id=851807939]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="NoodlesLabel2Text" type="Label" parent="Groups/Noodles/NoodlesRow1/NoodlesItem2/NoodlesLabel2"]
+[node name="NoodlesLabel2Text" type="Label" parent="Groups/Noodles/NoodlesRow1/NoodlesItem2/NoodlesLabel2" unique_id=869812611]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "เส้นหมี่"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="NoodlesRow2" type="HBoxContainer" parent="Groups/Noodles"]
+[node name="NoodlesRow2" type="HBoxContainer" parent="Groups/Noodles" unique_id=1397708187]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="NoodlesItem3" type="VBoxContainer" parent="Groups/Noodles/NoodlesRow2"]
+[node name="NoodlesItem3" type="VBoxContainer" parent="Groups/Noodles/NoodlesRow2" unique_id=1157675841]
 layout_mode = 2
 
-[node name="NoodlesIcon3" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem3"]
+[node name="NoodlesIcon3" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem3" unique_id=1172191504]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_yellow")
 
-[node name="NoodlesLabel3" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem3"]
+[node name="NoodlesLabel3" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem3" unique_id=337474930]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="NoodlesLabel3Text" type="Label" parent="Groups/Noodles/NoodlesRow2/NoodlesItem3/NoodlesLabel3"]
+[node name="NoodlesLabel3Text" type="Label" parent="Groups/Noodles/NoodlesRow2/NoodlesItem3/NoodlesLabel3" unique_id=685212519]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "วุ้นเส้น"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="NoodlesItem4" type="VBoxContainer" parent="Groups/Noodles/NoodlesRow2"]
+[node name="NoodlesItem4" type="VBoxContainer" parent="Groups/Noodles/NoodlesRow2" unique_id=1545548032]
 layout_mode = 2
 
-[node name="NoodlesIcon4" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem4"]
+[node name="NoodlesIcon4" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem4" unique_id=1426813891]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_yellow")
 
-[node name="NoodlesLabel4" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem4"]
+[node name="NoodlesLabel4" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem4" unique_id=1887669962]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="NoodlesLabel4Text" type="Label" parent="Groups/Noodles/NoodlesRow2/NoodlesItem4/NoodlesLabel4"]
+[node name="NoodlesLabel4Text" type="Label" parent="Groups/Noodles/NoodlesRow2/NoodlesItem4/NoodlesLabel4" unique_id=1777500850]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "บะหมี่"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="NoodlesItem5" type="VBoxContainer" parent="Groups/Noodles/NoodlesRow2"]
+[node name="NoodlesItem5" type="VBoxContainer" parent="Groups/Noodles/NoodlesRow2" unique_id=1010371546]
 layout_mode = 2
 
-[node name="NoodlesIcon5" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem5"]
+[node name="NoodlesIcon5" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem5" unique_id=2106118037]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_yellow")
 
-[node name="NoodlesLabel5" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem5"]
+[node name="NoodlesLabel5" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem5" unique_id=523132448]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="NoodlesLabel5Text" type="Label" parent="Groups/Noodles/NoodlesRow2/NoodlesItem5/NoodlesLabel5"]
+[node name="NoodlesLabel5Text" type="Label" parent="Groups/Noodles/NoodlesRow2/NoodlesItem5/NoodlesLabel5" unique_id=947930599]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "เส้นใหญ่"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="Meat" type="VBoxContainer" parent="Groups"]
-layout_mode = 2
+[node name="Meat" type="VBoxContainer" parent="Groups" unique_id=1076219204]
 custom_minimum_size = Vector2(200, 180)
-theme_override_constants/separation = 8
-
-[node name="MeatRow1" type="HBoxContainer" parent="Groups/Meat"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="MeatItem1" type="VBoxContainer" parent="Groups/Meat/MeatRow1"]
+[node name="MeatRow1" type="HBoxContainer" parent="Groups/Meat" unique_id=708481231]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MeatItem1" type="VBoxContainer" parent="Groups/Meat/MeatRow1" unique_id=595709364]
 layout_mode = 2
 
-[node name="MeatIcon1" type="PanelContainer" parent="Groups/Meat/MeatRow1/MeatItem1"]
+[node name="MeatIcon1" type="PanelContainer" parent="Groups/Meat/MeatRow1/MeatItem1" unique_id=952840224]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_orange")
 
-[node name="MeatLabel1" type="PanelContainer" parent="Groups/Meat/MeatRow1/MeatItem1"]
+[node name="MeatLabel1" type="PanelContainer" parent="Groups/Meat/MeatRow1/MeatItem1" unique_id=1842075257]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="MeatLabel1Text" type="Label" parent="Groups/Meat/MeatRow1/MeatItem1/MeatLabel1"]
+[node name="MeatLabel1Text" type="Label" parent="Groups/Meat/MeatRow1/MeatItem1/MeatLabel1" unique_id=242098593]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "ลูกชิ้น"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="MeatItem2" type="VBoxContainer" parent="Groups/Meat/MeatRow1"]
+[node name="MeatItem2" type="VBoxContainer" parent="Groups/Meat/MeatRow1" unique_id=2133360257]
 layout_mode = 2
 
-[node name="MeatIcon2" type="PanelContainer" parent="Groups/Meat/MeatRow1/MeatItem2"]
+[node name="MeatIcon2" type="PanelContainer" parent="Groups/Meat/MeatRow1/MeatItem2" unique_id=1175153112]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_orange")
 
-[node name="MeatLabel2" type="PanelContainer" parent="Groups/Meat/MeatRow1/MeatItem2"]
+[node name="MeatLabel2" type="PanelContainer" parent="Groups/Meat/MeatRow1/MeatItem2" unique_id=645254689]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="MeatLabel2Text" type="Label" parent="Groups/Meat/MeatRow1/MeatItem2/MeatLabel2"]
+[node name="MeatLabel2Text" type="Label" parent="Groups/Meat/MeatRow1/MeatItem2/MeatLabel2" unique_id=991074325]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "เนื้อตุ๋น"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="MeatRow2" type="HBoxContainer" parent="Groups/Meat"]
+[node name="MeatRow2" type="HBoxContainer" parent="Groups/Meat" unique_id=673768115]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="MeatItem3" type="VBoxContainer" parent="Groups/Meat/MeatRow2"]
+[node name="MeatItem3" type="VBoxContainer" parent="Groups/Meat/MeatRow2" unique_id=886532342]
 layout_mode = 2
 
-[node name="MeatIcon3" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem3"]
+[node name="MeatIcon3" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem3" unique_id=495903274]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_orange")
 
-[node name="MeatLabel3" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem3"]
+[node name="MeatLabel3" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem3" unique_id=1605651201]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="MeatLabel3Text" type="Label" parent="Groups/Meat/MeatRow2/MeatItem3/MeatLabel3"]
+[node name="MeatLabel3Text" type="Label" parent="Groups/Meat/MeatRow2/MeatItem3/MeatLabel3" unique_id=35095408]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "หมูสับ"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="MeatItem4" type="VBoxContainer" parent="Groups/Meat/MeatRow2"]
+[node name="MeatItem4" type="VBoxContainer" parent="Groups/Meat/MeatRow2" unique_id=820958735]
 layout_mode = 2
 
-[node name="MeatIcon4" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem4"]
+[node name="MeatIcon4" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem4" unique_id=747764648]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_orange")
 
-[node name="MeatLabel4" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem4"]
+[node name="MeatLabel4" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem4" unique_id=1879144099]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="MeatLabel4Text" type="Label" parent="Groups/Meat/MeatRow2/MeatItem4/MeatLabel4"]
+[node name="MeatLabel4Text" type="Label" parent="Groups/Meat/MeatRow2/MeatItem4/MeatLabel4" unique_id=180192369]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "หมูเด้ง"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="MeatItem5" type="VBoxContainer" parent="Groups/Meat/MeatRow2"]
+[node name="MeatItem5" type="VBoxContainer" parent="Groups/Meat/MeatRow2" unique_id=376190849]
 layout_mode = 2
 
-[node name="MeatIcon5" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem5"]
+[node name="MeatIcon5" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem5" unique_id=473397913]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_orange")
 
-[node name="MeatLabel5" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem5"]
+[node name="MeatLabel5" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem5" unique_id=516654078]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="MeatLabel5Text" type="Label" parent="Groups/Meat/MeatRow2/MeatItem5/MeatLabel5"]
+[node name="MeatLabel5Text" type="Label" parent="Groups/Meat/MeatRow2/MeatItem5/MeatLabel5" unique_id=799968974]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "น่องไก่"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="Veg" type="VBoxContainer" parent="Groups"]
-layout_mode = 2
+[node name="Veg" type="VBoxContainer" parent="Groups" unique_id=248480575]
 custom_minimum_size = Vector2(160, 180)
-theme_override_constants/separation = 8
-
-[node name="VegRow1" type="HBoxContainer" parent="Groups/Veg"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="VegItem1" type="VBoxContainer" parent="Groups/Veg/VegRow1"]
+[node name="VegRow1" type="HBoxContainer" parent="Groups/Veg" unique_id=1537963305]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="VegItem1" type="VBoxContainer" parent="Groups/Veg/VegRow1" unique_id=968604462]
 layout_mode = 2
 
-[node name="VegIcon1" type="PanelContainer" parent="Groups/Veg/VegRow1/VegItem1"]
+[node name="VegIcon1" type="PanelContainer" parent="Groups/Veg/VegRow1/VegItem1" unique_id=2029586310]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_green")
 
-[node name="VegLabel1" type="PanelContainer" parent="Groups/Veg/VegRow1/VegItem1"]
+[node name="VegLabel1" type="PanelContainer" parent="Groups/Veg/VegRow1/VegItem1" unique_id=1378159032]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="VegLabel1Text" type="Label" parent="Groups/Veg/VegRow1/VegItem1/VegLabel1"]
+[node name="VegLabel1Text" type="Label" parent="Groups/Veg/VegRow1/VegItem1/VegLabel1" unique_id=1986551746]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "กระเทียมเจียว"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="VegRow2" type="HBoxContainer" parent="Groups/Veg"]
+[node name="VegRow2" type="HBoxContainer" parent="Groups/Veg" unique_id=1831333351]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="VegItem2" type="VBoxContainer" parent="Groups/Veg/VegRow2"]
+[node name="VegItem2" type="VBoxContainer" parent="Groups/Veg/VegRow2" unique_id=1539333713]
 layout_mode = 2
 
-[node name="VegIcon2" type="PanelContainer" parent="Groups/Veg/VegRow2/VegItem2"]
+[node name="VegIcon2" type="PanelContainer" parent="Groups/Veg/VegRow2/VegItem2" unique_id=241958539]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_green")
 
-[node name="VegLabel2" type="PanelContainer" parent="Groups/Veg/VegRow2/VegItem2"]
+[node name="VegLabel2" type="PanelContainer" parent="Groups/Veg/VegRow2/VegItem2" unique_id=504938800]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="VegLabel2Text" type="Label" parent="Groups/Veg/VegRow2/VegItem2/VegLabel2"]
+[node name="VegLabel2Text" type="Label" parent="Groups/Veg/VegRow2/VegItem2/VegLabel2" unique_id=803800859]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "ถั่วงอก"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="VegItem3" type="VBoxContainer" parent="Groups/Veg/VegRow2"]
+[node name="VegItem3" type="VBoxContainer" parent="Groups/Veg/VegRow2" unique_id=920224064]
 layout_mode = 2
 
-[node name="VegIcon3" type="PanelContainer" parent="Groups/Veg/VegRow2/VegItem3"]
+[node name="VegIcon3" type="PanelContainer" parent="Groups/Veg/VegRow2/VegItem3" unique_id=1397344427]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_green")
 
-[node name="VegLabel3" type="PanelContainer" parent="Groups/Veg/VegRow2/VegItem3"]
+[node name="VegLabel3" type="PanelContainer" parent="Groups/Veg/VegRow2/VegItem3" unique_id=2032811851]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="VegLabel3Text" type="Label" parent="Groups/Veg/VegRow2/VegItem3/VegLabel3"]
+[node name="VegLabel3Text" type="Label" parent="Groups/Veg/VegRow2/VegItem3/VegLabel3" unique_id=164728633]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "ต้นหอมผักชี"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="Drink" type="VBoxContainer" parent="Groups"]
-layout_mode = 2
+[node name="Drink" type="VBoxContainer" parent="Groups" unique_id=2015216951]
 custom_minimum_size = Vector2(160, 180)
-theme_override_constants/separation = 8
-
-[node name="DrinkRow1" type="HBoxContainer" parent="Groups/Drink"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="DrinkItem1" type="VBoxContainer" parent="Groups/Drink/DrinkRow1"]
+[node name="DrinkRow1" type="HBoxContainer" parent="Groups/Drink" unique_id=2136102309]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="DrinkItem1" type="VBoxContainer" parent="Groups/Drink/DrinkRow1" unique_id=676924167]
 layout_mode = 2
 
-[node name="DrinkIcon1" type="PanelContainer" parent="Groups/Drink/DrinkRow1/DrinkItem1"]
+[node name="DrinkIcon1" type="PanelContainer" parent="Groups/Drink/DrinkRow1/DrinkItem1" unique_id=442817929]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_blue")
 
-[node name="DrinkLabel1" type="PanelContainer" parent="Groups/Drink/DrinkRow1/DrinkItem1"]
+[node name="DrinkLabel1" type="PanelContainer" parent="Groups/Drink/DrinkRow1/DrinkItem1" unique_id=518912435]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="DrinkLabel1Text" type="Label" parent="Groups/Drink/DrinkRow1/DrinkItem1/DrinkLabel1"]
+[node name="DrinkLabel1Text" type="Label" parent="Groups/Drink/DrinkRow1/DrinkItem1/DrinkLabel1" unique_id=1051993064]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "โอเลี้ยง"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="DrinkItem2" type="VBoxContainer" parent="Groups/Drink/DrinkRow1"]
+[node name="DrinkItem2" type="VBoxContainer" parent="Groups/Drink/DrinkRow1" unique_id=1126117507]
 layout_mode = 2
 
-[node name="DrinkIcon2" type="PanelContainer" parent="Groups/Drink/DrinkRow1/DrinkItem2"]
+[node name="DrinkIcon2" type="PanelContainer" parent="Groups/Drink/DrinkRow1/DrinkItem2" unique_id=1280348669]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_blue")
 
-[node name="DrinkLabel2" type="PanelContainer" parent="Groups/Drink/DrinkRow1/DrinkItem2"]
+[node name="DrinkLabel2" type="PanelContainer" parent="Groups/Drink/DrinkRow1/DrinkItem2" unique_id=1573253855]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="DrinkLabel2Text" type="Label" parent="Groups/Drink/DrinkRow1/DrinkItem2/DrinkLabel2"]
+[node name="DrinkLabel2Text" type="Label" parent="Groups/Drink/DrinkRow1/DrinkItem2/DrinkLabel2" unique_id=247706447]
 layout_mode = 2
-text = "น้ำเก๊กฮวย"
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
+text = "น้ำเก๊กฮวย"
 
-[node name="DrinkRow2" type="HBoxContainer" parent="Groups/Drink"]
+[node name="DrinkRow2" type="HBoxContainer" parent="Groups/Drink" unique_id=787895348]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="DrinkItem3" type="VBoxContainer" parent="Groups/Drink/DrinkRow2"]
+[node name="DrinkItem3" type="VBoxContainer" parent="Groups/Drink/DrinkRow2" unique_id=253517062]
 layout_mode = 2
 
-[node name="DrinkIcon3" type="PanelContainer" parent="Groups/Drink/DrinkRow2/DrinkItem3"]
+[node name="DrinkIcon3" type="PanelContainer" parent="Groups/Drink/DrinkRow2/DrinkItem3" unique_id=1938732153]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_blue")
 
-[node name="DrinkLabel3" type="PanelContainer" parent="Groups/Drink/DrinkRow2/DrinkItem3"]
+[node name="DrinkLabel3" type="PanelContainer" parent="Groups/Drink/DrinkRow2/DrinkItem3" unique_id=815004653]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="DrinkLabel3Text" type="Label" parent="Groups/Drink/DrinkRow2/DrinkItem3/DrinkLabel3"]
+[node name="DrinkLabel3Text" type="Label" parent="Groups/Drink/DrinkRow2/DrinkItem3/DrinkLabel3" unique_id=666946212]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 12
 text = "น้ำกระเจี๊ยบ"
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
 
-[node name="DrinkItem4" type="VBoxContainer" parent="Groups/Drink/DrinkRow2"]
+[node name="DrinkItem4" type="VBoxContainer" parent="Groups/Drink/DrinkRow2" unique_id=418139393]
 layout_mode = 2
 
-[node name="DrinkIcon4" type="PanelContainer" parent="Groups/Drink/DrinkRow2/DrinkItem4"]
+[node name="DrinkIcon4" type="PanelContainer" parent="Groups/Drink/DrinkRow2/DrinkItem4" unique_id=187080857]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_circle_blue")
 
-[node name="DrinkLabel4" type="PanelContainer" parent="Groups/Drink/DrinkRow2/DrinkItem4"]
+[node name="DrinkLabel4" type="PanelContainer" parent="Groups/Drink/DrinkRow2/DrinkItem4" unique_id=850909365]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_group")
 
-[node name="DrinkLabel4Text" type="Label" parent="Groups/Drink/DrinkRow2/DrinkItem4/DrinkLabel4"]
+[node name="DrinkLabel4Text" type="Label" parent="Groups/Drink/DrinkRow2/DrinkItem4/DrinkLabel4" unique_id=1834661003]
 layout_mode = 2
-text = "น้ำใบเตย"
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
+text = "น้ำใบเตย"
