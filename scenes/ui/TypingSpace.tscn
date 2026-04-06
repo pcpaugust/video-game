@@ -31,17 +31,24 @@ alignment = 1
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_block")
 
-[node name="BlockContent" type="VBoxContainer" parent="TypingSpace/TypingBlock" unique_id=82676836]
+[node name="MarginContainer" type="MarginContainer" parent="TypingSpace/TypingBlock" unique_id=1888984308]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="BlockContent" type="VBoxContainer" parent="TypingSpace/TypingBlock/MarginContainer" unique_id=82676836]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="ModeLabel" type="Label" parent="TypingSpace/TypingBlock/BlockContent" unique_id=1921083847]
+[node name="ModeLabel" type="Label" parent="TypingSpace/TypingBlock/MarginContainer/BlockContent" unique_id=1921083847]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "????"
 
-[node name="TextField" type="Label" parent="TypingSpace/TypingBlock/BlockContent" unique_id=319323677]
+[node name="TextField" type="Label" parent="TypingSpace/TypingBlock/MarginContainer/BlockContent" unique_id=319323677]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 32

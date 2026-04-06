@@ -19,14 +19,14 @@ script = ExtResource("1_cy70s")
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1041534527]
 custom_minimum_size = Vector2(1024, 720)
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_ijlok")
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("7_thai_theme")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ijlok")
 
 [node name="Background" type="TextureRect" parent="CanvasLayer/PanelContainer" unique_id=2108137782]
 modulate = Color(1, 1, 1, 0.1)
@@ -51,8 +51,7 @@ theme_override_constants/separation = 16
 custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 
-[node name="OrderContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2144028027 instance=ExtResource("2_cy70s")]
-custom_minimum_size = Vector2(0, 110)
+[node name="Order" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1408987235 instance=ExtResource("2_cy70s")]
 layout_mode = 2
 
 [node name="ActionRow" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1194688964]

@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bqsjev56a4qov" path="res://scripts/ui/order_queue.gd" id="1_dgkx7"]
 
-[node name="OrderContainer" type="ScrollContainer" unique_id=2144028027]
-custom_minimum_size = Vector2(800, 100)
-offset_right = 800.0
-offset_bottom = 100.0
-vertical_scroll_mode = 0
+[node name="Order" type="MarginContainer" unique_id=1408987235]
+theme_override_constants/margin_top = 8
 script = ExtResource("1_dgkx7")
 
-[node name="OrderQueue" type="HBoxContainer" parent="." unique_id=837512951]
+[node name="OrderContainer" type="ScrollContainer" parent="." unique_id=2144028027]
+custom_minimum_size = Vector2(800, 100)
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="OrderQueue" type="HBoxContainer" parent="OrderContainer" unique_id=837512951]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 16

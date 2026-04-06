@@ -30,7 +30,7 @@ var dish_slots: Array = [] # เก็บ: { "key": String, "ingredients": Array
 var selected_slot: int = 0
 
 @onready var level_bar = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/LevelBar
-@onready var order_queue = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/OrderContainer
+@onready var order_queue = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/Order
 @onready var typing_space = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow/TypingSpace
 @onready var dish_container = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/DishContainer
 func _ready() -> void:

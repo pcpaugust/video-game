@@ -1,8 +1,8 @@
 extends MarginContainer
 
 # ดึง Node ลูกออกมาเตรียมไว้
-@onready var mode = $TypingSpace/TypingBlock/BlockContent/ModeLabel
-@onready var input_label = $TypingSpace/TypingBlock/BlockContent/TextField
+@onready var mode = $TypingSpace/TypingBlock/MarginContainer/BlockContent/ModeLabel
+@onready var input_label = $TypingSpace/TypingBlock/MarginContainer/BlockContent/TextField
 @onready var icon_container = $TypingSpace/HBoxContainer
 
 const TypingIngredientScene = preload("res://scenes/ui/TypingIngredient.tscn")

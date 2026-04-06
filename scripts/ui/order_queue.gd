@@ -1,8 +1,8 @@
-extends ScrollContainer
+extends MarginContainer
 
 const OrderCardScene = preload("res://scenes/ui/customer_item.tscn")
 
-@onready var queue = $OrderQueue
+@onready var queue = $OrderContainer/OrderQueue
 
 func refresh_all_cards(customers: Array):
 	# ลบการ์ดเก่าออกทั้งหมด
