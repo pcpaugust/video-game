@@ -39,6 +39,8 @@ var help_panel: Control = null
 func _ready() -> void:
 	randomize()
 	_create_help_panel()
+	level = 1
+	target_score = 40
 	start_level(level, target_score)
 
 func start_level(new_level: int, target: int) -> void:
