@@ -24,6 +24,18 @@ corner_radius_top_right = 1000
 corner_radius_bottom_right = 1000
 corner_radius_bottom_left = 1000
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_level_bg"]
+bg_color = Color(1, 0.968627, 0.886275, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.439216, 0.415686, 0.415686, 0.55)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="LevelBar" type="HBoxContainer" unique_id=35058829]
 custom_minimum_size = Vector2(960, 32)
 theme_override_constants/separation = 12
@@ -33,10 +45,15 @@ script = ExtResource("1_bcj4y")
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Level" type="Label" parent="Container" unique_id=1441692276]
+[node name="LevelBox" type="PanelContainer" parent="Container" unique_id=1441692276]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_level_bg")
+
+[node name="Level" type="Label" parent="Container/LevelBox" unique_id=1441692276]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 20
+theme_override_constants/line_spacing = 0
 text = "Level 12"
 
 [node name="Score" type="Label" parent="Container" unique_id=141258403]

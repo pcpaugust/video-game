@@ -1,6 +1,15 @@
 extends PanelContainer
 class_name CustomerItem
 
+const ORDER_COLORS: Array[Color] = [
+	Color(0.972549, 0.913725, 0.643137, 1),
+	Color(0.976471, 0.556863, 0.235294, 1),
+	Color(0.262745, 0.760784, 0.337255, 1),
+	Color(0.294118, 0.376471, 0.941176, 1),
+	Color(0.992157, 0.666667, 0.741176, 1),
+	Color(0.67451, 0.564706, 0.956863, 1),
+]
+
 @onready var face_icon: TextureRect = $MarginContainer/VBoxContainer/HeaderRow/FaceIcon
 @onready var name_label: Label = $MarginContainer/VBoxContainer/HeaderRow/NameColumn/NameLabel
 @onready var patience_bar: ProgressBar = $MarginContainer/VBoxContainer/HeaderRow/NameColumn/PatienceBar
@@ -49,10 +58,10 @@ func _update_orders(order_keys: Array) -> void:
 
 	var first_box_count: int = min(order_keys.size(), 4)
 	for i in range(first_box_count):
-		grid_a.add_child(_make_item())
+		grid_a.add_child(_make_item(order_keys[i]))
 
 	for i in range(first_box_count, order_keys.size()):
-		grid_b.add_child(_make_item())
+		grid_b.add_child(_make_item(order_keys[i]))
 
 	if orders_text:
 		orders_text.text = ", ".join(order_keys)
@@ -63,7 +72,21 @@ func _clear_grid(grid: GridContainer) -> void:
 			continue
 		child.queue_free()
 
-func _make_item() -> PanelContainer:
+func _make_item(order_key: String = "") -> PanelContainer:
 	var item: PanelContainer = item_template.duplicate() as PanelContainer
 	item.visible = true
+	item.tooltip_text = order_key
+
+	var style := StyleBoxFlat.new()
+	var color_idx: int = 0
+	if order_key != "":
+		var order_hash: int = int(order_key.hash())
+		color_idx = abs(order_hash) % ORDER_COLORS.size()
+	style.bg_color = ORDER_COLORS[color_idx]
+	style.corner_radius_top_left = 999
+	style.corner_radius_top_right = 999
+	style.corner_radius_bottom_right = 999
+	style.corner_radius_bottom_left = 999
+	item.add_theme_stylebox_override("panel", style)
+
 	return item

@@ -96,7 +96,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("6_table")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 0
 
 [node name="Groups" type="HBoxContainer" parent="." unique_id=1730722800]
 layout_mode = 1

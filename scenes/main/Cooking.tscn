@@ -22,18 +22,23 @@ custom_minimum_size = Vector2(1024, 720)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 30.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7_thai_theme")
 theme_override_styles/panel = SubResource("StyleBoxFlat_ijlok")
 
 [node name="Background" type="TextureRect" parent="CanvasLayer/PanelContainer" unique_id=2108137782]
-modulate = Color(1, 1, 1, 0.1)
-layout_mode = 2
+modulate = Color(1, 1, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("5_bg")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer" unique_id=1147982892]
 layout_mode = 2
