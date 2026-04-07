@@ -68,7 +68,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="DishContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1222613478 instance=ExtResource("4_xdmyo")]
-custom_minimum_size = Vector2(0, 70)
+custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 
 [node name="IngredientTable" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=83946894 instance=ExtResource("4_4vgtb")]

@@ -2,28 +2,46 @@
 
 [ext_resource type="Script" path="res://scripts/ui/dish_container.gd" id="1_7fkh8"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(1, 0.968627, 0.886275, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.439216, 0.415686, 0.415686, 0.75)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="DishContainer" type="PanelContainer" unique_id=1222613478]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 58)
 offset_right = 208.0
 offset_bottom = 128.0
-size_flags_vertical = 3
+size_flags_vertical = 0
 script = ExtResource("1_7fkh8")
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1268281063]
 layout_mode = 2
-theme_override_constants/margin_left = 4
+theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
+theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=417333253]
-custom_minimum_size = Vector2(200, 120)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme_override_constants/separation = 4
 
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=723520676]
 layout_mode = 2
 text = "รายการที่ทำแล้ว"
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 13
 
-[node name="List" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1334126301]
-custom_minimum_size = Vector2(200, 50)
+[node name="List" type="HFlowContainer" parent="MarginContainer/VBoxContainer" unique_id=1334126301]
+custom_minimum_size = Vector2(200, 22)
 layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 4
