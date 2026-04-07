@@ -138,6 +138,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "น้ำข้น"
+horizontal_alignment = 1
 
 [node name="SoupItem2" type="VBoxContainer" parent="Groups/Soup/SoupRow1" unique_id=991526787]
 layout_mode = 2
@@ -156,6 +157,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "น้ำใส"
+horizontal_alignment = 1
 
 [node name="SoupRow2" type="HBoxContainer" parent="Groups/Soup" unique_id=1402384243]
 layout_mode = 2
@@ -178,6 +180,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "ต้มยำ"
+horizontal_alignment = 1
 
 [node name="SoupItem4" type="VBoxContainer" parent="Groups/Soup/SoupRow2" unique_id=360397668]
 layout_mode = 2
@@ -196,6 +199,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "เย็นตาโฟ"
+horizontal_alignment = 1
 
 [node name="Noodles" type="VBoxContainer" parent="Groups" unique_id=2137536170]
 custom_minimum_size = Vector2(224, 180)
@@ -237,6 +241,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "เส้นเล็ก"
+horizontal_alignment = 1
 
 [node name="NoodlesItem2" type="VBoxContainer" parent="Groups/Noodles/NoodlesRow1" unique_id=260626441]
 layout_mode = 2
@@ -269,6 +274,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "เส้นหมี่"
+horizontal_alignment = 1
 
 [node name="NoodlesRow2" type="HBoxContainer" parent="Groups/Noodles" unique_id=1397708187]
 layout_mode = 2
@@ -305,6 +311,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "วุ้นเส้น"
+horizontal_alignment = 1
 
 [node name="NoodlesItem4" type="VBoxContainer" parent="Groups/Noodles/NoodlesRow2" unique_id=1545548032]
 layout_mode = 2
@@ -337,6 +344,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "บะหมี่"
+horizontal_alignment = 1
 
 [node name="NoodlesItem5" type="VBoxContainer" parent="Groups/Noodles/NoodlesRow2" unique_id=1010371546]
 layout_mode = 2
@@ -369,6 +377,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "เส้นใหญ่"
+horizontal_alignment = 1
 
 [node name="Meat" type="VBoxContainer" parent="Groups" unique_id=1076219204]
 custom_minimum_size = Vector2(224, 180)
@@ -410,6 +419,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "ลูกชิ้น"
+horizontal_alignment = 1
 
 [node name="MeatItem2" type="VBoxContainer" parent="Groups/Meat/MeatRow1" unique_id=2133360257]
 layout_mode = 2
@@ -442,6 +452,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "เนื้อตุ๋น"
+horizontal_alignment = 1
 
 [node name="MeatRow2" type="HBoxContainer" parent="Groups/Meat" unique_id=673768115]
 layout_mode = 2
@@ -478,6 +489,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "หมูสับ"
+horizontal_alignment = 1
 
 [node name="MeatItem4" type="VBoxContainer" parent="Groups/Meat/MeatRow2" unique_id=820958735]
 layout_mode = 2
@@ -510,6 +522,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "หมูเด้ง"
+horizontal_alignment = 1
 
 [node name="MeatItem5" type="VBoxContainer" parent="Groups/Meat/MeatRow2" unique_id=376190849]
 layout_mode = 2
@@ -542,6 +555,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "น่องไก่"
+horizontal_alignment = 1
 
 [node name="Veg" type="VBoxContainer" parent="Groups" unique_id=248480575]
 custom_minimum_size = Vector2(160, 180)
@@ -583,6 +597,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "กระเทียมเจียว"
+horizontal_alignment = 1
 
 [node name="VegRow2" type="HBoxContainer" parent="Groups/Veg" unique_id=1831333351]
 layout_mode = 2
@@ -619,6 +634,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "ถั่วงอก"
+horizontal_alignment = 1
 
 [node name="VegItem3" type="VBoxContainer" parent="Groups/Veg/VegRow2" unique_id=920224064]
 layout_mode = 2
@@ -651,6 +667,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "ต้นหอมผักชี"
+horizontal_alignment = 1
 
 [node name="Drink" type="VBoxContainer" parent="Groups" unique_id=2015216951]
 custom_minimum_size = Vector2(160, 180)
@@ -692,6 +709,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "โอเลี้ยง"
+horizontal_alignment = 1
 
 [node name="DrinkItem2" type="VBoxContainer" parent="Groups/Drink/DrinkRow1" unique_id=1126117507]
 layout_mode = 2
@@ -724,6 +742,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "น้ำเก๊กฮวย"
+horizontal_alignment = 1
 
 [node name="DrinkRow2" type="HBoxContainer" parent="Groups/Drink" unique_id=787895348]
 layout_mode = 2
@@ -760,4 +779,5 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "น้ำกระเจี๊ยบ"
+horizontal_alignment = 1
 
