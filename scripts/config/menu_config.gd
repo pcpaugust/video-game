@@ -26,8 +26,7 @@ const MEAT_TYPES: Array[String] = [
 ]
 
 const VEGETABLE_TYPES: Array[String] = [
-	"ต้นหอม",
-	"ผักชี",
+	"ต้นหอมผักชี",
 	"ถั่วงอก",
 	"กระเทียมเจียว",
 ]

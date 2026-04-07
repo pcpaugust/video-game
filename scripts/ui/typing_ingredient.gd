@@ -3,12 +3,22 @@
 extends VBoxContainer
 
 const MenuConfig = preload("res://scripts/config/menu_config.gd")
-const NOODLE_TEXTURES: Dictionary = {
+const INGREDIENT_TEXTURES: Dictionary = {
 	"เส้นเล็ก": preload("res://assets/figma/nood01.png"),
 	"เส้นหมี่": preload("res://assets/figma/nood02.png"),
 	"วุ้นเส้น": preload("res://assets/figma/nood03.png"),
 	"บะหมี่": preload("res://assets/figma/nood04.png"),
 	"เส้นใหญ่": preload("res://assets/figma/nood05.png"),
+	"ลูกชิ้น": preload("res://assets/figma/meat01.png"),
+	"เนื้อตุ๋น": preload("res://assets/figma/meat02.png"),
+	"หมูเด้ง": preload("res://assets/figma/meat04.png"),
+	"น่องไก่": preload("res://assets/figma/meat05.png"),
+	"กระเทียมเจียว": preload("res://assets/figma/veg01.png"),
+	"ถั่วงอก": preload("res://assets/figma/veg02.png"),
+	"ต้นหอมผักชี": preload("res://assets/figma/veg03.png"),
+	"โอเลี้ยง": preload("res://assets/figma/drink01.png"),
+	"กระเจี๊ยบ": preload("res://assets/figma/drink03.png"),
+	"เก๊กฮวย": preload("res://assets/figma/drink02.png"),
 }
 
 @onready var icon_panel: PanelContainer = $CenterContainer/IconCircle
@@ -71,9 +81,9 @@ func _apply_icon_visual(ing_name: String) -> void:
 	icon_panel.add_theme_stylebox_override("panel", style)
 
 func _get_ingredient_texture(ing_name: String) -> Texture2D:
-	if not NOODLE_TEXTURES.has(ing_name):
+	if not INGREDIENT_TEXTURES.has(ing_name):
 		return null
-	return NOODLE_TEXTURES[ing_name] as Texture2D
+	return INGREDIENT_TEXTURES[ing_name] as Texture2D
 
 func _ensure_styles() -> void:
 	if style_grey != null:
