@@ -1,5 +1,23 @@
 [gd_scene format=3 uid="uid://cdkr12srcscr8"]
 
+[ext_resource type="Texture2D" path="res://assets/figma/nood01.png" id="1_nood01"]
+[ext_resource type="Texture2D" path="res://assets/figma/nood02.png" id="2_nood02"]
+[ext_resource type="Texture2D" path="res://assets/figma/nood03.png" id="3_nood03"]
+[ext_resource type="Texture2D" path="res://assets/figma/nood04.png" id="4_nood04"]
+[ext_resource type="Texture2D" path="res://assets/figma/nood05.png" id="5_nood05"]
+[ext_resource type="Texture2D" path="res://assets/figma/table.png" id="6_table"]
+[ext_resource type="Texture2D" path="res://assets/figma/meat01.png" id="7_meat01"]
+[ext_resource type="Texture2D" path="res://assets/figma/meat02.png" id="8_meat02"]
+[ext_resource type="Texture2D" path="res://assets/figma/meat03.png" id="9_meat03"]
+[ext_resource type="Texture2D" path="res://assets/figma/meat04.png" id="10_meat04"]
+[ext_resource type="Texture2D" path="res://assets/figma/meat05.png" id="11_meat05"]
+[ext_resource type="Texture2D" path="res://assets/figma/veg01.png" id="12_veg01"]
+[ext_resource type="Texture2D" path="res://assets/figma/veg02.png" id="13_veg02"]
+[ext_resource type="Texture2D" path="res://assets/figma/veg03.png" id="14_veg03"]
+[ext_resource type="Texture2D" path="res://assets/figma/drink01.png" id="15_drink01"]
+[ext_resource type="Texture2D" path="res://assets/figma/drink02.png" id="16_drink02"]
+[ext_resource type="Texture2D" path="res://assets/figma/drink03.png" id="17_drink03"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_circle_grey"]
 bg_color = Color(0.439216, 0.415686, 0.415686, 1)
 corner_radius_top_left = 999
@@ -8,19 +26,30 @@ corner_radius_bottom_right = 999
 corner_radius_bottom_left = 999
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_group"]
-bg_color = Color(1, 0.933333, 0.764706, 1)
+bg_color = Color(1, 0.968627, 0.886275, 0.96)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.439216, 0.415686, 0.415686, 1)
+border_color = Color(0.439216, 0.415686, 0.415686, 0.75)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+content_margin_left = 3.0
+content_margin_top = 1.0
+content_margin_right = 3.0
+content_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_circle_yellow"]
 bg_color = Color(0.972549, 0.9137255, 0.22745098, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_circle_clear"]
+bg_color = Color(0, 0, 0, 0)
 corner_radius_top_left = 999
 corner_radius_top_right = 999
 corner_radius_bottom_right = 999
@@ -48,20 +77,40 @@ corner_radius_bottom_right = 999
 corner_radius_bottom_left = 999
 
 [node name="IngredientTable" type="Control" unique_id=83946894]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(976, 200)
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Background" type="TextureRect" parent="." unique_id=573602107]
+modulate = Color(1, 1, 1, 0.92)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_table")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Groups" type="HBoxContainer" parent="." unique_id=1730722800]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = -10.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 8
+alignment = 1
 
 [node name="Soup" type="VBoxContainer" parent="Groups" unique_id=868719430]
 custom_minimum_size = Vector2(160, 180)
@@ -149,7 +198,7 @@ theme_override_font_sizes/font_size = 12
 text = "เย็นตาโฟ"
 
 [node name="Noodles" type="VBoxContainer" parent="Groups" unique_id=2137536170]
-custom_minimum_size = Vector2(200, 180)
+custom_minimum_size = Vector2(224, 180)
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -161,9 +210,23 @@ theme_override_constants/separation = 8
 layout_mode = 2
 
 [node name="NoodlesIcon1" type="PanelContainer" parent="Groups/Noodles/NoodlesRow1/NoodlesItem1" unique_id=251460193]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_yellow")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Noodles/NoodlesRow1/NoodlesItem1/NoodlesIcon1"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("1_nood01")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="NoodlesLabel1" type="PanelContainer" parent="Groups/Noodles/NoodlesRow1/NoodlesItem1" unique_id=1679867649]
 layout_mode = 2
@@ -179,9 +242,23 @@ text = "เส้นเล็ก"
 layout_mode = 2
 
 [node name="NoodlesIcon2" type="PanelContainer" parent="Groups/Noodles/NoodlesRow1/NoodlesItem2" unique_id=1985750238]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_yellow")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Noodles/NoodlesRow1/NoodlesItem2/NoodlesIcon2"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("2_nood02")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="NoodlesLabel2" type="PanelContainer" parent="Groups/Noodles/NoodlesRow1/NoodlesItem2" unique_id=851807939]
 layout_mode = 2
@@ -201,9 +278,23 @@ theme_override_constants/separation = 8
 layout_mode = 2
 
 [node name="NoodlesIcon3" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem3" unique_id=1172191504]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_yellow")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Noodles/NoodlesRow2/NoodlesItem3/NoodlesIcon3"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("3_nood03")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="NoodlesLabel3" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem3" unique_id=337474930]
 layout_mode = 2
@@ -219,9 +310,23 @@ text = "วุ้นเส้น"
 layout_mode = 2
 
 [node name="NoodlesIcon4" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem4" unique_id=1426813891]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_yellow")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Noodles/NoodlesRow2/NoodlesItem4/NoodlesIcon4"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("4_nood04")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="NoodlesLabel4" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem4" unique_id=1887669962]
 layout_mode = 2
@@ -237,9 +342,23 @@ text = "บะหมี่"
 layout_mode = 2
 
 [node name="NoodlesIcon5" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem5" unique_id=2106118037]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_yellow")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Noodles/NoodlesRow2/NoodlesItem5/NoodlesIcon5"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("5_nood05")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="NoodlesLabel5" type="PanelContainer" parent="Groups/Noodles/NoodlesRow2/NoodlesItem5" unique_id=523132448]
 layout_mode = 2
@@ -252,7 +371,7 @@ theme_override_font_sizes/font_size = 12
 text = "เส้นใหญ่"
 
 [node name="Meat" type="VBoxContainer" parent="Groups" unique_id=1076219204]
-custom_minimum_size = Vector2(200, 180)
+custom_minimum_size = Vector2(224, 180)
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -264,9 +383,23 @@ theme_override_constants/separation = 8
 layout_mode = 2
 
 [node name="MeatIcon1" type="PanelContainer" parent="Groups/Meat/MeatRow1/MeatItem1" unique_id=952840224]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_orange")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Meat/MeatRow1/MeatItem1/MeatIcon1"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("7_meat01")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="MeatLabel1" type="PanelContainer" parent="Groups/Meat/MeatRow1/MeatItem1" unique_id=1842075257]
 layout_mode = 2
@@ -282,9 +415,23 @@ text = "ลูกชิ้น"
 layout_mode = 2
 
 [node name="MeatIcon2" type="PanelContainer" parent="Groups/Meat/MeatRow1/MeatItem2" unique_id=1175153112]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_orange")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Meat/MeatRow1/MeatItem2/MeatIcon2"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("8_meat02")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="MeatLabel2" type="PanelContainer" parent="Groups/Meat/MeatRow1/MeatItem2" unique_id=645254689]
 layout_mode = 2
@@ -304,9 +451,23 @@ theme_override_constants/separation = 8
 layout_mode = 2
 
 [node name="MeatIcon3" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem3" unique_id=495903274]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_orange")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Meat/MeatRow2/MeatItem3/MeatIcon3"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("9_meat03")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="MeatLabel3" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem3" unique_id=1605651201]
 layout_mode = 2
@@ -322,9 +483,23 @@ text = "หมูสับ"
 layout_mode = 2
 
 [node name="MeatIcon4" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem4" unique_id=747764648]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_orange")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Meat/MeatRow2/MeatItem4/MeatIcon4"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("10_meat04")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="MeatLabel4" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem4" unique_id=1879144099]
 layout_mode = 2
@@ -340,9 +515,23 @@ text = "หมูเด้ง"
 layout_mode = 2
 
 [node name="MeatIcon5" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem5" unique_id=473397913]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_orange")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Meat/MeatRow2/MeatItem5/MeatIcon5"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("11_meat05")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="MeatLabel5" type="PanelContainer" parent="Groups/Meat/MeatRow2/MeatItem5" unique_id=516654078]
 layout_mode = 2
@@ -367,9 +556,23 @@ theme_override_constants/separation = 8
 layout_mode = 2
 
 [node name="VegIcon1" type="PanelContainer" parent="Groups/Veg/VegRow1/VegItem1" unique_id=2029586310]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_green")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Veg/VegRow1/VegItem1/VegIcon1"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("12_veg01")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="VegLabel1" type="PanelContainer" parent="Groups/Veg/VegRow1/VegItem1" unique_id=1378159032]
 layout_mode = 2
@@ -389,9 +592,23 @@ theme_override_constants/separation = 8
 layout_mode = 2
 
 [node name="VegIcon2" type="PanelContainer" parent="Groups/Veg/VegRow2/VegItem2" unique_id=241958539]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_green")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Veg/VegRow2/VegItem2/VegIcon2"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("13_veg02")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="VegLabel2" type="PanelContainer" parent="Groups/Veg/VegRow2/VegItem2" unique_id=504938800]
 layout_mode = 2
@@ -407,9 +624,23 @@ text = "ถั่วงอก"
 layout_mode = 2
 
 [node name="VegIcon3" type="PanelContainer" parent="Groups/Veg/VegRow2/VegItem3" unique_id=1397344427]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_green")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Veg/VegRow2/VegItem3/VegIcon3"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("14_veg03")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="VegLabel3" type="PanelContainer" parent="Groups/Veg/VegRow2/VegItem3" unique_id=2032811851]
 layout_mode = 2
@@ -434,9 +665,23 @@ theme_override_constants/separation = 8
 layout_mode = 2
 
 [node name="DrinkIcon1" type="PanelContainer" parent="Groups/Drink/DrinkRow1/DrinkItem1" unique_id=442817929]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_blue")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Drink/DrinkRow1/DrinkItem1/DrinkIcon1"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("15_drink01")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="DrinkLabel1" type="PanelContainer" parent="Groups/Drink/DrinkRow1/DrinkItem1" unique_id=518912435]
 layout_mode = 2
@@ -452,9 +697,23 @@ text = "โอเลี้ยง"
 layout_mode = 2
 
 [node name="DrinkIcon2" type="PanelContainer" parent="Groups/Drink/DrinkRow1/DrinkItem2" unique_id=1280348669]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_blue")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Drink/DrinkRow1/DrinkItem2/DrinkIcon2"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("16_drink02")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="DrinkLabel2" type="PanelContainer" parent="Groups/Drink/DrinkRow1/DrinkItem2" unique_id=1573253855]
 layout_mode = 2
@@ -474,9 +733,23 @@ theme_override_constants/separation = 8
 layout_mode = 2
 
 [node name="DrinkIcon3" type="PanelContainer" parent="Groups/Drink/DrinkRow2/DrinkItem3" unique_id=1938732153]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_blue")
+theme_override_styles/panel = SubResource("StyleBoxFlat_circle_clear")
+
+[node name="TextureRect" type="TextureRect" parent="Groups/Drink/DrinkRow2/DrinkItem3/DrinkIcon3"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("17_drink03")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="DrinkLabel3" type="PanelContainer" parent="Groups/Drink/DrinkRow2/DrinkItem3" unique_id=815004653]
 layout_mode = 2
@@ -488,20 +761,3 @@ theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
 theme_override_font_sizes/font_size = 12
 text = "น้ำกระเจี๊ยบ"
 
-[node name="DrinkItem4" type="VBoxContainer" parent="Groups/Drink/DrinkRow2" unique_id=418139393]
-layout_mode = 2
-
-[node name="DrinkIcon4" type="PanelContainer" parent="Groups/Drink/DrinkRow2/DrinkItem4" unique_id=187080857]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_circle_blue")
-
-[node name="DrinkLabel4" type="PanelContainer" parent="Groups/Drink/DrinkRow2/DrinkItem4" unique_id=850909365]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_group")
-
-[node name="DrinkLabel4Text" type="Label" parent="Groups/Drink/DrinkRow2/DrinkItem4/DrinkLabel4" unique_id=1834661003]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
-text = "น้ำใบเตย"

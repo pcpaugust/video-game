@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://5v3dcckdensw" path="res://scripts/ui/typing_ingredient.gd" id="1_3s5he"]
 [node name="TypingIngredient" type="VBoxContainer" unique_id=55046984]
-custom_minimum_size = Vector2(60, 70)
+custom_minimum_size = Vector2(84, 96)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -13,11 +13,25 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="IconCircle" type="PanelContainer" parent="CenterContainer" unique_id=2099751981]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 2
 
+[node name="IconTexture" type="TextureRect" parent="CenterContainer/IconCircle"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+visible = false
+
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1176633193]
-custom_minimum_size = Vector2(60, 0)
+custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_top = 2
@@ -26,6 +40,6 @@ theme_override_constants/margin_bottom = 2
 [node name="Text" type="Label" parent="MarginContainer" unique_id=291410091]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1
 vertical_alignment = 1
