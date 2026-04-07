@@ -2,6 +2,7 @@ extends Node2D
 
 const MenuData = preload("res://scripts/data/menu_data.gd")
 const GameConfig = preload("res://scripts/config/game_config.gd")
+const HelpPanelScene = preload("res://scenes/ui/HelpPanel.tscn")
 
 enum Mode {
 	PREP,
@@ -33,8 +34,11 @@ var selected_slot: int = 0
 @onready var order_queue = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/Order
 @onready var typing_space = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow/TypingSpace
 @onready var dish_container = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/DishContainer
+
+var help_panel: Control = null
 func _ready() -> void:
 	randomize()
+	_create_help_panel()
 	start_level(level, target_score)
 
 func start_level(new_level: int, target: int) -> void:
@@ -231,9 +235,9 @@ func _sync_typing_visuals() -> void:
 func _update_mode_ui() -> void:
 	var text = ""
 	match current_mode:
-		Mode.PREP: text = "โหมดปรุง: พิมพ์วัตถุดิบแล้วกด Enter"
-		Mode.SERVE: text = "โหมดเสิร์ฟ: พิมพ์ชื่อลูกค้าแล้วกด Enter"
-		Mode.CLEAR_SLOT: text = "โหมดทิ้ง: กด Tab เลือกชาม แล้ว Enter"
+		Mode.PREP: text = "🔤 โหมดปรุง: พิมพ์วัตถุดิบแล้วกด [Enter] | TAB สลับโหมด"
+		Mode.SERVE: text = "🎯 โหมดเสิร์ฟ: พิมพ์ชื่อลูกค้าแล้วกด [Enter] | TAB สลับโหมด"
+		Mode.CLEAR_SLOT: text = "🗑️ โหมดทิ้ง: กด [TAB] เลือกจาน จากนั้น [Enter] ยืนยัน"
 	typing_space.update_mode(text)
 
 func _update_score() -> void:
@@ -262,3 +266,8 @@ func _handle_game_over() -> void:
 	# แสดงผลแพ้เกม และรีเซ็ตกลับไปด่าน 1
 	print("Game Over! Restarting...")
 	start_level(1, 80)
+
+func _create_help_panel() -> void:
+	# Create and show help panel at startup
+	help_panel = HelpPanelScene.instantiate()
+	add_child(help_panel)

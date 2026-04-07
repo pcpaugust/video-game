@@ -14,6 +14,18 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hint"]
+bg_color = Color(1, 0.968627, 0.886275, 0.7)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.439216, 0.415686, 0.415686, 0.3)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [node name="MarginContainer" type="MarginContainer" unique_id=1078964189]
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,3 +68,68 @@ theme_override_font_sizes/font_size = 32
 [node name="HBoxContainer" type="HBoxContainer" parent="TypingSpace" unique_id=1145732806]
 layout_mode = 2
 theme_override_constants/separation = 8
+
+[node name="KeybindHints" type="PanelContainer" parent="TypingSpace"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hint")
+
+[node name="HintsMargin" type="MarginContainer" parent="TypingSpace/KeybindHints"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="HintsGrid" type="GridContainer" parent="TypingSpace/KeybindHints/HintsMargin"]
+layout_mode = 2
+columns = 4
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 4
+
+[node name="Hint1Key" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.294118, 0.376471, 0.941176, 1)
+theme_override_font_sizes/font_size = 10
+text = "[TAB]"
+
+[node name="Hint1Desc" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 10
+text = "เปลี่ยนโหมด"
+
+[node name="Hint2Key" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.294118, 0.376471, 0.941176, 1)
+theme_override_font_sizes/font_size = 10
+text = "[Enter]"
+
+[node name="Hint2Desc" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 10
+text = "ยืนยัน"
+
+[node name="Hint3Key" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.294118, 0.376471, 0.941176, 1)
+theme_override_font_sizes/font_size = 10
+text = "[Backspace]"
+
+[node name="Hint3Desc" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 10
+text = "ลบตัวอักษร"
+
+[node name="Hint4Key" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.294118, 0.376471, 0.941176, 1)
+theme_override_font_sizes/font_size = 10
+text = "[ESC]"
+
+[node name="Hint4Desc" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
+theme_override_font_sizes/font_size = 10
+text = "ยกเลิก"
