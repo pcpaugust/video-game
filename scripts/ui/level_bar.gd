@@ -1,7 +1,7 @@
 extends Control
 
 # อ้างอิง Node ลูกภายใน LevelBar.tscn (อิงตามรูปที่ 3)
-@onready var level_label = $Container/Level
+@onready var level_label = $Container/LevelBox/Level
 @onready var score_label = $Container/Score
 @onready var progress_bar = $BarWrap/ProgressBar
 
