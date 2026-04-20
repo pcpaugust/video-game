@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://dmddamjyml4vo"]
 
 [ext_resource type="Script" uid="uid://boisyl2wq1vrp" path="res://scripts/ui/level_bar.gd" id="1_bcj4y"]
-[ext_resource type="Texture2D" uid="uid://d28x6344r62bu" path="res://assets/figma/star_left.svg" id="1_star_left"]
-[ext_resource type="Texture2D" uid="uid://2271b1syc7bi" path="res://assets/figma/star_main.svg" id="2_star_main"]
-[ext_resource type="Texture2D" uid="uid://ct5k0lepwk5xm" path="res://assets/figma/star_right.svg" id="3_star_right"]
+[ext_resource type="Texture2D" uid="uid://c4fw00vonq2np" path="res://assets/artwork/star/empty.png" id="2_bcj4y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
 bg_color = Color(0.439216, 0.415686, 0.415686, 1)
@@ -24,49 +22,37 @@ corner_radius_top_right = 1000
 corner_radius_bottom_right = 1000
 corner_radius_bottom_left = 1000
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_level_bg"]
-bg_color = Color(1, 0.968627, 0.886275, 0.96)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.439216, 0.415686, 0.415686, 0.55)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
 [node name="LevelBar" type="HBoxContainer" unique_id=35058829]
-custom_minimum_size = Vector2(960, 32)
+custom_minimum_size = Vector2(1800, 50)
+offset_right = 1800.0
+offset_bottom = 50.0
+size_flags_horizontal = 3
 theme_override_constants/separation = 12
 script = ExtResource("1_bcj4y")
 
-[node name="Container" type="HBoxContainer" parent="." unique_id=388713073]
+[node name="Level" type="Control" parent="." unique_id=1985596268]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-theme_override_constants/separation = 12
 
-[node name="LevelBox" type="PanelContainer" parent="Container" unique_id=1441692276]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_level_bg")
-
-[node name="Level" type="Label" parent="Container/LevelBox" unique_id=1441692276]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 20
-theme_override_constants/line_spacing = 0
-text = "Level 1"
-
-[node name="Score" type="Label" parent="Container" unique_id=141258403]
-visible = false
-layout_mode = 2
+[node name="LevelLabel" type="RichTextLabel" parent="Level" unique_id=1936575324]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 23.0
+theme_override_colors/default_color = Color(0.9372549, 0.8980392, 0.8039216, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "[b]Level 1[/b]"
+fit_content = true
+horizontal_alignment = 1
 
 [node name="BarWrap" type="Control" parent="." unique_id=534773475]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(1600, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ProgressBar" type="ProgressBar" parent="BarWrap" unique_id=767615644]
-custom_minimum_size = Vector2(0, 8)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,47 +68,21 @@ show_percentage = false
 
 [node name="StarLeft" type="TextureRect" parent="BarWrap" unique_id=1292237827]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -203.5
-offset_top = -16.0
-offset_right = -171.5
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_star_left")
-expand_mode = 1
+anchors_preset = -1
+offset_left = 533.0
+texture = ExtResource("2_bcj4y")
 
-[node name="StarMid" type="TextureRect" parent="BarWrap" unique_id=732462115]
+[node name="StarMid" type="TextureRect" parent="BarWrap" unique_id=1899257168]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_star_main")
-expand_mode = 1
+anchors_preset = -1
+offset_left = 1066.0
+offset_bottom = 58.0
+texture = ExtResource("2_bcj4y")
 
-[node name="StarRight" type="TextureRect" parent="BarWrap" unique_id=2122643108]
+[node name="StarRight" type="TextureRect" parent="BarWrap" unique_id=1359795335]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -16.0
-offset_bottom = 16.0
-grow_horizontal = 0
-grow_vertical = 2
-texture = ExtResource("3_star_right")
-expand_mode = 1
+anchors_preset = -1
+offset_left = 1590.0
+offset_right = 655.0
+offset_bottom = 58.0
+texture = ExtResource("2_bcj4y")

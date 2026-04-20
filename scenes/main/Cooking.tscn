@@ -5,8 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://r8jlkk4nsfeo" path="res://scenes/ui/OrderQueue.tscn" id="2_cy70s"]
 [ext_resource type="PackedScene" uid="uid://dshga2ulvahoa" path="res://scenes/ui/TypingSpace.tscn" id="3_xdmyo"]
 [ext_resource type="PackedScene" uid="uid://bn2itsdp6foer" path="res://scenes/ui/DishContainer.tscn" id="4_xdmyo"]
-[ext_resource type="Texture2D" uid="uid://cgy3p5jojrnir" path="res://assets/figma/bg.png" id="5_bg"]
-[ext_resource type="Theme" path="res://assets/themes/thai_ui_theme.tres" id="7_thai_theme"]
+[ext_resource type="Texture2D" uid="uid://2dcn8nuad2ef" path="res://assets/figma/bg.png" id="5_bg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijlok"]
 bg_color = Color(0.972549, 0.9137255, 0.6431373, 1)
@@ -24,7 +23,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("7_thai_theme")
 theme_override_styles/panel = SubResource("StyleBoxFlat_ijlok")
 
 [node name="Background" type="TextureRect" parent="CanvasLayer/PanelContainer" unique_id=2108137782]
@@ -44,7 +42,6 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="LevelBar" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=35058829 instance=ExtResource("1_kwnqp")]
-custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 
 [node name="Order" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1408987235 instance=ExtResource("2_cy70s")]
