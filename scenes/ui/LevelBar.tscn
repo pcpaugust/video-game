@@ -53,17 +53,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ProgressBar" type="ProgressBar" parent="BarWrap" unique_id=767615644]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -10.0
-offset_right = 18.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
+custom_minimum_size = Vector2(1650, 20)
+layout_mode = 0
+offset_top = 15.0
+offset_right = 1651.0
+offset_bottom = 35.0
 theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bar_fill")
 step = 1.0
@@ -72,20 +66,28 @@ show_percentage = false
 [node name="StarLeft" type="TextureRect" parent="BarWrap" unique_id=1292237827]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 533.0
+offset_left = 525.0
+offset_right = 609.0
+offset_bottom = 65.0
 texture = ExtResource("2_bcj4y")
+expand_mode = 2
+stretch_mode = 5
 
 [node name="StarMid" type="TextureRect" parent="BarWrap" unique_id=1899257168]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 1066.0
+offset_left = 1075.0
 offset_bottom = 58.0
 texture = ExtResource("2_bcj4y")
+expand_mode = 2
+stretch_mode = 5
 
 [node name="StarRight" type="TextureRect" parent="BarWrap" unique_id=1359795335]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 1590.0
-offset_right = 655.0
+offset_left = 1600.0
+offset_right = 1648.0
 offset_bottom = 58.0
 texture = ExtResource("2_bcj4y")
+expand_mode = 2
+stretch_mode = 5
