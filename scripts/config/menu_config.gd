@@ -47,12 +47,12 @@ const INGREDIENT_TEXTURES: Dictionary = {
 	"เนื้อตุ๋น": preload("res://assets/artwork/menu/meat02.png"),
 	"หมูเด้ง": preload("res://assets/artwork/menu/meat04.png"),
 	"น่องไก่": preload("res://assets/artwork/menu/meat05.png"),
-	"กระเทียมเจียว": preload("res://assets/artwork/menu/veg01.png"),
-	"ถั่วงอก": preload("res://assets/artwork/menu/veg02.png"),
-	"ต้นหอมผักชี": preload("res://assets/artwork/menu/veg03.png"),
-	"โอเลี้ยง": preload("res://assets/artwork/menu/drink01.png"),
-	"กระเจี๊ยบ": preload("res://assets/artwork/menu/drink03.png"),
-	"เก๊กฮวย": preload("res://assets/artwork/menu/drink02.png"),
+	"กระเทียมเจียว": preload("res://assets/artwork/menu/veg02.png"),
+	"ถั่วงอก": preload("res://assets/artwork/menu/veg03.png"),
+	"ต้นหอมผักชี": preload("res://assets/artwork/menu/veg01.png"),
+	"โอเลี้ยง": preload("res://assets/artwork/menu/drink02.png"),
+	"กระเจี๊ยบ": preload("res://assets/artwork/menu/drink01.png"),
+	"เก๊กฮวย": preload("res://assets/artwork/menu/drink03.png"),
 }
 
 # Customer name pools
@@ -84,17 +84,6 @@ const NORMAL_CUSTOMER_NAMES: Array[String] = [
 	"ลุงหวัง",
 	"ป้าจิก",
 	"พี่หนุ่ม"
-]
-
-const SPECIAL_CUSTOMER_NAMES: Array[String] = [
-	"คุณศุภกฤตศักดิ์เดชากร",
-	"คุณพรพรหมรัตนมาศ",
-	"คุณอัครมหาไพศาล",
-	"คุณเบญจมินทรากุล",
-	"คุณวิวัฒน์ธนโชติอนันต์",
-	"คุณประเสริฐเลิศวิจิตร",
-	"คุณรัตนไพโรจน์กิจ",
-	"คุณธนภัทรโภคินทร์"
 ]
 
 const CHILD_CUSTOMER_NAMES: Array[String] = [

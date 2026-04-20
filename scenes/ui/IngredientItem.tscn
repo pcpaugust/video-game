@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://df4bo8f0lq244"]
+
+[ext_resource type="Script" uid="uid://3objul2dws4i" path="res://scenes/ui/ingredient_item.gd" id="1_nrqfa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ol5p8"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="IngredientItem" type="HBoxContainer" unique_id=1953120265]
+custom_minimum_size = Vector2(0, 48)
+offset_right = 252.0
+offset_bottom = 48.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+script = ExtResource("1_nrqfa")
+
+[node name="IconContainer" type="PanelContainer" parent="." unique_id=1896462458]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ol5p8")
+
+[node name="Icon" type="TextureRect" parent="IconContainer" unique_id=613317756]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 4
+
+[node name="LabelContainer" type="Control" parent="." unique_id=154852924]
+custom_minimum_size = Vector2(200, 48)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LabelContainer" unique_id=1499526486]
+custom_minimum_size = Vector2(200, 48)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0.1882353, 0.1764706, 0.1764706, 1)
+theme_override_font_sizes/font_size = 36
+text = "testtest"

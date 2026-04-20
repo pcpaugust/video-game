@@ -15,7 +15,6 @@ class Customer:
 	var order_keys: Array[String] = []
 	var patience: float = 0.0
 	var max_patience: float = 0.0
-	var is_special: bool = false
 	var is_child: bool = false
 
 var level: int = 1
@@ -64,8 +63,7 @@ func _spawn_initial_customers() -> void:
 	while customers.size() < count:
 		var c = Customer.new()
 		c.is_child = randf() < GameConfig.CHILD_CUSTOMER_CHANCE
-		c.is_special = randf() < GameConfig.SPECIAL_CUSTOMER_CHANCE
-		c.name = MenuData.random_customer_name(c.is_special, c.is_child)
+		c.name = MenuData.random_customer_name(c.is_child)
 		
 		if (used_name.has(c.name)): continue
 		
@@ -77,8 +75,6 @@ func _spawn_initial_customers() -> void:
 		# ปรับแต่งเวลาตามประเภทลูกค้า
 		if c.is_child:
 			base_time += GameConfig.CHILD_PATIENCE_BONUS
-		elif c.is_special:
-			base_time -= GameConfig.SPECIAL_PATIENCE_PENALTY
 			
 		c.max_patience = max(base_time, GameConfig.MIN_PATIENCE_TIME)
 		c.patience = c.max_patience
@@ -201,8 +197,6 @@ func _attempt_serve() -> void:
 			current_serve_score += GameConfig.FULL_ORDER_BONUS
 			
 		# 3. Apply ตัวคูณตามประเภทลูกค้า
-		if customer.is_special:
-			current_serve_score = int(current_serve_score * GameConfig.SPECIAL_SCORE_MULTIPLIER)
 		elif customer.is_child:
 			current_serve_score = int(current_serve_score * GameConfig.CHILD_SCORE_MULTIPLIER)
    

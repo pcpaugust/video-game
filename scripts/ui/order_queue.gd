@@ -16,7 +16,6 @@ func refresh_all_cards(customers: Array):
 		if card.has_method("update_from_data"):
 			card.update_from_data(
 				c.name,
-				c.is_special,
 				c.is_child,
 				c.patience,
 				c.max_patience,

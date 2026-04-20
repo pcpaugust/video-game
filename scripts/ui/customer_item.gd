@@ -18,22 +18,23 @@ const ORDER_COLORS: Array[Color] = [
 @onready var grid_a: GridContainer = $MarginContainer/VBoxContainer/OrdersRow/OrderBoxA/BoxAContent
 @onready var grid_b: GridContainer = $MarginContainer/VBoxContainer/OrdersRow/OrderBoxB/BoxBContent
 @onready var item_template: PanelContainer = $MarginContainer/VBoxContainer/OrdersRow/OrderBoxA/BoxAContent/ItemTemplate
+@onready var order_list: VBoxContainer = $MarginContainer/VBoxContainer/OrderList
 @onready var orders_text: Label = $MarginContainer/VBoxContainer/OrdersText
 
-const FACE_ANGY: Texture2D = preload("res://assets/figma/face_angy.svg")
-const FACE_HAPPY: Texture2D = preload("res://assets/figma/face_happy.svg")
-const INGREDIENT_TEXTURES = MenuConfig.INGREDIENT_TEXTURES
+const IngredientItemScene = preload("res://scenes/ui/IngredientItem.tscn")
+
+const FACE_ANGRY: Texture2D = preload("res://assets/artwork/customer/angry.png")
+const FACE_MEH: Texture2D = preload("res://assets/artwork/customer/meh.png")
+const FACE_HAPPY: Texture2D = preload("res://assets/artwork/customer/happy.png")
 
 func update_from_data(
 	name: String,
-	is_special: bool,
 	is_child: bool,
 	patience: float,
 	max_patience: float,
 	order_keys: Array
 ) -> void:
 	name_label.text = name
-	face_icon.texture = FACE_HAPPY if (is_special or is_child) else FACE_ANGY
 
 	_update_patience(patience, max_patience)
 	_update_orders(order_keys)
@@ -43,29 +44,25 @@ func _update_patience(current: float, max_val: float) -> void:
 		return
 	patience_bar.max_value = max_val
 	patience_bar.value = current
-
-	var ratio: float = current / max_val if max_val > 0.0 else 0.0
-	patience_bar.modulate = Color(0.262745, 0.760784, 0.337255) if ratio >= 0.3 else Color(0.87451, 0.337255, 0.25098)
+	face_icon.texture = FACE_HAPPY
+	if current <= 0.5 * max_val:
+		face_icon.texture = FACE_MEH
+	if current <= 0.2 * max_val:
+		face_icon.texture = FACE_ANGRY
 
 func update_patience(current: float, max_val: float) -> void:
 	_update_patience(current, max_val)
 
 func _update_orders(order_keys: Array) -> void:
-	if grid_a == null or grid_b == null:
-		return
-
-	_clear_grid(grid_a)
-	_clear_grid(grid_b)
-
-	var first_box_count: int = min(order_keys.size(), 4)
-	for i in range(first_box_count):
-		grid_a.add_child(_make_item(order_keys[i]))
-
-	for i in range(first_box_count, order_keys.size()):
-		grid_b.add_child(_make_item(order_keys[i]))
-
 	if orders_text:
 		orders_text.text = ", ".join(order_keys)
+	for order in order_keys:
+		var ing = order.split(" ")
+		for i in ing:
+			var item = IngredientItemScene.instantiate()
+			order_list.add_child(item)
+			item.call_deferred("setup", i)
+		
 
 func _clear_grid(grid: GridContainer) -> void:
 	for child in grid.get_children():
