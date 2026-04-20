@@ -8,6 +8,7 @@ const MenuConfig = preload("res://scripts/config/menu_config.gd")
 @onready var typing_box: PanelContainer = $TypingBox
 @onready var dashed_overlay: Control = $TypingBox/DashedBorderOverlay
 @onready var text_field: Label = $TypingBox/BoxMargin/TextField
+@onready var space_guide: Label = $TypingBox/SpaceGuide
 
 var style_matched: StyleBoxFlat
 var style_unmatched: StyleBoxFlat
@@ -94,6 +95,9 @@ func _refresh_display() -> void:
 	var matched_texture: Texture2D = null
 	if is_matched:
 		matched_texture = _get_texture(matched_ing)
+
+	if space_guide:
+		space_guide.visible = is_matched
 
 	if ingredient_preview:
 		ingredient_preview.visible = matched_texture != null

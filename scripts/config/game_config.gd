@@ -17,8 +17,7 @@ const MIN_PATIENCE_TIME: float = 8.0
 
 const TIME_BONUS_PER_DISH: float = 5.0
 
-# Dish / slot settings
-const MAX_DISH_SLOTS: int = 3
+const MAX_DISH_SLOTS: int = 2
 
 # Fail conditions
 const MAX_MISSED_CUSTOMERS: int = 2

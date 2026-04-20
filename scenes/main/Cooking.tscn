@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://2dcn8nuad2ef" path="res://assets/figma/bg.png" id="5_bg"]
 [ext_resource type="Texture2D" uid="uid://cpymbbeqw3c4b" path="res://assets/artwork/hand/left.png" id="6_lefth"]
 [ext_resource type="Texture2D" uid="uid://tgqmn1ym0fb2" path="res://assets/artwork/hand/right.png" id="7_righth"]
+[ext_resource type="PackedScene" uid="uid://bowl1234" path="res://scenes/ui/Bowl.tscn" id="8_bowl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijlok"]
 bg_color = Color(0.972549, 0.9137255, 0.6431373, 1)
@@ -50,9 +51,7 @@ layout_mode = 2
 [node name="Order" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1408987235 instance=ExtResource("2_cy70s")]
 layout_mode = 2
 
-[node name="DishContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1222613478 instance=ExtResource("4_xdmyo")]
-custom_minimum_size = Vector2(0, 56)
-layout_mode = 2
+
 
 [node name="TypingSpace" parent="CanvasLayer" unique_id=1951861316 instance=ExtResource("3_xdmyo")]
 anchors_preset = 8
@@ -99,3 +98,33 @@ pivot_offset = Vector2(500, 500)
 texture = ExtResource("7_righth")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="BowlsContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=593847281]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -600.0
+offset_top = -300.0
+offset_right = 600.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="LeftBowl" parent="CanvasLayer/BowlsContainer" unique_id=482910384 instance=ExtResource("8_bowl")]
+custom_minimum_size = Vector2(360, 270)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="CenterBowl" parent="CanvasLayer/BowlsContainer" unique_id=837291048 instance=ExtResource("8_bowl")]
+custom_minimum_size = Vector2(480, 360)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="RightBowl" parent="CanvasLayer/BowlsContainer" unique_id=928374619 instance=ExtResource("8_bowl")]
+custom_minimum_size = Vector2(360, 270)
+layout_mode = 2
+size_flags_vertical = 8

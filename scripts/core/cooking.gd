@@ -23,6 +23,7 @@ var score: int = 0
 var target_score: int = 40
 var customers: Array[Customer] = []
 var typing_buffer: String = ""
+var current_bowl_ingredients: Array[String] = []
 var missed_customers: int = 0
 var current_mode: Mode = Mode.PREP
 
@@ -33,7 +34,9 @@ var selected_slot: int = 0
 @onready var level_bar = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/LevelBar
 @onready var order_queue = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/Order
 @onready var typing_space = $CanvasLayer/TypingSpace
-@onready var dish_container = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/DishContainer
+@onready var center_bowl = $CanvasLayer/BowlsContainer/CenterBowl
+@onready var left_bowl = $CanvasLayer/BowlsContainer/LeftBowl
+@onready var right_bowl = $CanvasLayer/BowlsContainer/RightBowl
 @onready var left_hand = $CanvasLayer/LeftHand
 @onready var right_hand = $CanvasLayer/RightHand
 
@@ -54,8 +57,12 @@ func start_level(new_level: int, target: int) -> void:
 	customers.clear()
 	dish_slots.clear()
 	typing_buffer = ""
+	current_bowl_ingredients.clear()
 	current_mode = Mode.PREP
 	level_bar.set_level(new_level, target)
+	center_bowl.clear()
+	left_bowl.clear()
+	right_bowl.clear()
 	_spawn_initial_customers()
 	_update_ui_full()
 
@@ -114,10 +121,24 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_ENTER: _handle_submit()
 			KEY_TAB: _handle_tab()
 			KEY_BACKSPACE: _handle_backspace()
+			KEY_SPACE: _handle_space()
 			_:
-				if ev.unicode != 0:
+				if ev.unicode != 0 and ev.unicode != 32: # Ignore space here since it's handled above
 					typing_buffer += char(ev.unicode)
 					_sync_typing_visuals()
+
+func _handle_space() -> void:
+	if current_mode == Mode.PREP:
+		var word = typing_buffer.strip_edges()
+		if MenuData.is_valid_ingredient(word):
+			current_bowl_ingredients.append(word)
+			typing_buffer = ""
+			_sync_typing_visuals()
+			return
+	
+	# Default behavior for non-prep modes or invalid words
+	typing_buffer += " "
+	_sync_typing_visuals()
 
 func _handle_tab() -> void:
 	match current_mode:
@@ -134,10 +155,11 @@ func _handle_submit() -> void:
 
 	# ระบบคำสั่งพิเศษจาก game_manager
 	if cmd.to_lower() == "clear" and current_mode == Mode.PREP:
-		if dish_slots.size() > 0:
+		if dish_slots.size() > 0 or current_bowl_ingredients.size() > 0:
 			current_mode = Mode.CLEAR_SLOT
 			selected_slot = 0
 			typing_buffer = ""
+			current_bowl_ingredients.clear()
 			_sync_typing_visuals()
 			_update_mode_ui()
 			return
@@ -155,7 +177,7 @@ func _handle_submit() -> void:
 # Logic การปรุงอาหารจาก game_manager
 func _attempt_cook() -> void:
 	var words = typing_buffer.strip_edges().split(" ", false)
-	var valid_ingredients: Array[String] = []
+	var valid_ingredients: Array[String] = current_bowl_ingredients.duplicate()
 	for w in words:
 		if MenuData.is_valid_ingredient(w):
 			valid_ingredients.append(w)
@@ -167,6 +189,7 @@ func _attempt_cook() -> void:
 		dish_slots.append({"key": key, "ingredients": valid_ingredients})
 		_update_dish(dish_slots)
 		print("Cooked: ", key, " ", valid_ingredients)
+		current_bowl_ingredients.clear()
 	else: print("Dish Slot is Full!")
 
 # Logic การเสิร์ฟจาก game_manager
@@ -232,11 +255,22 @@ func _handle_backspace() -> void:
 	if typing_buffer.length() > 0:
 		typing_buffer = typing_buffer.substr(0, typing_buffer.length() - 1)
 		_sync_typing_visuals()
+	elif current_bowl_ingredients.size() > 0:
+		typing_buffer = current_bowl_ingredients.pop_back()
+		_sync_typing_visuals()
 
 func _sync_typing_visuals() -> void:
 	if typing_space.has_method("update_preview"):
 		typing_space.update_preview(typing_buffer)
 	_wiggle_hands()
+	
+	# Parse valid ingredients from the buffer and update center bowl
+	var all_ing = current_bowl_ingredients.duplicate()
+	var words = typing_buffer.strip_edges().split(" ", false)
+	for w in words:
+		if MenuData.is_valid_ingredient(w):
+			all_ing.append(w)
+	center_bowl.set_ingredients(all_ing)
 
 func _wiggle_hands() -> void:
 	if not left_hand or not right_hand: return
@@ -272,7 +306,15 @@ func _update_score() -> void:
 	level_bar.update_progress(score)
 
 func _update_dish(dish: Array) -> void:
-	dish_container.update_list(dish)
+	if dish.size() > 0:
+		left_bowl.set_ingredients(dish[0]["ingredients"])
+	else:
+		left_bowl.clear()
+		
+	if dish.size() > 1:
+		right_bowl.set_ingredients(dish[1]["ingredients"])
+	else:
+		right_bowl.clear()
 
 func _update_ui_full() -> void:
 	order_queue.refresh_all_cards(customers)
