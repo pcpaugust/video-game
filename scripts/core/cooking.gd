@@ -61,6 +61,7 @@ func start_level(new_level: int, target: int) -> void:
 	current_mode = Mode.PREP
 	level_bar.set_level(new_level, target)
 	center_bowl.clear()
+	center_bowl.set_state("glow")
 	left_bowl.clear()
 	right_bowl.clear()
 	_spawn_initial_customers()
@@ -111,6 +112,7 @@ func _update_customers_logic(delta: float) -> void:
 		if missed_customers >= GameConfig.MAX_MISSED_CUSTOMERS:
 			_handle_game_over()
 		_update_ui_full()
+		_refresh_completed_bowl_states()
 	if customers.is_empty():
 		_spawn_next_wave()
 
@@ -278,6 +280,7 @@ func _sync_typing_visuals() -> void:
 		if MenuData.is_valid_ingredient(w):
 			all_ing.append(w)
 	center_bowl.set_ingredients(all_ing)
+	center_bowl.set_state("glow")
 
 func _wiggle_hands() -> void:
 	if not left_hand or not right_hand: return
@@ -315,13 +318,33 @@ func _update_score() -> void:
 func _update_dish(dish: Array) -> void:
 	if dish.size() > 0:
 		left_bowl.set_ingredients(dish[0]["ingredients"])
+		_update_bowl_state(left_bowl, dish[0]["key"])
 	else:
 		left_bowl.clear()
 		
 	if dish.size() > 1:
 		right_bowl.set_ingredients(dish[1]["ingredients"])
+		_update_bowl_state(right_bowl, dish[1]["key"])
 	else:
 		right_bowl.clear()
+
+func _refresh_completed_bowl_states() -> void:
+	if dish_slots.size() > 0:
+		_update_bowl_state(left_bowl, dish_slots[0]["key"])
+	if dish_slots.size() > 1:
+		_update_bowl_state(right_bowl, dish_slots[1]["key"])
+
+func _update_bowl_state(bowl: Control, key: String) -> void:
+	var has_match = false
+	for c in customers:
+		if key in c.order_keys:
+			has_match = true
+			break
+			
+	if has_match:
+		bowl.set_state("match")
+	else:
+		bowl.set_state("dark")
 
 func _update_ui_full() -> void:
 	order_queue.refresh_all_cards(customers)
