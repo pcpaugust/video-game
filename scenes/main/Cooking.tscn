@@ -30,6 +30,7 @@ layout_mode = 2
 texture = ExtResource("5_bg")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer" unique_id=1147982892]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/margin_left = 24

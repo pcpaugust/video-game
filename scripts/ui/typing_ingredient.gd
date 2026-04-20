@@ -3,23 +3,7 @@
 extends VBoxContainer
 
 const MenuConfig = preload("res://scripts/config/menu_config.gd")
-const INGREDIENT_TEXTURES: Dictionary = {
-	"เส้นเล็ก": preload("res://assets/figma/nood01.png"),
-	"เส้นหมี่": preload("res://assets/figma/nood02.png"),
-	"วุ้นเส้น": preload("res://assets/figma/nood03.png"),
-	"บะหมี่": preload("res://assets/figma/nood04.png"),
-	"เส้นใหญ่": preload("res://assets/figma/nood05.png"),
-	"ลูกชิ้น": preload("res://assets/figma/meat01.png"),
-	"เนื้อตุ๋น": preload("res://assets/figma/meat02.png"),
-	"หมูเด้ง": preload("res://assets/figma/meat04.png"),
-	"น่องไก่": preload("res://assets/figma/meat05.png"),
-	"กระเทียมเจียว": preload("res://assets/figma/veg01.png"),
-	"ถั่วงอก": preload("res://assets/figma/veg02.png"),
-	"ต้นหอมผักชี": preload("res://assets/figma/veg03.png"),
-	"โอเลี้ยง": preload("res://assets/figma/drink01.png"),
-	"กระเจี๊ยบ": preload("res://assets/figma/drink03.png"),
-	"เก๊กฮวย": preload("res://assets/figma/drink02.png"),
-}
+const INGREDIENT_TEXTURES = MenuConfig.INGREDIENT_TEXTURES
 
 @onready var icon_panel: PanelContainer = $CenterContainer/IconCircle
 @onready var icon_texture: TextureRect = $CenterContainer/IconCircle/IconTexture

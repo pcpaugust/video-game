@@ -255,6 +255,7 @@ func _update_dish(dish: Array) -> void:
 
 func _update_ui_full() -> void:
 	order_queue.refresh_all_cards(customers)
+	_update_dish(dish_slots)
 	_update_mode_ui()
 
 func _spawn_next_wave() -> void:

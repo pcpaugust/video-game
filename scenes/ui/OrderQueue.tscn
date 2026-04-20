@@ -3,18 +3,14 @@
 [ext_resource type="Script" uid="uid://bqsjev56a4qov" path="res://scripts/ui/order_queue.gd" id="1_dgkx7"]
 
 [node name="Order" type="MarginContainer" unique_id=1408987235]
+offset_right = 808.0
+offset_bottom = 116.0
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 4
 script = ExtResource("1_dgkx7")
 
-[node name="OrderContainer" type="ScrollContainer" parent="." unique_id=2144028027]
-custom_minimum_size = Vector2(800, 108)
-layout_mode = 2
-size_flags_horizontal = 3
-vertical_scroll_mode = 0
-
-[node name="OrderQueue" type="HBoxContainer" parent="OrderContainer" unique_id=837512951]
+[node name="OrderQueue" type="HBoxContainer" parent="." unique_id=837512951]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 12

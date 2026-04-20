@@ -22,6 +22,7 @@ const ORDER_COLORS: Array[Color] = [
 
 const FACE_ANGY: Texture2D = preload("res://assets/figma/face_angy.svg")
 const FACE_HAPPY: Texture2D = preload("res://assets/figma/face_happy.svg")
+const INGREDIENT_TEXTURES = MenuConfig.INGREDIENT_TEXTURES
 
 func update_from_data(
 	name: String,

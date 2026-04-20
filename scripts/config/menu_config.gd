@@ -37,6 +37,23 @@ const DRINK_TYPES: Array[String] = [
 	"เก๊กฮวย",
 ]
 
+const INGREDIENT_TEXTURES: Dictionary = {
+	"เส้นเล็ก": preload("res://assets/artwork/menu/nood02.png"),
+	"เส้นหมี่": preload("res://assets/artwork/menu/nood04.png"),
+	"วุ้นเส้น": preload("res://assets/artwork/menu/nood03.png"),
+	"บะหมี่": preload("res://assets/artwork/menu/nood01.png"),
+	"เส้นใหญ่": preload("res://assets/artwork/menu/nood05.png"),
+	"ลูกชิ้น": preload("res://assets/artwork/menu/meat01.png"),
+	"เนื้อตุ๋น": preload("res://assets/artwork/menu/meat02.png"),
+	"หมูเด้ง": preload("res://assets/artwork/menu/meat04.png"),
+	"น่องไก่": preload("res://assets/artwork/menu/meat05.png"),
+	"กระเทียมเจียว": preload("res://assets/artwork/menu/veg01.png"),
+	"ถั่วงอก": preload("res://assets/artwork/menu/veg02.png"),
+	"ต้นหอมผักชี": preload("res://assets/artwork/menu/veg03.png"),
+	"โอเลี้ยง": preload("res://assets/artwork/menu/drink01.png"),
+	"กระเจี๊ยบ": preload("res://assets/artwork/menu/drink03.png"),
+	"เก๊กฮวย": preload("res://assets/artwork/menu/drink02.png"),
+}
 
 # Customer name pools
 const NORMAL_CUSTOMER_NAMES: Array[String] = [
