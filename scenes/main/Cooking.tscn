@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dshga2ulvahoa" path="res://scenes/ui/TypingSpace.tscn" id="3_xdmyo"]
 [ext_resource type="PackedScene" uid="uid://bn2itsdp6foer" path="res://scenes/ui/DishContainer.tscn" id="4_xdmyo"]
 [ext_resource type="Texture2D" uid="uid://2dcn8nuad2ef" path="res://assets/figma/bg.png" id="5_bg"]
+[ext_resource type="Texture2D" uid="uid://cpymbbeqw3c4b" path="res://assets/artwork/hand/left.png" id="6_lefth"]
+[ext_resource type="Texture2D" uid="uid://tgqmn1ym0fb2" path="res://assets/artwork/hand/right.png" id="7_righth"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijlok"]
 bg_color = Color(0.972549, 0.9137255, 0.6431373, 1)
@@ -48,19 +50,52 @@ layout_mode = 2
 [node name="Order" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1408987235 instance=ExtResource("2_cy70s")]
 layout_mode = 2
 
-[node name="ActionRow" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1194688964]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="TypingSpace" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow" unique_id=1951861316 instance=ExtResource("3_xdmyo")]
-custom_minimum_size = Vector2(220, 140)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
 [node name="DishContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1222613478 instance=ExtResource("4_xdmyo")]
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
+
+[node name="TypingSpace" parent="CanvasLayer" unique_id=1951861316 instance=ExtResource("3_xdmyo")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="LeftHand" type="TextureRect" parent="CanvasLayer" unique_id=2003241290]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -76.0
+offset_top = -471.0
+offset_right = 424.0
+offset_bottom = 29.0
+grow_vertical = 0
+pivot_offset = Vector2(0, 500)
+texture = ExtResource("6_lefth")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RightHand" type="TextureRect" parent="CanvasLayer" unique_id=2003241291]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -426.0
+offset_top = -462.0
+offset_right = 74.0
+offset_bottom = 38.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(500, 500)
+texture = ExtResource("7_righth")
+expand_mode = 1
+stretch_mode = 5

@@ -32,10 +32,13 @@ var selected_slot: int = 0
 
 @onready var level_bar = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/LevelBar
 @onready var order_queue = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/Order
-@onready var typing_space = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow/TypingSpace
+@onready var typing_space = $CanvasLayer/TypingSpace
 @onready var dish_container = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/DishContainer
+@onready var left_hand = $CanvasLayer/LeftHand
+@onready var right_hand = $CanvasLayer/RightHand
 
 var help_panel: Control = null
+var _hand_tween: Tween
 func _ready() -> void:
 	randomize()
 	_create_help_panel()
@@ -233,6 +236,24 @@ func _handle_backspace() -> void:
 func _sync_typing_visuals() -> void:
 	if typing_space.has_method("update_preview"):
 		typing_space.update_preview(typing_buffer)
+	_wiggle_hands()
+
+func _wiggle_hands() -> void:
+	if not left_hand or not right_hand: return
+	if _hand_tween and _hand_tween.is_valid():
+		_hand_tween.kill()
+		
+	_hand_tween = create_tween()
+	_hand_tween.set_parallel(true)
+	
+	var l_angle = randf_range(0.05, 0.15) * (1 if randi() % 2 == 0 else -1)
+	var r_angle = randf_range(0.05, 0.15) * (1 if randi() % 2 == 0 else -1)
+	
+	_hand_tween.tween_property(left_hand, "rotation", l_angle, 0.05)
+	_hand_tween.tween_property(right_hand, "rotation", r_angle, 0.05)
+	
+	_hand_tween.chain().tween_property(left_hand, "rotation", 0.0, 0.05)
+	_hand_tween.tween_property(right_hand, "rotation", 0.0, 0.05)
 
 func _update_mode_ui() -> void:
 	var text = ""
