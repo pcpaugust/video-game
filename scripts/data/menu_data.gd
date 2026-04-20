@@ -20,7 +20,6 @@ static func canonical_dish_key(ingredients: Array[String]) -> String:
 	for ing in ingredients:
 		if ing in all_ingredients() and not filtered.has(ing):
 			filtered.append(ing)
-	filtered.sort()
 	return " ".join(filtered)
 
 
@@ -67,13 +66,10 @@ static func get_unlocked_ingredients_for_level(level: int) -> Array[String]:
 	return result
 
 
-static func random_customer_name(is_special: bool, is_child: bool) -> String:
+static func random_customer_name(is_child: bool) -> String:
 	if is_child:
 		var child_names: Array[String] = MenuConfig.CHILD_CUSTOMER_NAMES
 		return child_names[randi() % child_names.size()]
-	if is_special:
-		var special_names: Array[String] = MenuConfig.SPECIAL_CUSTOMER_NAMES
-		return special_names[randi() % special_names.size()]
 	var normal_names: Array[String] = MenuConfig.NORMAL_CUSTOMER_NAMES
 	return normal_names[randi() % normal_names.size()]
 
@@ -97,14 +93,14 @@ static func _build_single_dish_key(unlocked_ingredients: Array[String]) -> Strin
 			MenuConfig.DRINK_TYPES[randi() % MenuConfig.DRINK_TYPES.size()]
 		)
 	else:
-		# Choose broth
-		ingredients.append(
-			MenuConfig.BROTH_TYPES[randi() % MenuConfig.BROTH_TYPES.size()]
-		)
-
 		# Choose noodle
 		ingredients.append(
 			MenuConfig.NOODLE_TYPES[randi() % MenuConfig.NOODLE_TYPES.size()]
+		)
+
+		# Choose broth
+		ingredients.append(
+			MenuConfig.BROTH_TYPES[randi() % MenuConfig.BROTH_TYPES.size()]
 		)
 
 		# Maybe add 1–2 meats

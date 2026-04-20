@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://bowl1234"]
+
+[ext_resource type="Script" path="res://scripts/ui/bowl.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://whcc2xefbc5m" path="res://assets/figma/dot.svg" id="2_dot"]
+
+[sub_resource type="Gradient" id="Gradient_smoke"]
+colors = PackedColorArray(1, 1, 1, 0.2, 1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glow"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+shadow_color = Color(1, 0.89, 0.4, 1)
+shadow_size = 60
+corner_radius_top_left = 180
+corner_radius_top_right = 180
+corner_radius_bottom_right = 180
+corner_radius_bottom_left = 180
+
+[node name="Bowl" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="GlowPanel" type="Panel" parent="." unique_id=839472615]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 20.0
+offset_right = -40.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_glow")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ingredients" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -60.0
+offset_right = 160.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="SmokeAnchor" type="Control" parent="." unique_id=987213456]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SmokeParticles" type="CPUParticles2D" parent="SmokeAnchor" unique_id=567812349]
+position = Vector2(0, -80)
+amount = 12
+lifetime = 2.0
+texture = ExtResource("2_dot")
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, -40)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+scale_amount_min = 0.8
+scale_amount_max = 1.8
+color_ramp = SubResource("Gradient_smoke")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dovcvlsh5afbr"
-path="res://.godot/imported/happy.png-19a560f135a23b9c9645fe9579430909.ctex"
+uid="uid://b66dxu1g4f0i2"
+path="res://.godot/imported/meh.png-53900e942a9aa2faf33e10aa7c421a69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/artwork/customer/happy.png"
-dest_files=["res://.godot/imported/happy.png-19a560f135a23b9c9645fe9579430909.ctex"]
+source_file="res://assets/artwork/customer/meh.png"
+dest_files=["res://.godot/imported/meh.png-53900e942a9aa2faf33e10aa7c421a69.ctex"]
 
 [params]
 

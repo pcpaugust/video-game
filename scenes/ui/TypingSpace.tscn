@@ -2,134 +2,98 @@
 
 [ext_resource type="Script" uid="uid://2fpyyk0ildvv" path="res://scripts/ui/typing_space.gd" id="1_ro5k3"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_block"]
-bg_color = Color(1, 0.933333, 0.764706, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_typing_box"]
+bg_color = Color(0.960784, 0.776471, 0.337255, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0.439216, 0.415686, 0.415686, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+corner_radius_top_left = 13
+corner_radius_top_right = 13
+corner_radius_bottom_right = 13
+corner_radius_bottom_left = 13
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hint"]
-bg_color = Color(1, 0.968627, 0.886275, 0.7)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.439216, 0.415686, 0.415686, 0.3)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icon_slot"]
+bg_color = Color(1, 1, 1, 0.8)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
-[node name="MarginContainer" type="MarginContainer" unique_id=1078964189]
+[node name="TypingSpace" type="Control" unique_id=1078964189]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_right = 8
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ro5k3")
 
-[node name="TypingSpace" type="VBoxContainer" parent="." unique_id=199487381]
-layout_mode = 2
-theme_override_constants/separation = 12
-alignment = 1
+[node name="IngredientPreview" type="PanelContainer" parent="." unique_id=1111602193]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -80.0
+offset_right = -290.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_icon_slot")
+visible = false
 
-[node name="TypingBlock" type="PanelContainer" parent="TypingSpace" unique_id=1111602193]
+[node name="IngredientTexture" type="TextureRect" parent="IngredientPreview" unique_id=1888984308]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_block")
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="TypingSpace/TypingBlock" unique_id=1888984308]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+[node name="TypingBox" type="PanelContainer" parent="." unique_id=82676836]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -64.0
+offset_right = 250.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_typing_box")
 
-[node name="BlockContent" type="VBoxContainer" parent="TypingSpace/TypingBlock/MarginContainer" unique_id=82676836]
+[node name="DashedBorderOverlay" type="Control" parent="TypingBox" unique_id=238947239]
 layout_mode = 2
-theme_override_constants/separation = 4
+mouse_filter = 2
 
-[node name="ModeLabel" type="Label" parent="TypingSpace/TypingBlock/MarginContainer/BlockContent" unique_id=1921083847]
+[node name="BoxMargin" type="MarginContainer" parent="TypingBox" unique_id=319323677]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
-text = "????"
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 26
 
-[node name="TextField" type="Label" parent="TypingSpace/TypingBlock/MarginContainer/BlockContent" unique_id=319323677]
+[node name="TextField" type="Label" parent="TypingBox/BoxMargin" unique_id=1921083847]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.188235, 0.176471, 0.176471, 1)
+theme_override_font_sizes/font_size = 64
+text = "|"
+horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TypingSpace" unique_id=1145732806]
+[node name="SpaceGuide" type="Label" parent="TypingBox" unique_id=539174820]
 layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="KeybindHints" type="PanelContainer" parent="TypingSpace"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_hint")
-
-[node name="HintsMargin" type="MarginContainer" parent="TypingSpace/KeybindHints"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 6
-
-[node name="HintsGrid" type="GridContainer" parent="TypingSpace/KeybindHints/HintsMargin"]
-layout_mode = 2
-columns = 4
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 4
-
-[node name="Hint1Key" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.294118, 0.376471, 0.941176, 1)
-theme_override_font_sizes/font_size = 10
-text = "[TAB]"
-
-[node name="Hint1Desc" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 10
-text = "เปลี่ยนโหมด"
-
-[node name="Hint2Key" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.294118, 0.376471, 0.941176, 1)
-theme_override_font_sizes/font_size = 10
-text = "[Enter]"
-
-[node name="Hint2Desc" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 10
-text = "ยืนยัน"
-
-[node name="Hint3Key" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.294118, 0.376471, 0.941176, 1)
-theme_override_font_sizes/font_size = 10
-text = "[Backspace]"
-
-[node name="Hint3Desc" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 10
-text = "ลบตัวอักษร"
-
-[node name="Hint4Key" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.294118, 0.376471, 0.941176, 1)
-theme_override_font_sizes/font_size = 10
-text = "[ESC]"
-
-[node name="Hint4Desc" type="Label" parent="TypingSpace/KeybindHints/HintsMargin/HintsGrid"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 10
-text = "ยกเลิก"
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 0.8)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+text = "กด Spacebar "
+horizontal_alignment = 2
+vertical_alignment = 2

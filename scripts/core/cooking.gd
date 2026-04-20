@@ -15,7 +15,6 @@ class Customer:
 	var order_keys: Array[String] = []
 	var patience: float = 0.0
 	var max_patience: float = 0.0
-	var is_special: bool = false
 	var is_child: bool = false
 
 var level: int = 1
@@ -23,6 +22,7 @@ var score: int = 0
 var target_score: int = 40
 var customers: Array[Customer] = []
 var typing_buffer: String = ""
+var current_bowl_ingredients: Array[String] = []
 var missed_customers: int = 0
 var current_mode: Mode = Mode.PREP
 
@@ -32,10 +32,15 @@ var selected_slot: int = 0
 
 @onready var level_bar = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/LevelBar
 @onready var order_queue = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/Order
-@onready var typing_space = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ActionRow/TypingSpace
-@onready var dish_container = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/DishContainer
+@onready var typing_space = $CanvasLayer/TypingSpace
+@onready var center_bowl = $CanvasLayer/BowlsContainer/CenterBowl
+@onready var left_bowl = $CanvasLayer/BowlsContainer/LeftBowl
+@onready var right_bowl = $CanvasLayer/BowlsContainer/RightBowl
+@onready var left_hand = $CanvasLayer/LeftHand
+@onready var right_hand = $CanvasLayer/RightHand
 
 var help_panel: Control = null
+var _hand_tween: Tween
 func _ready() -> void:
 	randomize()
 	_create_help_panel()
@@ -51,8 +56,13 @@ func start_level(new_level: int, target: int) -> void:
 	customers.clear()
 	dish_slots.clear()
 	typing_buffer = ""
+	current_bowl_ingredients.clear()
 	current_mode = Mode.PREP
 	level_bar.set_level(new_level, target)
+	center_bowl.clear()
+	center_bowl.set_state("glow")
+	left_bowl.clear()
+	right_bowl.clear()
 	_spawn_initial_customers()
 	_update_ui_full()
 
@@ -64,8 +74,7 @@ func _spawn_initial_customers() -> void:
 	while customers.size() < count:
 		var c = Customer.new()
 		c.is_child = randf() < GameConfig.CHILD_CUSTOMER_CHANCE
-		c.is_special = randf() < GameConfig.SPECIAL_CUSTOMER_CHANCE
-		c.name = MenuData.random_customer_name(c.is_special, c.is_child)
+		c.name = MenuData.random_customer_name(c.is_child)
 		
 		if (used_name.has(c.name)): continue
 		
@@ -77,8 +86,6 @@ func _spawn_initial_customers() -> void:
 		# ปรับแต่งเวลาตามประเภทลูกค้า
 		if c.is_child:
 			base_time += GameConfig.CHILD_PATIENCE_BONUS
-		elif c.is_special:
-			base_time -= GameConfig.SPECIAL_PATIENCE_PENALTY
 			
 		c.max_patience = max(base_time, GameConfig.MIN_PATIENCE_TIME)
 		c.patience = c.max_patience
@@ -101,6 +108,7 @@ func _update_customers_logic(delta: float) -> void:
 		if missed_customers >= GameConfig.MAX_MISSED_CUSTOMERS:
 			_handle_game_over()
 		_update_ui_full()
+		_refresh_completed_bowl_states()
 	if customers.is_empty():
 		_spawn_next_wave()
 
@@ -111,15 +119,27 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_ENTER: _handle_submit()
 			KEY_TAB: _handle_tab()
 			KEY_BACKSPACE: _handle_backspace()
+			KEY_SPACE: _handle_space()
 			_:
-				if ev.unicode != 0:
+				if ev.unicode != 0 and ev.unicode != 32: # Ignore space here since it's handled above
 					typing_buffer += char(ev.unicode)
 					_sync_typing_visuals()
 
+func _handle_space() -> void:
+	if current_mode == Mode.PREP:
+		var word = typing_buffer.strip_edges()
+		if MenuData.is_valid_ingredient(word):
+			current_bowl_ingredients.append(word)
+			typing_buffer = ""
+			_sync_typing_visuals()
+			return
+	
+	# Default behavior for non-prep modes or invalid words
+	typing_buffer += " "
+	_sync_typing_visuals()
+
 func _handle_tab() -> void:
 	match current_mode:
-		Mode.PREP: current_mode = Mode.SERVE
-		Mode.SERVE: current_mode = Mode.PREP
 		Mode.CLEAR_SLOT:
 			if dish_slots.size() > 0:
 				selected_slot = (selected_slot + 1) % dish_slots.size()
@@ -127,24 +147,35 @@ func _handle_tab() -> void:
 
 func _handle_submit() -> void:
 	var cmd = typing_buffer.strip_edges()
-	if cmd == "": return
-
-	# ระบบคำสั่งพิเศษจาก game_manager
+	
 	if cmd.to_lower() == "clear" and current_mode == Mode.PREP:
-		if dish_slots.size() > 0:
+		if dish_slots.size() > 0 or current_bowl_ingredients.size() > 0:
 			current_mode = Mode.CLEAR_SLOT
 			selected_slot = 0
 			typing_buffer = ""
+			current_bowl_ingredients.clear()
 			_sync_typing_visuals()
 			_update_mode_ui()
-			return
+		return
 
-	if current_mode == Mode.PREP:
-		_attempt_cook()
-	elif current_mode == Mode.SERVE:
-		_attempt_serve()
-	elif current_mode == Mode.CLEAR_SLOT:
+	if current_mode == Mode.CLEAR_SLOT:
 		_confirm_clear_slot()
+		typing_buffer = ""
+		_sync_typing_visuals()
+		return
+
+	# Check if cmd is a customer name
+	var is_customer = false
+	if cmd != "":
+		for c in customers:
+			if c.name == cmd:
+				is_customer = true
+				break
+
+	if is_customer:
+		_attempt_serve(cmd)
+	else:
+		_attempt_cook()
 
 	typing_buffer = ""
 	_sync_typing_visuals()
@@ -152,7 +183,7 @@ func _handle_submit() -> void:
 # Logic การปรุงอาหารจาก game_manager
 func _attempt_cook() -> void:
 	var words = typing_buffer.strip_edges().split(" ", false)
-	var valid_ingredients: Array[String] = []
+	var valid_ingredients: Array[String] = current_bowl_ingredients.duplicate()
 	for w in words:
 		if MenuData.is_valid_ingredient(w):
 			valid_ingredients.append(w)
@@ -164,11 +195,11 @@ func _attempt_cook() -> void:
 		dish_slots.append({"key": key, "ingredients": valid_ingredients})
 		_update_dish(dish_slots)
 		print("Cooked: ", key, " ", valid_ingredients)
+		current_bowl_ingredients.clear()
 	else: print("Dish Slot is Full!")
 
 # Logic การเสิร์ฟจาก game_manager
-func _attempt_serve() -> void:
-	var customer_name = typing_buffer.strip_edges()
+func _attempt_serve(customer_name: String) -> void:
 	var target_idx = -1
 	for i in range(customers.size()):
 		if customers[i].name == customer_name:
@@ -201,8 +232,6 @@ func _attempt_serve() -> void:
 			current_serve_score += GameConfig.FULL_ORDER_BONUS
 			
 		# 3. Apply ตัวคูณตามประเภทลูกค้า
-		if customer.is_special:
-			current_serve_score = int(current_serve_score * GameConfig.SPECIAL_SCORE_MULTIPLIER)
 		elif customer.is_child:
 			current_serve_score = int(current_serve_score * GameConfig.CHILD_SCORE_MULTIPLIER)
    
@@ -229,16 +258,46 @@ func _handle_backspace() -> void:
 	if typing_buffer.length() > 0:
 		typing_buffer = typing_buffer.substr(0, typing_buffer.length() - 1)
 		_sync_typing_visuals()
+	elif current_bowl_ingredients.size() > 0:
+		typing_buffer = current_bowl_ingredients.pop_back()
+		_sync_typing_visuals()
 
 func _sync_typing_visuals() -> void:
 	if typing_space.has_method("update_preview"):
 		typing_space.update_preview(typing_buffer)
+	_wiggle_hands()
+	
+	# Parse valid ingredients from the buffer and update center bowl
+	var all_ing = current_bowl_ingredients.duplicate()
+	var words = typing_buffer.strip_edges().split(" ", false)
+	for w in words:
+		if MenuData.is_valid_ingredient(w):
+			all_ing.append(w)
+	center_bowl.set_ingredients(all_ing)
+	center_bowl.set_state("glow")
+
+func _wiggle_hands() -> void:
+	if not left_hand or not right_hand: return
+	if _hand_tween and _hand_tween.is_valid():
+		_hand_tween.kill()
+		
+	_hand_tween = create_tween()
+	_hand_tween.set_parallel(true)
+	
+	var l_angle = randf_range(0.05, 0.15) * (1 if randi() % 2 == 0 else -1)
+	var r_angle = randf_range(0.05, 0.15) * (1 if randi() % 2 == 0 else -1)
+	
+	_hand_tween.tween_property(left_hand, "rotation", l_angle, 0.05)
+	_hand_tween.tween_property(right_hand, "rotation", r_angle, 0.05)
+	
+	_hand_tween.chain().tween_property(left_hand, "rotation", 0.0, 0.05)
+	_hand_tween.tween_property(right_hand, "rotation", 0.0, 0.05)
 
 func _update_mode_ui() -> void:
 	var text = ""
 	match current_mode:
-		Mode.PREP: text = "🔤 โหมดปรุง: พิมพ์วัตถุดิบแล้วกด [Enter] | TAB สลับโหมด"
-		Mode.SERVE: text = "🎯 โหมดเสิร์ฟ: พิมพ์ชื่อลูกค้าแล้วกด [Enter] | TAB สลับโหมด"
+		Mode.PREP: text = "🔤 พิมพ์วัตถุดิบเพื่อปรุง หรือ พิมพ์ชื่อลูกค้าเพื่อเสิร์ฟ"
+		Mode.SERVE: text = "🔤 พิมพ์วัตถุดิบเพื่อปรุง หรือ พิมพ์ชื่อลูกค้าเพื่อเสิร์ฟ"
 		Mode.CLEAR_SLOT: text = "🗑️ โหมดทิ้ง: กด [TAB] เลือกจาน จากนั้น [Enter] ยืนยัน"
 	typing_space.update_mode(text)
 
@@ -251,10 +310,39 @@ func _update_score() -> void:
 	level_bar.update_progress(score)
 
 func _update_dish(dish: Array) -> void:
-	dish_container.update_list(dish)
+	if dish.size() > 0:
+		left_bowl.set_ingredients(dish[0]["ingredients"])
+		_update_bowl_state(left_bowl, dish[0]["key"])
+	else:
+		left_bowl.clear()
+		
+	if dish.size() > 1:
+		right_bowl.set_ingredients(dish[1]["ingredients"])
+		_update_bowl_state(right_bowl, dish[1]["key"])
+	else:
+		right_bowl.clear()
+
+func _refresh_completed_bowl_states() -> void:
+	if dish_slots.size() > 0:
+		_update_bowl_state(left_bowl, dish_slots[0]["key"])
+	if dish_slots.size() > 1:
+		_update_bowl_state(right_bowl, dish_slots[1]["key"])
+
+func _update_bowl_state(bowl: Control, key: String) -> void:
+	var has_match = false
+	for c in customers:
+		if key in c.order_keys:
+			has_match = true
+			break
+			
+	if has_match:
+		bowl.set_state("match")
+	else:
+		bowl.set_state("dark")
 
 func _update_ui_full() -> void:
 	order_queue.refresh_all_cards(customers)
+	_update_dish(dish_slots)
 	_update_mode_ui()
 
 func _spawn_next_wave() -> void:

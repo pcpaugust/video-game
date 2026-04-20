@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f82pg4jbo4x2"
-path="res://.godot/imported/bowl.png-c7bfaa7ca6e3a9113d4bb114c5bc29b9.ctex"
+uid="uid://bucem5bw3tjxa"
+path="res://.godot/imported/tafo.png-7dd2813f3e72901397970cc878920a56.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/artwork/bowl.png"
-dest_files=["res://.godot/imported/bowl.png-c7bfaa7ca6e3a9113d4bb114c5bc29b9.ctex"]
+source_file="res://assets/artwork/bowls/tafo.png"
+dest_files=["res://.godot/imported/tafo.png-7dd2813f3e72901397970cc878920a56.ctex"]
 
 [params]
 

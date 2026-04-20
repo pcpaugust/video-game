@@ -2,7 +2,7 @@ extends MarginContainer
 
 const OrderCardScene = preload("res://scenes/ui/customer_item.tscn")
 
-@onready var queue = $OrderContainer/OrderQueue
+@onready var queue = $OrderQueue
 
 func refresh_all_cards(customers: Array):
 	# ลบการ์ดเก่าออกทั้งหมด
@@ -16,7 +16,6 @@ func refresh_all_cards(customers: Array):
 		if card.has_method("update_from_data"):
 			card.update_from_data(
 				c.name,
-				c.is_special,
 				c.is_child,
 				c.patience,
 				c.max_patience,
