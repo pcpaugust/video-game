@@ -142,8 +142,6 @@ func _handle_space() -> void:
 
 func _handle_tab() -> void:
 	match current_mode:
-		Mode.PREP: current_mode = Mode.SERVE
-		Mode.SERVE: current_mode = Mode.PREP
 		Mode.CLEAR_SLOT:
 			if dish_slots.size() > 0:
 				selected_slot = (selected_slot + 1) % dish_slots.size()
@@ -151,9 +149,7 @@ func _handle_tab() -> void:
 
 func _handle_submit() -> void:
 	var cmd = typing_buffer.strip_edges()
-	if cmd == "": return
-
-	# ระบบคำสั่งพิเศษจาก game_manager
+	
 	if cmd.to_lower() == "clear" and current_mode == Mode.PREP:
 		if dish_slots.size() > 0 or current_bowl_ingredients.size() > 0:
 			current_mode = Mode.CLEAR_SLOT
@@ -162,14 +158,26 @@ func _handle_submit() -> void:
 			current_bowl_ingredients.clear()
 			_sync_typing_visuals()
 			_update_mode_ui()
-			return
+		return
 
-	if current_mode == Mode.PREP:
-		_attempt_cook()
-	elif current_mode == Mode.SERVE:
-		_attempt_serve()
-	elif current_mode == Mode.CLEAR_SLOT:
+	if current_mode == Mode.CLEAR_SLOT:
 		_confirm_clear_slot()
+		typing_buffer = ""
+		_sync_typing_visuals()
+		return
+
+	# Check if cmd is a customer name
+	var is_customer = false
+	if cmd != "":
+		for c in customers:
+			if c.name == cmd:
+				is_customer = true
+				break
+
+	if is_customer:
+		_attempt_serve(cmd)
+	else:
+		_attempt_cook()
 
 	typing_buffer = ""
 	_sync_typing_visuals()
@@ -193,8 +201,7 @@ func _attempt_cook() -> void:
 	else: print("Dish Slot is Full!")
 
 # Logic การเสิร์ฟจาก game_manager
-func _attempt_serve() -> void:
-	var customer_name = typing_buffer.strip_edges()
+func _attempt_serve(customer_name: String) -> void:
 	var target_idx = -1
 	for i in range(customers.size()):
 		if customers[i].name == customer_name:
@@ -292,8 +299,8 @@ func _wiggle_hands() -> void:
 func _update_mode_ui() -> void:
 	var text = ""
 	match current_mode:
-		Mode.PREP: text = "🔤 โหมดปรุง: พิมพ์วัตถุดิบแล้วกด [Enter] | TAB สลับโหมด"
-		Mode.SERVE: text = "🎯 โหมดเสิร์ฟ: พิมพ์ชื่อลูกค้าแล้วกด [Enter] | TAB สลับโหมด"
+		Mode.PREP: text = "🔤 พิมพ์วัตถุดิบเพื่อปรุง หรือ พิมพ์ชื่อลูกค้าเพื่อเสิร์ฟ"
+		Mode.SERVE: text = "🔤 พิมพ์วัตถุดิบเพื่อปรุง หรือ พิมพ์ชื่อลูกค้าเพื่อเสิร์ฟ"
 		Mode.CLEAR_SLOT: text = "🗑️ โหมดทิ้ง: กด [TAB] เลือกจาน จากนั้น [Enter] ยืนยัน"
 	typing_space.update_mode(text)
 
