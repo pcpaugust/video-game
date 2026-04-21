@@ -19,10 +19,11 @@ const NOODLE_TYPES: Array[String] = [
 ]
 
 const MEAT_TYPES: Array[String] = [
-	"ลูกชิ้น",
-	"เนื้อตุ๋น",
-	"หมูเด้ง",
 	"น่องไก่",
+	"หมูเด้ง",
+	"เนื้อตุ๋น",
+	"ลูกชิ้น",
+	"หมูแดง",
 ]
 
 const VEGETABLE_TYPES: Array[String] = [
@@ -43,16 +44,22 @@ const INGREDIENT_TEXTURES: Dictionary = {
 	"วุ้นเส้น": preload("res://assets/artwork/menu/nood03.png"),
 	"บะหมี่": preload("res://assets/artwork/menu/nood01.png"),
 	"เส้นใหญ่": preload("res://assets/artwork/menu/nood05.png"),
-	"ลูกชิ้น": preload("res://assets/artwork/menu/meat01.png"),
-	"เนื้อตุ๋น": preload("res://assets/artwork/menu/meat02.png"),
-	"หมูเด้ง": preload("res://assets/artwork/menu/meat04.png"),
-	"น่องไก่": preload("res://assets/artwork/menu/meat05.png"),
+	"ลูกชิ้น": preload("res://assets/artwork/menu/meat05.png"),
+	"เนื้อตุ๋น": preload("res://assets/artwork/menu/meat03.png"),
+	"หมูเด้ง": preload("res://assets/artwork/menu/meat02.png"),
+	"น่องไก่": preload("res://assets/artwork/menu/meat01.png"),
+	"หมูแดง": preload("res://assets/artwork/menu/meat04.png"),
 	"กระเทียมเจียว": preload("res://assets/artwork/menu/veg02.png"),
 	"ถั่วงอก": preload("res://assets/artwork/menu/veg03.png"),
 	"ต้นหอมผักชี": preload("res://assets/artwork/menu/veg01.png"),
 	"โอเลี้ยง": preload("res://assets/artwork/menu/drink02.png"),
 	"กระเจี๊ยบ": preload("res://assets/artwork/menu/drink01.png"),
 	"เก๊กฮวย": preload("res://assets/artwork/menu/drink03.png"),
+	"แห้ง": preload("res://assets/artwork/menu/soup05.png"),
+	"น้ำใส": preload("res://assets/artwork/menu/soup02.png"),
+	"น้ำข้น": preload("res://assets/artwork/menu/soup01.png"),
+	"ต้มยำ": preload("res://assets/artwork/menu/soup03.png"),
+	"เย็นตาโฟ": preload("res://assets/artwork/menu/soup04.png"),
 }
 
 # Customer name pools

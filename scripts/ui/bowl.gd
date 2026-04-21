@@ -11,9 +11,9 @@ var _glow_tween: Tween
 
 # Map broth types to their background textures
 var broth_textures: Dictionary = {
-	"แห้ง": preload("res://assets/artwork/bowls/black.png"),
-	"น้ำใส": preload("res://assets/artwork/bowls/empty.png"),
-	"น้ำข้น": preload("res://assets/artwork/bowls/yellow.png"),
+	"แห้ง": preload("res://assets/artwork/bowls/empty.png"),
+	"น้ำใส": preload("res://assets/artwork/bowls/yellow.png"),
+	"น้ำข้น": preload("res://assets/artwork/bowls/black.png"),
 	"ต้มยำ": preload("res://assets/artwork/bowls/tomyam.png"),
 	"เย็นตาโฟ": preload("res://assets/artwork/bowls/tafo.png")
 }
