@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cpymbbeqw3c4b" path="res://assets/artwork/hand/left.png" id="6_lefth"]
 [ext_resource type="Texture2D" uid="uid://tgqmn1ym0fb2" path="res://assets/artwork/hand/right.png" id="7_righth"]
 [ext_resource type="PackedScene" uid="uid://bowl1234" path="res://scenes/ui/Bowl.tscn" id="8_bowl"]
+[ext_resource type="AudioStream" uid="uid://dg6v2kjjg0sje" path="res://assets/sound/background_music.mp3" id="9_bgm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijlok"]
 bg_color = Color(0.972549, 0.9137255, 0.6431373, 1)
@@ -128,3 +129,7 @@ size_flags_vertical = 8
 custom_minimum_size = Vector2(360, 270)
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_bgm")
+autoplay = true
