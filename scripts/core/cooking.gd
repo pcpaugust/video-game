@@ -4,12 +4,14 @@ const MenuData = preload("res://scripts/data/menu_data.gd")
 const GameConfig = preload("res://scripts/config/game_config.gd")
 const HelpPanelScene = preload("res://scenes/ui/HelpPanel.tscn")
 const GameOverScene = preload("res://scenes/ui/GameOver.tscn")
+const NextLevelScene = preload("res://scenes/ui/NextLevel.tscn")
 
 enum Mode {
 	PREP,
 	CLEAR_SLOT,
 	SERVE,
 	GAME_OVER,
+	LEVEL_COMPLETE,
 }
 
 class Customer:
@@ -45,6 +47,7 @@ var selected_slot: int = 0
 
 var help_panel: Control = null
 var game_over_panel: Control = null
+var next_level_panel: Control = null
 var _hand_tween: Tween
 func _ready() -> void:
 	randomize()
@@ -103,7 +106,7 @@ func _spawn_single_customer() -> void:
 	_update_ui_full()
 
 func _process(delta: float) -> void:
-	if current_mode == Mode.GAME_OVER: return
+	if current_mode == Mode.GAME_OVER or current_mode == Mode.LEVEL_COMPLETE: return
 	
 	_update_customers_logic(delta)
 	order_queue.update_patience_only(customers)
@@ -132,7 +135,7 @@ func _update_customers_logic(delta: float) -> void:
 		_refresh_completed_bowl_states()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if current_mode == Mode.GAME_OVER: return
+	if current_mode == Mode.GAME_OVER or current_mode == Mode.LEVEL_COMPLETE: return
 	if event is InputEventKey and event.pressed:
 		var ev = event as InputEventKey
 		match ev.keycode:
@@ -320,14 +323,13 @@ func _update_mode_ui() -> void:
 		Mode.SERVE: text = "🔤 พิมพ์วัตถุดิบเพื่อปรุง หรือ พิมพ์ชื่อลูกค้าเพื่อเสิร์ฟ"
 		Mode.CLEAR_SLOT: text = "🗑️ โหมดทิ้ง: กด [TAB] เลือกจาน จากนั้น [Enter] ยืนยัน"
 		Mode.GAME_OVER: text = "เกมจบแล้ว!"
+		Mode.LEVEL_COMPLETE: text = "ผ่านด่านแล้ว!"
 	typing_space.update_mode(text)
 
 func _update_score() -> void:
-	if score >= target_score:
-		print("Finished! Next Level Started!")
-		var new_level = level + 1
-		var new_target = target_score + 40 + (level * 20)
-		start_level(new_level, new_target)
+	if score >= target_score and current_mode != Mode.LEVEL_COMPLETE:
+		print("Finished! Level Complete Screen Started!")
+		_handle_level_complete()
 		
 	level_bar.update_progress(score)
 
@@ -387,6 +389,27 @@ func _on_restart_requested() -> void:
 	
 	print("Restarting...")
 	start_level(1, 40)
+
+func _handle_level_complete() -> void:
+	current_mode = Mode.LEVEL_COMPLETE
+	_update_mode_ui()
+	
+	if not next_level_panel:
+		next_level_panel = NextLevelScene.instantiate()
+		$CanvasLayer.add_child(next_level_panel)
+		next_level_panel.continue_requested.connect(_on_continue_requested)
+	
+	next_level_panel.set_stats(level)
+	next_level_panel.show()
+	next_level_panel.set_process_unhandled_input(true)
+
+func _on_continue_requested() -> void:
+	if next_level_panel:
+		next_level_panel.hide()
+	
+	var new_level = level + 1
+	var new_target = target_score + 40 + (level * 20)
+	start_level(new_level, new_target)
 
 func _create_help_panel() -> void:
 	# Create and show help panel at startup
