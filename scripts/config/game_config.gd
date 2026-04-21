@@ -3,9 +3,13 @@ class_name GameConfig
 
 # Customer & level settings
 const BASE_CUSTOMER_COUNT: int = 2
-const MAX_CUSTOMERS: int = 4
+const MAX_CUSTOMERS: int = 5
 
 const CHILD_CUSTOMER_CHANCE: float = 0.1
+
+const SPAWN_INTERVAL_BASE: float = 10.0
+const SPAWN_INTERVAL_DECREASE_PER_LEVEL: float = 1.0
+const MIN_SPAWN_INTERVAL: float = 5.0
 
 # Patience / time settings
 const BASE_PATIENCE_TIME: float = 100.0

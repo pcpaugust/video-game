@@ -27,6 +27,7 @@ var typing_buffer: String = ""
 var current_bowl_ingredients: Array[String] = []
 var missed_customers: int = 0
 var current_mode: Mode = Mode.PREP
+var spawn_timer: float = 0.0
 
 # ระบบชามอาหาร (Dish Slots) จาก game_manager
 var dish_slots: Array = [] # เก็บ: { "key": String, "ingredients": Array[String] }
@@ -66,38 +67,48 @@ func start_level(new_level: int, target: int) -> void:
 	center_bowl.set_state("glow")
 	left_bowl.clear()
 	right_bowl.clear()
-	_spawn_initial_customers()
+	spawn_timer = 0.0
 	_update_ui_full()
 
-func _spawn_initial_customers() -> void:
+func _spawn_single_customer() -> void:
+	if customers.size() >= GameConfig.MAX_CUSTOMERS: return
+	
 	var unlocked = MenuData.get_unlocked_ingredients_for_level(level)
-	var count = clamp(GameConfig.BASE_CUSTOMER_COUNT + level, 3, 7)
 	var used_name = []
-
-	while customers.size() < count:
-		var c = Customer.new()
-		c.is_child = randf() < GameConfig.CHILD_CUSTOMER_CHANCE
-		c.name = MenuData.random_customer_name(c.is_child)
-		
-		if (used_name.has(c.name)): continue
-		
-		c.order_keys = MenuData.build_random_order_keys(unlocked, level)
-
-		# คำนวณเวลาพื้นฐานตาม Level
-		var base_time = GameConfig.BASE_PATIENCE_TIME - (level * GameConfig.PATIENCE_TIME_PER_LEVEL)
-
-		# ปรับแต่งเวลาตามประเภทลูกค้า
-		if c.is_child:
-			base_time += GameConfig.CHILD_PATIENCE_BONUS
-			
-		c.max_patience = max(base_time, GameConfig.MIN_PATIENCE_TIME)
-		c.patience = c.max_patience
-		customers.append(c)
+	for c in customers:
 		used_name.append(c.name)
+		
+	var c = Customer.new()
+	c.is_child = randf() < GameConfig.CHILD_CUSTOMER_CHANCE
+	
+	for i in range(10):
+		c.name = MenuData.random_customer_name(c.is_child)
+		if not used_name.has(c.name):
+			break
+			
+	c.order_keys = MenuData.build_random_order_keys(unlocked, level)
+
+	var base_time = GameConfig.BASE_PATIENCE_TIME - (level * GameConfig.PATIENCE_TIME_PER_LEVEL)
+
+	if c.is_child:
+		base_time += GameConfig.CHILD_PATIENCE_BONUS
+		
+	c.max_patience = max(base_time, GameConfig.MIN_PATIENCE_TIME)
+	c.patience = c.max_patience
+	customers.append(c)
+	_update_ui_full()
 
 func _process(delta: float) -> void:
+	if current_mode == Mode.GAME_OVER: return
+	
 	_update_customers_logic(delta)
 	order_queue.update_patience_only(customers)
+	
+	if customers.size() < GameConfig.MAX_CUSTOMERS:
+		spawn_timer -= delta
+		if spawn_timer <= 0.0:
+			_spawn_single_customer()
+			spawn_timer = max(GameConfig.MIN_SPAWN_INTERVAL, GameConfig.SPAWN_INTERVAL_BASE - (level * GameConfig.SPAWN_INTERVAL_DECREASE_PER_LEVEL))
 
 func _update_customers_logic(delta: float) -> void:
 	for i in range(customers.size() - 1, -1, -1):
@@ -112,8 +123,6 @@ func _update_customers_logic(delta: float) -> void:
 			_handle_game_over()
 		_update_ui_full()
 		_refresh_completed_bowl_states()
-	if customers.is_empty():
-		_spawn_next_wave()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_mode == Mode.GAME_OVER: return
@@ -310,7 +319,8 @@ func _update_score() -> void:
 	if score >= target_score:
 		print("Finished! Next Level Started!")
 		var new_level = level + 1
-		start_level(new_level, target_score+40)
+		var new_target = target_score + 40 + (level * 20)
+		start_level(new_level, new_target)
 		
 	level_bar.update_progress(score)
 
@@ -349,13 +359,6 @@ func _update_ui_full() -> void:
 	order_queue.refresh_all_cards(customers)
 	_update_dish(dish_slots)
 	_update_mode_ui()
-
-func _spawn_next_wave() -> void:
-	_spawn_initial_customers()
-	_update_ui_full()
-	
-	# แจ้งเตือนผ่าน console หรือ UI (Optional)
-	print("Next Wave Started! Current Level: ", level)
 
 func _handle_game_over() -> void:
 	print("Game Over!")
