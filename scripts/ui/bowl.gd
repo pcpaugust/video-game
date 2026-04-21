@@ -8,6 +8,7 @@ const MenuConfig = preload("res://scripts/config/menu_config.gd")
 @onready var smoke_particles = $SmokeAnchor/SmokeParticles
 
 var _glow_tween: Tween
+var state: String
 
 # Map broth types to their background textures
 var broth_textures: Dictionary = {
@@ -19,6 +20,7 @@ var broth_textures: Dictionary = {
 }
 
 func _ready() -> void:
+	state = "normal"
 	var style = glow_panel.get_theme_stylebox("panel").duplicate()
 	glow_panel.add_theme_stylebox_override("panel", style)
 	clear()
@@ -67,12 +69,13 @@ func clear() -> void:
 	set_ingredients([])
 	set_state("normal")
 
-func set_state(state: String) -> void:
+func set_state(s: String) -> void:
 	if _glow_tween and _glow_tween.is_valid():
 		_glow_tween.kill()
 		
 	var style = glow_panel.get_theme_stylebox("panel") as StyleBoxFlat
-	match state:
+	state = s
+	match s:
 		"glow":
 			modulate = Color(1.0, 1.0, 1.0)
 			style.shadow_color = Color(1.0, 0.89, 0.4, 1.0) # Yellow glow
