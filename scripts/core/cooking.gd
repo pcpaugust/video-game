@@ -18,6 +18,7 @@ class Customer:
 	var patience: float = 0.0
 	var max_patience: float = 0.0
 	var is_child: bool = false
+	var is_new: bool = true
 
 var level: int = 1
 var score: int = 0
@@ -67,7 +68,10 @@ func start_level(new_level: int, target: int) -> void:
 	center_bowl.set_state("glow")
 	left_bowl.clear()
 	right_bowl.clear()
-	spawn_timer = 0.0
+	for i in range(GameConfig.BASE_CUSTOMER_COUNT):
+		_spawn_single_customer()
+		
+	spawn_timer = max(GameConfig.MIN_SPAWN_INTERVAL, GameConfig.SPAWN_INTERVAL_BASE - (level * GameConfig.SPAWN_INTERVAL_DECREASE_PER_LEVEL))
 	_update_ui_full()
 
 func _spawn_single_customer() -> void:
@@ -105,6 +109,9 @@ func _process(delta: float) -> void:
 	order_queue.update_patience_only(customers)
 	
 	if customers.size() < GameConfig.MAX_CUSTOMERS:
+		if customers.is_empty():
+			spawn_timer = 0.0
+			
 		spawn_timer -= delta
 		if spawn_timer <= 0.0:
 			_spawn_single_customer()
