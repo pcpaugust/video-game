@@ -3,11 +3,13 @@ extends Node2D
 const MenuData = preload("res://scripts/data/menu_data.gd")
 const GameConfig = preload("res://scripts/config/game_config.gd")
 const HelpPanelScene = preload("res://scenes/ui/HelpPanel.tscn")
+const GameOverScene = preload("res://scenes/ui/GameOver.tscn")
 
 enum Mode {
 	PREP,
 	CLEAR_SLOT,
 	SERVE,
+	GAME_OVER,
 }
 
 class Customer:
@@ -40,6 +42,7 @@ var selected_slot: int = 0
 @onready var right_hand = $CanvasLayer/RightHand
 
 var help_panel: Control = null
+var game_over_panel: Control = null
 var _hand_tween: Tween
 func _ready() -> void:
 	randomize()
@@ -113,6 +116,7 @@ func _update_customers_logic(delta: float) -> void:
 		_spawn_next_wave()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if current_mode == Mode.GAME_OVER: return
 	if event is InputEventKey and event.pressed:
 		var ev = event as InputEventKey
 		match ev.keycode:
@@ -299,6 +303,7 @@ func _update_mode_ui() -> void:
 		Mode.PREP: text = "🔤 พิมพ์วัตถุดิบเพื่อปรุง หรือ พิมพ์ชื่อลูกค้าเพื่อเสิร์ฟ"
 		Mode.SERVE: text = "🔤 พิมพ์วัตถุดิบเพื่อปรุง หรือ พิมพ์ชื่อลูกค้าเพื่อเสิร์ฟ"
 		Mode.CLEAR_SLOT: text = "🗑️ โหมดทิ้ง: กด [TAB] เลือกจาน จากนั้น [Enter] ยืนยัน"
+		Mode.GAME_OVER: text = "เกมจบแล้ว!"
 	typing_space.update_mode(text)
 
 func _update_score() -> void:
@@ -353,9 +358,25 @@ func _spawn_next_wave() -> void:
 	print("Next Wave Started! Current Level: ", level)
 
 func _handle_game_over() -> void:
-	# แสดงผลแพ้เกม และรีเซ็ตกลับไปด่าน 1
-	print("Game Over! Restarting...")
-	start_level(1, 80)
+	print("Game Over!")
+	current_mode = Mode.GAME_OVER
+	_update_mode_ui()
+	
+	if not game_over_panel:
+		game_over_panel = GameOverScene.instantiate()
+		$CanvasLayer.add_child(game_over_panel)
+		game_over_panel.restart_requested.connect(_on_restart_requested)
+	
+	game_over_panel.set_stats(score, level)
+	game_over_panel.show()
+	game_over_panel.set_process_unhandled_input(true)
+
+func _on_restart_requested() -> void:
+	if game_over_panel:
+		game_over_panel.hide()
+	
+	print("Restarting...")
+	start_level(1, 40)
 
 func _create_help_panel() -> void:
 	# Create and show help panel at startup
