@@ -129,7 +129,7 @@ func _update_customers_logic(delta: float) -> void:
 			missed_customers += 1
 				
 		# ตรวจสอบเงื่อนไขแพ้เกม
-		if missed_customers >= GameConfig.MAX_MISSED_CUSTOMERS:
+		if missed_customers >= GameConfig.BASE_MISSED_CUSTOMERS + level:
 			_handle_game_over()
 		_update_ui_full()
 		_refresh_completed_bowl_states()
@@ -219,6 +219,9 @@ func _attempt_cook() -> void:
 		_update_dish(dish_slots)
 		print("Cooked: ", key, " ", valid_ingredients)
 		current_bowl_ingredients.clear()
+		
+		if left_bowl.state == "dark" && right_bowl.state == "dark": 
+			_handle_game_over()
 	else: print("Dish Slot is Full!")
 
 # Logic การเสิร์ฟจาก game_manager
