@@ -304,8 +304,8 @@ func _sync_typing_visuals() -> void:
 
 func _wiggle_hands() -> void:
 	if not left_hand or not right_hand: return
-	if _hand_tween and _hand_tween.is_valid():
-		_hand_tween.kill()
+	if _hand_tween and _hand_tween.is_running():
+		return
 		
 	_hand_tween = create_tween()
 	_hand_tween.set_parallel(true)
