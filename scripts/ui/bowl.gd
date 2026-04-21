@@ -38,7 +38,7 @@ func set_ingredients(ingredients: Array[String]) -> void:
 			break
 			
 	if not has_broth:
-		bg_texture.texture = broth_textures["น้ำใส"] # Default empty bowl
+		bg_texture.texture = broth_textures["แห้ง"] # Default empty bowl
 		
 	# Add ingredient textures
 	for ing in ingredients:
