@@ -217,6 +217,12 @@ func _attempt_cook() -> void:
 		var key = MenuData.canonical_dish_key(valid_ingredients)
 		dish_slots.append({"key": key, "ingredients": valid_ingredients})
 		_update_dish(dish_slots)
+		
+		if dish_slots.size() == 1:
+			left_bowl.play_complete_animation()
+		elif dish_slots.size() == 2:
+			right_bowl.play_complete_animation()
+			
 		print("Cooked: ", key, " ", valid_ingredients)
 		current_bowl_ingredients.clear()
 		

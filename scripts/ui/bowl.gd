@@ -6,9 +6,12 @@ const MenuConfig = preload("res://scripts/config/menu_config.gd")
 @onready var ingredients_container = $Ingredients
 @onready var glow_panel = $GlowPanel
 @onready var smoke_particles = $SmokeAnchor/SmokeParticles
+@onready var flash_rect = $FlashRect
+@onready var star_particles = $StarAnchor/StarParticles
 
 var _glow_tween: Tween
 var state: String
+var _last_ing_count: int = 0
 
 # Map broth types to their background textures
 var broth_textures: Dictionary = {
@@ -26,6 +29,9 @@ func _ready() -> void:
 	clear()
 
 func set_ingredients(ingredients: Array[String]) -> void:
+	var is_new = ingredients.size() > _last_ing_count
+	_last_ing_count = ingredients.size()
+
 	# Clear old ingredients
 	for child in ingredients_container.get_children():
 		child.queue_free()
@@ -49,21 +55,47 @@ func set_ingredients(ingredients: Array[String]) -> void:
 			
 		var tex = _get_ingredient_texture(ing)
 		if tex:
+			var wrapper = Control.new()
+			wrapper.custom_minimum_size = Vector2(96, 96)
+			
 			var trect = TextureRect.new()
 			trect.texture = tex
 			trect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			trect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 			trect.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			trect.custom_minimum_size = Vector2(96, 96)
-			ingredients_container.add_child(trect)
+			trect.size = Vector2(96, 96)
+			wrapper.add_child(trect)
+			
+			ingredients_container.add_child(wrapper)
+			
+	if is_new and ingredients_container.get_child_count() > 0:
+		var last_wrapper = ingredients_container.get_child(ingredients_container.get_child_count() - 1)
+		var trect = last_wrapper.get_child(0)
+		trect.position.y -= 80
+		trect.modulate.a = 0.0
+		var t = create_tween().set_parallel(true)
+		t.tween_property(trect, "position:y", 0.0, 0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+		t.tween_property(trect, "modulate:a", 1.0, 0.2)
+		_bounce_bowl()
 			
 	if smoke_particles:
-		smoke_particles.emitting = ingredients.size() > 0
+		smoke_particles.visible = ingredients.size() > 0
 
 func _get_ingredient_texture(ing_name: String) -> Texture2D:
 	if MenuConfig.INGREDIENT_TEXTURES.has(ing_name):
 		return MenuConfig.INGREDIENT_TEXTURES[ing_name] as Texture2D
 	return null
+
+func _bounce_bowl() -> void:
+	pivot_offset = size / 2.0
+	var t = create_tween()
+	t.tween_property(self, "scale", Vector2(1.1, 0.9), 0.1)
+	t.tween_property(self, "scale", Vector2(0.95, 1.05), 0.1)
+	t.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1)
+
+func play_complete_animation() -> void:
+	if star_particles:
+		star_particles.emitting = true
 
 func clear() -> void:
 	set_ingredients([])

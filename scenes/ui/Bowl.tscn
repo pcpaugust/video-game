@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://bowl1234"]
+[gd_scene format=3 uid="uid://piigfvmnnh3h"]
 
 [ext_resource type="Script" uid="uid://cvne0qpq1h4rn" path="res://scripts/ui/bowl.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://whcc2xefbc5m" path="res://assets/figma/dot.svg" id="2_dot"]
+[ext_resource type="Texture2D" uid="uid://cuqjhixbpc0nl" path="res://assets/artwork/star/star_particle.png" id="2_6xchk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glow"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -12,8 +12,17 @@ corner_radius_bottom_left = 180
 shadow_color = Color(1, 0.89, 0.4, 1)
 shadow_size = 60
 
+[sub_resource type="Gradient" id="Gradient_circle"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_smoke"]
+gradient = SubResource("Gradient_circle")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
 [sub_resource type="Gradient" id="Gradient_smoke"]
-colors = PackedColorArray(1, 1, 1, 0.2, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 0.08, 1, 1, 1, 0)
 
 [node name="Bowl" type="Control" unique_id=608086764]
 layout_mode = 3
@@ -76,13 +85,48 @@ grow_vertical = 2
 [node name="SmokeParticles" type="CPUParticles2D" parent="SmokeAnchor" unique_id=567812349]
 position = Vector2(0, -80)
 amount = 12
-texture = ExtResource("2_dot")
+texture = SubResource("GradientTexture2D_smoke")
 lifetime = 2.0
 direction = Vector2(0, -1)
 spread = 20.0
 gravity = Vector2(0, -40)
 initial_velocity_min = 10.0
 initial_velocity_max = 30.0
-scale_amount_min = 0.8
-scale_amount_max = 1.8
+scale_amount_min = 2.0
+scale_amount_max = 4.0
 color_ramp = SubResource("Gradient_smoke")
+
+[node name="FlashRect" type="ColorRect" parent="." unique_id=123456789]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="StarAnchor" type="Control" parent="." unique_id=987654321]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StarParticles" type="CPUParticles2D" parent="StarAnchor" unique_id=111222333]
+emitting = false
+amount = 5
+texture = ExtResource("2_6xchk")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.95
+direction = Vector2(0, -1)
+spread = 70.0
+gravity = Vector2(0, 600)
+initial_velocity_min = 250.0
+initial_velocity_max = 500.0
+scale_amount_min = 0.5
+scale_amount_max = 0.7
