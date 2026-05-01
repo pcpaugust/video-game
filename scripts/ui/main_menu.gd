@@ -1,5 +1,9 @@
 extends Control
 
+@onready var start_sound: AudioStreamPlayer = $StartSound
+
+var _starting_game := false
+
 func _ready():
 	# Make the StartLabel blink!
 	var tween = create_tween().set_loops()
@@ -8,5 +12,9 @@ func _ready():
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_SPACE or event.keycode == KEY_ENTER:
+		if not _starting_game and (event.keycode == KEY_SPACE or event.keycode == KEY_ENTER):
+			_starting_game = true
+			if start_sound and start_sound.stream:
+				start_sound.play()
+				await start_sound.finished
 			get_tree().change_scene_to_file("res://scenes/main/Cooking.tscn")

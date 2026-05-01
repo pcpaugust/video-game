@@ -44,17 +44,31 @@ var selected_slot: int = 0
 @onready var right_bowl = $CanvasLayer/BowlsContainer/RightBowl
 @onready var left_hand = $CanvasLayer/LeftHand
 @onready var right_hand = $CanvasLayer/RightHand
+@onready var ingredient_sound: AudioStreamPlayer = $IngredientSound
+@onready var cook_sound: AudioStreamPlayer = $CookSound
+@onready var serve_sound: AudioStreamPlayer = $ServeSound
+@onready var clear_sound: AudioStreamPlayer = $ClearSound
+@onready var error_sound: AudioStreamPlayer = $ErrorSound
+@onready var game_over_sound: AudioStreamPlayer = $GameOverSound
+@onready var level_complete_sound: AudioStreamPlayer = $LevelCompleteSound
 
 var help_panel: Control = null
 var game_over_panel: Control = null
 var next_level_panel: Control = null
 var _hand_tween: Tween
+
 func _ready() -> void:
 	randomize()
 	_create_help_panel()
 	level = 1
 	target_score = 40
 	start_level(level, target_score)
+
+func _play_sfx(player: AudioStreamPlayer) -> void:
+	if player == null:
+		return
+	player.stop()
+	player.play()
 
 func start_level(new_level: int, target: int) -> void:
 	level = new_level
@@ -153,9 +167,12 @@ func _handle_space() -> void:
 		var word = typing_buffer.strip_edges()
 		if MenuData.is_valid_ingredient(word):
 			current_bowl_ingredients.append(word)
+			_play_sfx(ingredient_sound)
 			typing_buffer = ""
 			_sync_typing_visuals()
 			return
+		elif word != "":
+			_play_sfx(error_sound)
 	
 	# Default behavior for non-prep modes or invalid words
 	typing_buffer += " "
@@ -166,6 +183,10 @@ func _handle_tab() -> void:
 		Mode.CLEAR_SLOT:
 			if dish_slots.size() > 0:
 				selected_slot = (selected_slot + 1) % dish_slots.size()
+			else:
+				_play_sfx(error_sound)
+		_:
+			_play_sfx(error_sound)
 	_update_mode_ui()
 
 func _handle_submit() -> void:
@@ -173,12 +194,20 @@ func _handle_submit() -> void:
 	
 	if cmd.to_lower() == "clear" and current_mode == Mode.PREP:
 		if dish_slots.size() > 0 or current_bowl_ingredients.size() > 0:
-			current_mode = Mode.CLEAR_SLOT
+			var has_dish_slots := dish_slots.size() > 0
+			if current_bowl_ingredients.size() > 0:
+				_play_sfx(clear_sound)
+			if has_dish_slots:
+				current_mode = Mode.CLEAR_SLOT
+			else:
+				current_mode = Mode.PREP
 			selected_slot = 0
 			typing_buffer = ""
 			current_bowl_ingredients.clear()
 			_sync_typing_visuals()
 			_update_mode_ui()
+		else:
+			_play_sfx(error_sound)
 		return
 
 	if current_mode == Mode.CLEAR_SLOT:
@@ -211,18 +240,23 @@ func _attempt_cook() -> void:
 		if MenuData.is_valid_ingredient(w):
 			valid_ingredients.append(w)
 	
-	if valid_ingredients.is_empty(): return
+	if valid_ingredients.is_empty():
+		_play_sfx(error_sound)
+		return
 
 	if dish_slots.size() < GameConfig.MAX_DISH_SLOTS:
 		var key = MenuData.canonical_dish_key(valid_ingredients)
 		dish_slots.append({"key": key, "ingredients": valid_ingredients})
 		_update_dish(dish_slots)
 		print("Cooked: ", key, " ", valid_ingredients)
+		_play_sfx(cook_sound)
 		current_bowl_ingredients.clear()
 		
 		if left_bowl.state == "dark" && right_bowl.state == "dark": 
 			_handle_game_over()
-	else: print("Dish Slot is Full!")
+	else:
+		print("Dish Slot is Full!")
+		_play_sfx(error_sound)
 
 # Logic การเสิร์ฟจาก game_manager
 func _attempt_serve(customer_name: String) -> void:
@@ -232,7 +266,9 @@ func _attempt_serve(customer_name: String) -> void:
 			target_idx = i
 			break
 
-	if target_idx == -1: return
+	if target_idx == -1:
+		_play_sfx(error_sound)
+		return
 
 	var customer = customers[target_idx]
 	var served_keys = []
@@ -271,12 +307,18 @@ func _attempt_serve(customer_name: String) -> void:
 		if remaining_required.is_empty():
 			customers.remove_at(target_idx)
 
+		_play_sfx(serve_sound)
 		_update_ui_full()
 		_update_score()
+	else:
+		_play_sfx(error_sound)
 
 func _confirm_clear_slot() -> void:
 	if dish_slots.size() > 0:
 		dish_slots.remove_at(selected_slot)
+		_play_sfx(clear_sound)
+	else:
+		_play_sfx(error_sound)
 	current_mode = Mode.PREP
 	_update_mode_ui()
 
@@ -373,8 +415,11 @@ func _update_ui_full() -> void:
 	_update_mode_ui()
 
 func _handle_game_over() -> void:
+	if current_mode == Mode.GAME_OVER:
+		return
 	print("Game Over!")
 	current_mode = Mode.GAME_OVER
+	_play_sfx(game_over_sound)
 	_update_mode_ui()
 	
 	if not game_over_panel:
@@ -394,7 +439,10 @@ func _on_restart_requested() -> void:
 	start_level(1, 40)
 
 func _handle_level_complete() -> void:
+	if current_mode == Mode.LEVEL_COMPLETE:
+		return
 	current_mode = Mode.LEVEL_COMPLETE
+	_play_sfx(level_complete_sound)
 	_update_mode_ui()
 	
 	if not next_level_panel:

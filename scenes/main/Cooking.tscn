@@ -10,6 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://tgqmn1ym0fb2" path="res://assets/artwork/hand/right.png" id="7_righth"]
 [ext_resource type="PackedScene" uid="uid://bowl1234" path="res://scenes/ui/Bowl.tscn" id="8_bowl"]
 [ext_resource type="AudioStream" uid="uid://dg6v2kjjg0sje" path="res://assets/sound/background_music.mp3" id="9_bgm"]
+[ext_resource type="AudioStream" path="res://assets/sound/ingredient.wav" id="10_ing"]
+[ext_resource type="AudioStream" path="res://assets/sound/cook.wav" id="11_cook"]
+[ext_resource type="AudioStream" path="res://assets/sound/serve.wav" id="12_serve"]
+[ext_resource type="AudioStream" path="res://assets/sound/clear.wav" id="13_clear"]
+[ext_resource type="AudioStream" path="res://assets/sound/error.wav" id="14_error"]
+[ext_resource type="AudioStream" path="res://assets/sound/game_over.wav" id="15_gameover"]
+[ext_resource type="AudioStream" path="res://assets/sound/level_complete.wav" id="16_level"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijlok"]
 bg_color = Color(0.972549, 0.9137255, 0.6431373, 1)
@@ -133,3 +140,32 @@ size_flags_vertical = 8
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_bgm")
 autoplay = true
+volume_db = -14.0
+
+[node name="IngredientSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_ing")
+volume_db = 8.0
+
+[node name="CookSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_cook")
+volume_db = 8.0
+
+[node name="ServeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_serve")
+volume_db = 8.0
+
+[node name="ClearSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_clear")
+volume_db = 8.0
+
+[node name="ErrorSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_error")
+volume_db = 24.0
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_gameover")
+volume_db = 8.0
+
+[node name="LevelCompleteSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_level")
+volume_db = 8.0

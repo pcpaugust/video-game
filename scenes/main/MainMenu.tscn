@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_mm"]
 [ext_resource type="Texture2D" path="res://assets/figma/main_menu_background.png" id="2_bg"]
+[ext_resource type="AudioStream" path="res://assets/sound/start.wav" id="3_start"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -42,3 +43,7 @@ theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 48
 text = "กด Space เพื่อเริ่มเกม"
 horizontal_alignment = 1
+
+[node name="StartSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_start")
+volume_db = 8.0
