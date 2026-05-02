@@ -123,6 +123,7 @@ func _process(delta: float) -> void:
 	if current_mode == Mode.GAME_OVER or current_mode == Mode.LEVEL_COMPLETE: return
 	
 	_update_customers_logic(delta)
+	if current_mode == Mode.GAME_OVER or current_mode == Mode.LEVEL_COMPLETE: return
 	order_queue.update_patience_only(customers)
 	
 	if customers.size() < GameConfig.MAX_CUSTOMERS:
@@ -135,18 +136,22 @@ func _process(delta: float) -> void:
 			spawn_timer = max(GameConfig.MIN_SPAWN_INTERVAL, GameConfig.SPAWN_INTERVAL_BASE - (level * GameConfig.SPAWN_INTERVAL_DECREASE_PER_LEVEL))
 
 func _update_customers_logic(delta: float) -> void:
+	var customers_changed := false
 	for i in range(customers.size() - 1, -1, -1):
 		var c = customers[i]
 		c.patience -= delta
 		if c.patience <= 0.0:
 			customers.remove_at(i)
 			missed_customers += 1
-				
-		# ตรวจสอบเงื่อนไขแพ้เกม
-		if missed_customers >= GameConfig.BASE_MISSED_CUSTOMERS + level:
-			_handle_game_over()
+			customers_changed = true
+
+	if customers_changed:
 		_update_ui_full()
 		_refresh_completed_bowl_states()
+
+	# ตรวจสอบเงื่อนไขแพ้เกม
+	if missed_customers >= GameConfig.BASE_MISSED_CUSTOMERS + level:
+		_handle_game_over()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_mode == Mode.GAME_OVER or current_mode == Mode.LEVEL_COMPLETE: return
@@ -294,7 +299,7 @@ func _attempt_serve(customer_name: String) -> void:
 			current_serve_score += GameConfig.FULL_ORDER_BONUS
 			
 		# 3. Apply ตัวคูณตามประเภทลูกค้า
-		elif customer.is_child:
+		if customer.is_child:
 			current_serve_score = int(current_serve_score * GameConfig.CHILD_SCORE_MULTIPLIER)
    
 		score += current_serve_score

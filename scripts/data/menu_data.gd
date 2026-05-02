@@ -17,8 +17,8 @@ static func is_valid_ingredient(token: String) -> bool:
 
 static func canonical_dish_key(ingredients: Array[String]) -> String:
 	var filtered: Array[String] = []
-	for ing in ingredients:
-		if ing in all_ingredients() and not filtered.has(ing):
+	for ing in all_ingredients():
+		if ing in ingredients and not filtered.has(ing):
 			filtered.append(ing)
 	return " ".join(filtered)
 
@@ -85,38 +85,54 @@ static func build_random_order_keys(unlocked_ingredients: Array[String], level: 
 
 static func _build_single_dish_key(unlocked_ingredients: Array[String]) -> String:
 	var ingredients: Array[String] = []
+	var unlocked_broths: Array[String] = _filter_unlocked(MenuConfig.BROTH_TYPES, unlocked_ingredients)
+	var unlocked_noodles: Array[String] = _filter_unlocked(MenuConfig.NOODLE_TYPES, unlocked_ingredients)
+	var unlocked_meats: Array[String] = _filter_unlocked(MenuConfig.MEAT_TYPES, unlocked_ingredients)
+	var unlocked_vegetables: Array[String] = _filter_unlocked(MenuConfig.VEGETABLE_TYPES, unlocked_ingredients)
+	var unlocked_drinks: Array[String] = _filter_unlocked(MenuConfig.DRINK_TYPES, unlocked_ingredients)
 
 	# Decide if this is a drink or noodle dish.
-	var make_drink: bool = MenuConfig.DRINK_TYPES.size() > 0 and randf() < 0.2
+	var make_drink: bool = unlocked_drinks.size() > 0 and randf() < 0.2
 	if make_drink:
 		ingredients.append(
-			MenuConfig.DRINK_TYPES[randi() % MenuConfig.DRINK_TYPES.size()]
+			unlocked_drinks[randi() % unlocked_drinks.size()]
 		)
 	else:
+		if unlocked_noodles.is_empty() or unlocked_broths.is_empty():
+			return ""
+
 		# Choose noodle
 		ingredients.append(
-			MenuConfig.NOODLE_TYPES[randi() % MenuConfig.NOODLE_TYPES.size()]
+			unlocked_noodles[randi() % unlocked_noodles.size()]
 		)
 
 		# Choose broth
 		ingredients.append(
-			MenuConfig.BROTH_TYPES[randi() % MenuConfig.BROTH_TYPES.size()]
+			unlocked_broths[randi() % unlocked_broths.size()]
 		)
 
 		# Maybe add 1–2 meats
-		var meats_to_add: int = randi_range(0, 2)
-		for i in range(meats_to_add):
-			ingredients.append(
-				MenuConfig.MEAT_TYPES[randi() % MenuConfig.MEAT_TYPES.size()]
-			)
+		if not unlocked_meats.is_empty():
+			var meats_to_add: int = randi_range(0, 2)
+			for i in range(meats_to_add):
+				ingredients.append(
+					unlocked_meats[randi() % unlocked_meats.size()]
+				)
 
 		# Maybe add 0–2 vegetables
-		var veg_to_add: int = randi_range(0, 2)
-		for i in range(veg_to_add):
-			ingredients.append(
-				MenuConfig.VEGETABLE_TYPES[
-					randi() % MenuConfig.VEGETABLE_TYPES.size()
-				]
-			)
+		if not unlocked_vegetables.is_empty():
+			var veg_to_add: int = randi_range(0, 2)
+			for i in range(veg_to_add):
+				ingredients.append(
+					unlocked_vegetables[randi() % unlocked_vegetables.size()]
+				)
 
 	return canonical_dish_key(ingredients)
+
+
+static func _filter_unlocked(source: Array[String], unlocked_ingredients: Array[String]) -> Array[String]:
+	var result: Array[String] = []
+	for ing in source:
+		if ing in unlocked_ingredients:
+			result.append(ing)
+	return result
