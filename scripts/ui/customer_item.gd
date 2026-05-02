@@ -56,13 +56,26 @@ func update_patience(current: float, max_val: float) -> void:
 func _update_orders(order_keys: Array) -> void:
 	if orders_text:
 		orders_text.text = ", ".join(order_keys)
-	for order in order_keys:
-		var ing = order.split(" ")
+	_clear_order_list()
+	for order_idx in range(order_keys.size()):
+		var ing = str(order_keys[order_idx]).split(" ", false)
 		for i in ing:
 			var item = IngredientItemScene.instantiate()
 			order_list.add_child(item)
 			item.call_deferred("setup", i)
-		
+
+		if order_idx < order_keys.size() - 1:
+			order_list.add_child(_make_order_separator())
+
+func _clear_order_list() -> void:
+	for child in order_list.get_children():
+		child.queue_free()
+
+func _make_order_separator() -> ColorRect:
+	var separator := ColorRect.new()
+	separator.custom_minimum_size = Vector2(0, 2)
+	separator.color = Color(0.439216, 0.415686, 0.415686, 0.35)
+	return separator
 
 func _clear_grid(grid: GridContainer) -> void:
 	for child in grid.get_children():
