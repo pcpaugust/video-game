@@ -2,7 +2,7 @@ extends MarginContainer
 
 const OrderCardScene = preload("res://scenes/ui/customer_item.tscn")
 
-@onready var queue = $OrderQueue
+@onready var queue = $QueueViewport/ScrollContainer/OrderQueue
 
 func refresh_all_cards(customers: Array, prepared_keys: Array[String] = []):
 	# ลบการ์ดเก่าออกทั้งหมด
@@ -19,7 +19,6 @@ func refresh_all_cards(customers: Array, prepared_keys: Array[String] = []):
 		queue.add_child(wrapper)
 		wrapper.add_child(card)
 		card.position = Vector2.ZERO
-		card.size = card.custom_minimum_size
 		
 		if card.has_method("update_from_data"):
 			card.update_from_data(
@@ -30,6 +29,9 @@ func refresh_all_cards(customers: Array, prepared_keys: Array[String] = []):
 				c.order_keys,
 				_customer_has_match(c.order_keys, prepared_keys)
 			)
+
+		wrapper.custom_minimum_size = card.custom_minimum_size
+		card.size = card.custom_minimum_size
 			
 		if "is_new" in c and c.is_new:
 			card.position.x = card.custom_minimum_size.x + queue.get_theme_constant("separation")

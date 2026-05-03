@@ -1,24 +1,16 @@
 extends PanelContainer
 class_name CustomerItem
 
-const ORDER_COLORS: Array[Color] = [
-	Color(0.972549, 0.913725, 0.643137, 1),
-	Color(0.976471, 0.556863, 0.235294, 1),
-	Color(0.262745, 0.760784, 0.337255, 1),
-	Color(0.294118, 0.376471, 0.941176, 1),
-	Color(0.992157, 0.666667, 0.741176, 1),
-	Color(0.67451, 0.564706, 0.956863, 1),
-]
+const BASE_CARD_SIZE := Vector2(320, 430)
+const ORDER_COLUMN_WIDTH := 280.0
+const ORDER_COLUMN_SEPARATION := 12.0
+const CARD_HORIZONTAL_MARGIN := 20.0
+const COLUMN_INNER_MARGIN := 8
 
 @onready var face_icon: TextureRect = $MarginContainer/VBoxContainer/HeaderRow/FaceIcon
 @onready var name_label: Label = $MarginContainer/VBoxContainer/HeaderRow/NameColumn/NameLabel
 @onready var patience_bar: ProgressBar = $MarginContainer/VBoxContainer/HeaderRow/NameColumn/PatienceBar
-@onready var box_a: PanelContainer = $MarginContainer/VBoxContainer/OrdersRow/OrderBoxA
-@onready var box_b: PanelContainer = $MarginContainer/VBoxContainer/OrdersRow/OrderBoxB
-@onready var grid_a: GridContainer = $MarginContainer/VBoxContainer/OrdersRow/OrderBoxA/BoxAContent
-@onready var grid_b: GridContainer = $MarginContainer/VBoxContainer/OrdersRow/OrderBoxB/BoxBContent
-@onready var item_template: PanelContainer = $MarginContainer/VBoxContainer/OrdersRow/OrderBoxA/BoxAContent/ItemTemplate
-@onready var order_list: VBoxContainer = $MarginContainer/VBoxContainer/OrderList
+@onready var order_list: HBoxContainer = $MarginContainer/VBoxContainer/OrderList
 @onready var orders_text: Label = $MarginContainer/VBoxContainer/OrdersText
 
 const IngredientItemScene = preload("res://scenes/ui/IngredientItem.tscn")
@@ -84,48 +76,60 @@ func _ensure_card_styles() -> void:
 func _update_orders(order_keys: Array) -> void:
 	if orders_text:
 		orders_text.text = ", ".join(order_keys)
+	_resize_for_order_count(order_keys.size())
 	_clear_order_list()
 	for order_idx in range(order_keys.size()):
-		var ing = str(order_keys[order_idx]).split(" ", false)
-		for i in ing:
-			var item = IngredientItemScene.instantiate()
-			order_list.add_child(item)
-			item.call_deferred("setup", i)
+		var column_panel := _make_order_column_panel()
+		var column := _make_order_column_content(column_panel)
+		order_list.add_child(column_panel)
 
-		if order_idx < order_keys.size() - 1:
-			order_list.add_child(_make_order_separator())
+		var ingredients = str(order_keys[order_idx]).split(" ", false)
+		for ing in ingredients:
+			var item = IngredientItemScene.instantiate()
+			column.add_child(item)
+			item.call_deferred("setup", ing)
+
+func _resize_for_order_count(order_count: int) -> void:
+	var safe_count = max(order_count, 1)
+	var order_width = (
+		CARD_HORIZONTAL_MARGIN
+		+ safe_count * ORDER_COLUMN_WIDTH
+		+ max(safe_count - 1, 0) * ORDER_COLUMN_SEPARATION
+	)
+	custom_minimum_size = Vector2(
+		max(BASE_CARD_SIZE.x, order_width),
+		BASE_CARD_SIZE.y
+	)
+
+func _make_order_column_panel() -> PanelContainer:
+	var panel := PanelContainer.new()
+	panel.custom_minimum_size = Vector2(ORDER_COLUMN_WIDTH, 0)
+	panel.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	panel.add_theme_stylebox_override("panel", _make_order_column_style())
+	return panel
+
+func _make_order_column_content(panel: PanelContainer) -> VBoxContainer:
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", COLUMN_INNER_MARGIN)
+	margin.add_theme_constant_override("margin_top", COLUMN_INNER_MARGIN)
+	margin.add_theme_constant_override("margin_right", COLUMN_INNER_MARGIN)
+	margin.add_theme_constant_override("margin_bottom", COLUMN_INNER_MARGIN)
+	panel.add_child(margin)
+
+	var column := VBoxContainer.new()
+	column.add_theme_constant_override("separation", 4)
+	margin.add_child(column)
+	return column
+
+func _make_order_column_style() -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(1, 1, 1, 0.18)
+	style.corner_radius_top_left = 6
+	style.corner_radius_top_right = 6
+	style.corner_radius_bottom_right = 6
+	style.corner_radius_bottom_left = 6
+	return style
 
 func _clear_order_list() -> void:
 	for child in order_list.get_children():
 		child.queue_free()
-
-func _make_order_separator() -> ColorRect:
-	var separator := ColorRect.new()
-	separator.custom_minimum_size = Vector2(0, 2)
-	separator.color = Color(0.439216, 0.415686, 0.415686, 0.35)
-	return separator
-
-func _clear_grid(grid: GridContainer) -> void:
-	for child in grid.get_children():
-		if child == item_template:
-			continue
-		child.queue_free()
-
-func _make_item(order_key: String = "") -> PanelContainer:
-	var item: PanelContainer = item_template.duplicate() as PanelContainer
-	item.visible = true
-	item.tooltip_text = order_key
-
-	var style := StyleBoxFlat.new()
-	var color_idx: int = 0
-	if order_key != "":
-		var order_hash: int = int(order_key.hash())
-		color_idx = abs(order_hash) % ORDER_COLORS.size()
-	style.bg_color = ORDER_COLORS[color_idx]
-	style.corner_radius_top_left = 999
-	style.corner_radius_top_right = 999
-	style.corner_radius_bottom_right = 999
-	style.corner_radius_bottom_left = 999
-	item.add_theme_stylebox_override("panel", style)
-
-	return item

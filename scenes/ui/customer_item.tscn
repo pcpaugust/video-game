@@ -134,5 +134,6 @@ theme_override_font_sizes/font_size = 11
 text = "รายการที่สั่ง"
 autowrap_mode = 2
 
-[node name="OrderList" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1497911243]
+[node name="OrderList" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1497911243]
 layout_mode = 2
+theme_override_constants/separation = 12
