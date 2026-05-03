@@ -9,6 +9,7 @@ const MenuConfig = preload("res://scripts/config/menu_config.gd")
 @onready var dashed_overlay: Control = $TypingBox/DashedBorderOverlay
 @onready var text_field: Label = $TypingBox/BoxMargin/TextField
 @onready var space_guide: Label = $TypingBox/SpaceGuide
+@onready var mode_hint: Label = $HintPanel/ModeHint
 
 var style_matched: StyleBoxFlat
 var style_unmatched: StyleBoxFlat
@@ -64,9 +65,10 @@ func update_preview(current_buffer: String) -> void:
 	_cursor_timer = 0.0
 	_refresh_display()
 
-# --- kept for backwards compat; cooking.gd still calls this ---
-func update_mode(_new_mode: String) -> void:
-	pass
+func update_mode(new_mode: String) -> void:
+	if not is_node_ready():
+		return
+	mode_hint.text = new_mode
 
 # --- private ---
 func _refresh_display() -> void:

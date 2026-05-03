@@ -27,17 +27,26 @@ const FACE_ANGRY: Texture2D = preload("res://assets/artwork/customer/angry.png")
 const FACE_MEH: Texture2D = preload("res://assets/artwork/customer/meh.png")
 const FACE_HAPPY: Texture2D = preload("res://assets/artwork/customer/happy.png")
 
+var style_normal: StyleBoxFlat
+var style_ready: StyleBoxFlat
+
+func _ready() -> void:
+	_ensure_card_styles()
+
 func update_from_data(
 	name: String,
 	is_child: bool,
 	patience: float,
 	max_patience: float,
-	order_keys: Array
+	order_keys: Array,
+	can_serve: bool = false
 ) -> void:
+	_ensure_card_styles()
 	name_label.text = name
 
 	_update_patience(patience, max_patience)
 	_update_orders(order_keys)
+	_update_serve_affordance(can_serve)
 
 func _update_patience(current: float, max_val: float) -> void:
 	if not patience_bar:
@@ -52,6 +61,25 @@ func _update_patience(current: float, max_val: float) -> void:
 
 func update_patience(current: float, max_val: float) -> void:
 	_update_patience(current, max_val)
+
+func _update_serve_affordance(can_serve: bool) -> void:
+	if can_serve:
+		add_theme_stylebox_override("panel", style_ready)
+	else:
+		add_theme_stylebox_override("panel", style_normal)
+
+func _ensure_card_styles() -> void:
+	if style_normal != null:
+		return
+
+	style_normal = get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+	style_ready = style_normal.duplicate() as StyleBoxFlat
+	style_ready.bg_color = Color(0.941176, 1.0, 0.878431, 0.98)
+	style_ready.border_width_left = 4
+	style_ready.border_width_top = 4
+	style_ready.border_width_right = 4
+	style_ready.border_width_bottom = 4
+	style_ready.border_color = Color(0.262745, 0.760784, 0.337255, 1)
 
 func _update_orders(order_keys: Array) -> void:
 	if orders_text:

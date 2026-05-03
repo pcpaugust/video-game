@@ -4,7 +4,7 @@ const OrderCardScene = preload("res://scenes/ui/customer_item.tscn")
 
 @onready var queue = $OrderQueue
 
-func refresh_all_cards(customers: Array):
+func refresh_all_cards(customers: Array, prepared_keys: Array[String] = []):
 	# ลบการ์ดเก่าออกทั้งหมด
 	for child in queue.get_children():
 		child.queue_free()
@@ -24,7 +24,8 @@ func refresh_all_cards(customers: Array):
 				c.is_child,
 				c.patience,
 				c.max_patience,
-				c.order_keys
+				c.order_keys,
+				_customer_has_match(c.order_keys, prepared_keys)
 			)
 			
 		if "is_new" in c and c.is_new:
@@ -35,6 +36,12 @@ func refresh_all_cards(customers: Array):
 			tween.tween_property(card, "position:x", 0.0, 0.6).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 			tween.tween_property(card, "modulate", Color(1, 1, 1, 1), 0.5).set_ease(Tween.EASE_OUT)
 			c.is_new = false
+
+func _customer_has_match(order_keys: Array, prepared_keys: Array[String]) -> bool:
+	for key in prepared_keys:
+		if key in order_keys:
+			return true
+	return false
 
 func update_patience_only(customers: Array):
 	# อัปเดตเฉพาะแถบเวลาโดยไม่ต้องลบโหนดทิ้ง (Performance)
