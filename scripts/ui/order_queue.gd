@@ -15,8 +15,11 @@ func refresh_all_cards(customers: Array, prepared_keys: Array[String] = []):
 		
 		var wrapper = Control.new()
 		wrapper.custom_minimum_size = card.custom_minimum_size
+		wrapper.clip_contents = true
 		queue.add_child(wrapper)
 		wrapper.add_child(card)
+		card.position = Vector2.ZERO
+		card.size = card.custom_minimum_size
 		
 		if card.has_method("update_from_data"):
 			card.update_from_data(
@@ -29,7 +32,7 @@ func refresh_all_cards(customers: Array, prepared_keys: Array[String] = []):
 			)
 			
 		if "is_new" in c and c.is_new:
-			card.position.x = 1920
+			card.position.x = card.custom_minimum_size.x + queue.get_theme_constant("separation")
 			card.modulate = Color(1, 1, 1, 0)
 			var tween = create_tween()
 			tween.set_parallel(true)
