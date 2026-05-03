@@ -13,7 +13,6 @@
 [ext_resource type="AudioStream" path="res://assets/sound/ingredient.wav" id="10_ing"]
 [ext_resource type="AudioStream" path="res://assets/sound/cook.wav" id="11_cook"]
 [ext_resource type="AudioStream" path="res://assets/sound/serve.wav" id="12_serve"]
-[ext_resource type="AudioStream" path="res://assets/sound/clear.wav" id="13_clear"]
 [ext_resource type="AudioStream" path="res://assets/sound/error.wav" id="14_error"]
 [ext_resource type="AudioStream" path="res://assets/sound/game_over.wav" id="15_gameover"]
 [ext_resource type="AudioStream" path="res://assets/sound/level_complete.wav" id="16_level"]
@@ -152,10 +151,6 @@ volume_db = 8.0
 
 [node name="ServeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_serve")
-volume_db = 8.0
-
-[node name="ClearSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_clear")
 volume_db = 8.0
 
 [node name="ErrorSound" type="AudioStreamPlayer" parent="."]

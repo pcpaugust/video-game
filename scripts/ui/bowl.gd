@@ -78,6 +78,8 @@ func set_state(s: String) -> void:
 	match s:
 		"glow":
 			modulate = Color(1.0, 1.0, 1.0)
+			if smoke_particles:
+				smoke_particles.modulate = Color(1.0, 1.0, 1.0, 1.0)
 			style.shadow_color = Color(1.0, 0.89, 0.4, 1.0) # Yellow glow
 			glow_panel.visible = true
 			glow_panel.modulate.a = 1.0
@@ -86,15 +88,29 @@ func set_state(s: String) -> void:
 			_glow_tween.tween_property(glow_panel, "modulate:a", 1.0, 0.8)
 		"match":
 			modulate = Color(1.0, 1.0, 1.0) 
+			if smoke_particles:
+				smoke_particles.modulate = Color(1.0, 1.0, 1.0, 1.0)
 			style.shadow_color = Color8(151, 180, 71, 255) # Lime glow
 			glow_panel.visible = true
 			glow_panel.modulate.a = 1.0
 			_glow_tween = create_tween().set_loops()
 			_glow_tween.tween_property(glow_panel, "modulate:a", 0.6, 0.8)
 			_glow_tween.tween_property(glow_panel, "modulate:a", 1.0, 0.8)
+		"spoiled":
+			modulate = Color(0.55, 0.64, 0.42)
+			style.shadow_color = Color(0.28, 0.39, 0.12, 0.95)
+			glow_panel.visible = true
+			glow_panel.modulate.a = 0.95
+			if smoke_particles:
+				smoke_particles.modulate = Color(0.44, 0.72, 0.24, 0.9)
+				smoke_particles.emitting = true
 		"dark":
 			modulate = Color(0.3, 0.3, 0.3) # Dark tint
+			if smoke_particles:
+				smoke_particles.modulate = Color(1.0, 1.0, 1.0, 1.0)
 			glow_panel.visible = false
 		"normal", _:
 			modulate = Color(1.0, 1.0, 1.0)
+			if smoke_particles:
+				smoke_particles.modulate = Color(1.0, 1.0, 1.0, 1.0)
 			glow_panel.visible = false

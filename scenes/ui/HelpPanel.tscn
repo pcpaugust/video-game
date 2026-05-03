@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/ui/help_panel.gd" id="1_help"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
 bg_color = Color(1, 0.968627, 0.886275, 0.96)
 border_width_left = 2
 border_width_top = 2
@@ -14,220 +14,98 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_key"]
 bg_color = Color(0.972549, 0.913725, 0.643137, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.439216, 0.415686, 0.415686, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.439216, 0.415686, 0.415686, 0.7)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
 [node name="HelpPanel" type="Control"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_help")
 
-[node name="DarkOverlay" type="ColorRect" parent="."]
-anchors_preset = 15
+[node name="Card" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(470, 230)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color(0, 0, 0, 0.7)
+offset_left = -494.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 254.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer"]
-custom_minimum_size = Vector2(600, 500)
+[node name="MarginContainer" type="MarginContainer" parent="Card"]
 layout_mode = 2
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 1
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Card/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleRow" type="HBoxContainer" parent="Card/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Card/MarginContainer/VBoxContainer/TitleRow"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+theme_override_colors/font_color = Color(0.188235, 0.176471, 0.176471, 1)
+theme_override_font_sizes/font_size = 24
+text = "วิธีเล่นเร็ว"
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/ScrollContainer/MarginContainer"]
+[node name="CloseButton" type="Button" parent="Card/MarginContainer/VBoxContainer/TitleRow"]
+custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+focus_mode = 0
+theme_override_font_sizes/font_size = 18
+text = "X"
 
-[node name="ContentMargin" type="MarginContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer"]
+[node name="StepCook" type="Label" parent="Card/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin"]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="TitleLabel" type="Label" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 28
-text = "วิธีการเล่น"
-alignment = 1
-
-[node name="HSeparator1" type="HSeparator" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer"]
-layout_mode = 2
-
-[node name="Section1" type="PanelContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_button")
-
-[node name="Margin1" type="MarginContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section1"]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="VBox1" type="VBoxContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section1/Margin1"]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="SectionTitle1" type="Label" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section1/Margin1/VBox1"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 16
-text = "🔤 โหมดปรุง (Cooking Mode)"
-text_overrun_behavior = 3
-
-[node name="Desc1" type="Label" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section1/Margin1/VBox1"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
-text = "พิมพ์วัตถุดิบ (เช่น \"เส้นเล็ก ลูกชิ้น ต้นหอมผักชี\") แล้วกด Enter เพื่อปรุงอาหาร"
+theme_override_colors/font_color = Color(0.188235, 0.176471, 0.176471, 1)
+theme_override_font_sizes/font_size = 17
+text = "1. พิมพ์วัตถุดิบตามออเดอร์ แล้วกด Space เพื่อใส่ชาม"
 autowrap_mode = 2
 
-[node name="Keys1" type="Label" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section1/Margin1/VBox1"]
+[node name="StepMake" type="Label" parent="Card/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.294118, 0.376471, 0.941176, 1)
-theme_override_font_sizes/font_size = 11
-text = "พิมพ์: วัตถุดิบ | Enter: ปรุงอาหาร | TAB: ไปโหมดเสิร์ฟ"
+theme_override_colors/font_color = Color(0.188235, 0.176471, 0.176471, 1)
+theme_override_font_sizes/font_size = 17
+text = "2. กด Enter เพื่อทำจาน ถ้าผิดออเดอร์จานจะเสียค้างในช่องชามเดิม"
 autowrap_mode = 2
 
-[node name="Section2" type="PanelContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer"]
+[node name="StepServe" type="Label" parent="Card/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_button")
-
-[node name="Margin2" type="MarginContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section2"]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="VBox2" type="VBoxContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section2/Margin2"]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="SectionTitle2" type="Label" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section2/Margin2/VBox2"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 16
-text = "🎯 โหมดเสิร์ฟ (Serve Mode)"
-text_overrun_behavior = 3
-
-[node name="Desc2" type="Label" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section2/Margin2/VBox2"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
-text = "พิมพ์ชื่อลูกค้า (เช่น \"พี่ต่อ\") แล้วกด Enter เพื่อเสิร์ฟอาหารให้เขา"
+theme_override_colors/font_color = Color(0.188235, 0.176471, 0.176471, 1)
+theme_override_font_sizes/font_size = 17
+text = "3. เมื่อจานตรงออเดอร์ ให้พิมพ์ชื่อลูกค้าแล้วกด Enter"
 autowrap_mode = 2
 
-[node name="Keys2" type="Label" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section2/Margin2/VBox2"]
+[node name="KeysPanel" type="PanelContainer" parent="Card/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.294118, 0.376471, 0.941176, 1)
-theme_override_font_sizes/font_size = 11
-text = "พิมพ์: ชื่อลูกค้า | Enter: เสิร์ฟ | TAB: กลับโหมดปรุง"
-autowrap_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_key")
 
-[node name="Section3" type="PanelContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_button")
-
-[node name="Margin3" type="MarginContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section3"]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="VBox3" type="VBoxContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section3/Margin3"]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="SectionTitle3" type="Label" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section3/Margin3/VBox3"]
+[node name="KeysLabel" type="Label" parent="Card/MarginContainer/VBoxContainer/KeysPanel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 16
-text = "🗑️ โหมดทิ้ง (Clear Mode)"
-text_overrun_behavior = 3
-
-[node name="Desc3" type="Label" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section3/Margin3/VBox3"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
-text = "พิมพ์ \"clear\" แล้วกด Enter เพื่อเข้าโหมดทิ้งจาน ใช้ TAB เลือกจาน และกด Enter เพื่อลบ"
+theme_override_font_sizes/font_size = 15
+text = "Backspace ลบคำล่าสุด | จานเสียค้างในชาม | ครบ 3 ใบเกมจบ"
+horizontal_alignment = 1
 autowrap_mode = 2
-
-[node name="Keys3" type="Label" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section3/Margin3/VBox3"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.294118, 0.376471, 0.941176, 1)
-theme_override_font_sizes/font_size = 11
-text = "พิมพ์: clear | TAB: เลือกจาน | Enter: ยืนยันการลบ"
-autowrap_mode = 2
-
-[node name="Section4" type="PanelContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_button")
-
-[node name="Margin4" type="MarginContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section4"]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="VBox4" type="VBoxContainer" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section4/Margin4"]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="SectionTitle4" type="Label" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section4/Margin4/VBox4"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 16
-text = "⌨️ ปุ่มควบคุมอื่นๆ"
-text_overrun_behavior = 3
-
-[node name="Control1" type="Label" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section4/Margin4/VBox4"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
-text = "Backspace: ลบตัวอักษรสุดท้าย"
-autowrap_mode = 2
-
-[node name="Control2" type="Label" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer/Section4/Margin4/VBox4"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.415686, 0.415686, 1)
-theme_override_font_sizes/font_size = 12
-text = "ESC: ยกเลิกและกลับไปโหมดปรุง"
-autowrap_mode = 2
-
-[node name="HSeparator2" type="HSeparator" parent="CenterContainer/ScrollContainer/MarginContainer/PanelContainer/ContentMargin/VBoxContainer"]
-layout_mode = 2
