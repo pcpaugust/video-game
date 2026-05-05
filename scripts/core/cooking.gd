@@ -523,7 +523,7 @@ func _on_continue_requested() -> void:
 		next_level_panel.hide()
 	
 	var new_level = level + 1
-	var new_target = target_score + 40 + (level * 20)
+	var new_target = target_score + 10 + (level * 5)
 	start_level(new_level, new_target)
 
 func _create_help_panel() -> void:
