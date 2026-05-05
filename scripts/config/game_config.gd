@@ -13,7 +13,7 @@ const MIN_SPAWN_INTERVAL: float = 5.0
 
 # Patience / time settings
 const BASE_PATIENCE_TIME: float = 72.0
-const PATIENCE_TIME_PER_LEVEL: float = 1.5
+const PATIENCE_TIME_PER_LEVEL: float = 1.2
 const CHILD_PATIENCE_BONUS: float = 4.0
 const MIN_PATIENCE_TIME: float = 8.0
 
